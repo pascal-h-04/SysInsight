@@ -1,0 +1,227 @@
+[
+    {
+        "id": "unternehmensnamen",
+        "category": "Allgemein",
+        "question": "Name des Unternehmens:",
+        "type": "text",
+        "weight": 1,
+        "mandatory": false
+    },
+    {
+        "id": "branche",
+        "question": "Branche:",
+        "type": "select",
+        "options": [
+            "Technologie",
+            "Finanzen",
+            "Gesundheitswesen",
+            "Bildung",
+            "Handel",
+            "Produktion",
+            "Andere"
+        ],
+        "weight": 3,
+        "mandatory": true
+    },
+    {
+        "id": "unternehmensgroesse",
+        "question": "Mitarbeiterzahl:",
+        "type": "range",
+        "min": 1,
+        "max": 2000,
+        "step": 1,
+        "weight": 2,
+        "mandatory": true
+    },
+    {
+        "id": "standorte",
+        "question": "In welchen Ländern ist Ihr Unternehmen tätig?",
+        "type": "select",
+        "options": [
+            "Deutschland",
+            "Österreich",
+            "Schweiz",
+            "Anderes Land"
+        ],
+        "weight": 1,
+        "mandatory": false
+    },
+    {
+        "id": "rolle",
+        "question": "Ihre Rollen im Unternehmen:",
+        "type": "text",
+        "weight": 1,
+        "mandatory": false
+    },
+    {
+        "id": "it_management",
+        "category": "IT",
+        "question": "Verwaltung der IT-Infrastruktur:",
+        "type": "select",
+        "options": [
+            "Intern",
+            "Extern",
+            "Intern & Extern"
+        ],
+        "weight": 1,
+        "mandatory": true
+    },
+    {
+        "id": "grosse_it_abteilung",
+        "question": "Geschätze Größe der internen IT-Abteilung:",
+        "type": "range",
+        "min": 1,
+        "max": 2000,
+        "step": 1,
+        "weight": 2,
+        "mandatory": true
+    },
+    {
+        "id": "aktuelle_auspraegung_homeoffice_mobiles_arbeiten",
+        "category": "Digital Workplace",
+        "question": "Aktuelle Ausprägung von HomeOffice / Mobiles Arbeiten:",
+        "type": "select",
+        "options": [
+            "0%",
+            "0-20%",
+            "20-40%",
+            "40-60%",
+            "60-80%",
+            "80-100%",
+            "100%"
+        ],
+        "weight": 2,
+        "mandatory": true
+    },
+    {
+        "id": "angestrebte_auspraegung_homeoffice_mobiles_arbeiten",
+        "question": "Angestrebte Ausprägung von HomeOffice / Mobiles Arbeiten:",
+        "type": "select",
+        "options": [
+            "0%",
+            "0-20%",
+            "20-40%",
+            "40-60%",
+            "60-80%",
+            "80-100%",
+            "100%"
+        ],
+        "weight": 3,
+        "mandatory": true
+    },
+    {
+        "id": "online_meeting_platform",
+        "question": "Genutze Online-Meeting-Plattform:",
+        "type": "select",
+        "options": [
+            "Keine in Verwendung",
+            "Zoom",
+            "MS Teams",
+            "Cisco Webex",
+            "Google Meet",
+            "Andere"
+        ],
+        "weight": 2,
+        "mandatory": true
+    },
+    {
+        "id": "kollaborative_tools",
+        "question": "Genutze kollaborative Tools:",
+        "type": "select",
+        "options": [
+            "Keine in Verwendung",
+            "Slack",
+            "Microsoft Teams",
+            "Trello",
+            "Asana",
+            "Andere"
+        ],
+        "weight": 2,
+        "mandatory": true
+    },
+    {
+        "id": "relevanz_office_pakete",
+        "question": "Relevanz von Office-Paketen:",
+        "type": "range",
+        "min": 1,
+        "max": 5,
+        "step": 1,
+        "labels": {
+            "1": "Unwichtig",
+            "3": "Neutral",
+            "5": "Sehr wichtig"
+        },
+        "weight": 2,
+        "mandatory": true
+    },
+    {
+        "id": "relevanz_mobile_endgeraete",
+        "question": "Relevanz von mobilen Endgeräten:",
+        "type": "select",
+        "options": [
+            "Niedrig",
+            "Mittel",
+            "Hoch"
+        ],
+        "weight": 1,
+        "mandatory": false
+    },
+    {
+        "id": "authentifizierungsmethode",
+        "category": "Security",
+        "question": "Welche Authentifizierungsmethode ist erwünscht?",
+        "type": "select",
+        "options": [
+            "Passwort",
+            "Zwei-Faktor-Authentifizierung",
+            "Single Sign-On"
+        ],
+        "weight": 1,
+        "mandatory": false
+    },
+    {
+        "id": "vpn_einsatz",
+        "question": "Ist der Einsatz von VPN erwünscht?",
+        "type": "select",
+        "options": [
+            "Ja",
+            "Nein"
+        ],
+        "weight": 1,
+        "mandatory": false
+    },
+    {
+        "id": "relevanz_intranet",
+        "question": "Relevanz eines Intranets:",
+        "type": "range",
+        "min": 1,
+        "max": 5,
+        "step": 1,
+        "labels": {
+            "1": "Unwichtig",
+            "3": "Neutral",
+            "5": "Sehr wichtig"
+        },
+        "weight": 1,
+        "mandatory": false
+    },
+    {
+        "id": "hosting_daten_lagerung",
+        "question": "Aktuelle Art der Datenlagerung?",
+        "type": "select",
+        "options": [
+            "On-Premise",
+            "Cloud",
+            "Hybrid"
+        ],
+        "weight": 2,
+        "mandatory": false
+    },
+    {
+        "id": "email",
+        "category": "Kontakt",
+        "question": "Ihre E-Mail-Adresse:",
+        "type": "text",
+        "mandatory": true
+    }
+]

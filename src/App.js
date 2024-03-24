@@ -1,8 +1,8 @@
 import './App.css';
 import { useState, useEffect } from 'react';
-import Button from 'react-bootstrap/Button';
 import LoginScreen from './components/LoginScreen';
 import Navigation from './components/Navigation';
+import Startseite from './components/Startseite';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -26,7 +26,7 @@ function App() {
       <main>
         {!isLoggedIn ? <LoginScreen loginSuccess={handleLoginSuccess} />
         : <>
-          <h1>SysInsight</h1>
+          <Startseite />
         </> }
       </main>
     </div>
