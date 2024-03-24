@@ -1,6 +1,7 @@
 import './Fragen.css';
 import jsonFragen from '../data/fragen.json';
 import { Form, Col, Row, Badge } from 'react-bootstrap';
+import React from 'react';
 const Fragen = () => {
     const renderQuestion = (question) => {
         switch (question.type) {
@@ -38,18 +39,19 @@ const Fragen = () => {
       return (
         <div id="question-wrapper">
             <Form>
-            {jsonFragen.map((question) => (<>
-                {question.category && <Badge bg="secondary">{question.category}</Badge>}
-                <Form.Group as={Row} key={question.id} className="mb-3">
-                <Form.Label column sm={5}>
-                    {question.question}
-                    {question.mandatory && <span className="mandatory-star">*</span>}
-                </Form.Label>
-                <Col sm={5}>
-                    {renderQuestion(question)}
-                </Col>
-                </Form.Group>
-            </>
+            {jsonFragen.map((question) => (
+                <React.Fragment key={question.id}>
+                    {question.category && <Badge bg="secondary">{question.category}</Badge>}
+                    <Form.Group as={Row} className="mb-3">
+                    <Form.Label column sm={7}>
+                        {question.question}
+                        {question.mandatory && <span className="mandatory-star">*</span>}
+                    </Form.Label>
+                    <Col sm={5}>
+                        {renderQuestion(question)}
+                    </Col>
+                    </Form.Group>
+                </React.Fragment>
             ))}
             </Form>
         </div>
