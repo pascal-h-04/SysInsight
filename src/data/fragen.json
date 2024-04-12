@@ -233,5 +233,11 @@
     "question": "Dateneingabe bestätigen:",
     "type": "checkbox",
     "mandatory": true
+  },
+  {
+    "id": "terminplanung",
+    "question": "Terminplanung ? Wann haben Sie Zeit?",
+    "type": "text",
+    "mandatory": false
   }
 ]
