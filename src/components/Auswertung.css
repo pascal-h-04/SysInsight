@@ -1,0 +1,50 @@
+/* Auswertung.css */
+
+/* Styles for the main container */
+.container {
+    display: flex;
+    border-radius: 3%;
+    padding: 2%;
+    margin: 3% auto;
+    width: 80%;
+    height: auto;
+    background-color: #03c7c7;
+    animation: fadeIn 1.5s ease-in-out;
+}
+
+/* Styles for the left section */
+.left-section {
+    flex: 2;
+    padding: 2%;
+}
+
+.left-section img {
+    width: 80%;
+    height: auto;
+    margin-left: 5%;
+    border-radius: 3%;
+}
+
+/* Styles for the right section */
+.right-section {
+    flex: 1;
+    padding: 2%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Styles for the offers section */
+.offers {
+    margin-left: 20px;
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
