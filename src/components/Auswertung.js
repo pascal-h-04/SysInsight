@@ -23,6 +23,7 @@ const Auswertung = () => {
           {/* Weitere TopicMetric Komponenten hier */}
         </Col>
         <Col md={6}>
+        <h1> Unsere Lösungen</h1>
           <CompanyOffers />
           <CompanyOffers />
           <CompanyOffers />
@@ -31,7 +32,7 @@ const Auswertung = () => {
 
       <Row>
         <Col className="d-flex justify-content-end">
-          <Button variant="primary">Angebot senden</Button>
+          <Button variant="primary">Auswertung anzeigen</Button>
         </Col>
       </Row>
     </Container>

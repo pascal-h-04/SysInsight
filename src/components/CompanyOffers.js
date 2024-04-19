@@ -6,9 +6,9 @@ const CompanyOffers = () => {
   return (
     <Card className="company-offers mb-4">
       <Card.Body>
-        <Card.Title>Company Offers</Card.Title>
+        <Card.Title>Lösung 1</Card.Title>
         <Card.Text>
-          Beispielangebot 1: Beschreibung des Angebots
+          Wir bieten Meeting-Plattformen für kollaboratives Arbeiten an.
           {/* Weitere Angebote hier */}
         </Card.Text>
       </Card.Body>
