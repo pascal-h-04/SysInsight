@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import LoginScreen from './components/LoginScreen';
 import Navigation from './components/Navigation';
 import Startseite from './components/Startseite';
+import Angebotseite from './components/Angebotseite';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);

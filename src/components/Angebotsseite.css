@@ -1,0 +1,13 @@
+.angebot {
+    margin: 10px 50px 20px; /* Abstand zwischen den Angeboten */
+  }
+  
+  .card {
+    width: 100%; /* Breite der Karte auf 100% setzen */
+  }
+  
+  .card-img-top {
+    width: 10%; /* Bild auf volle Breite der Karte strecken */
+    height: 20px; /* Festlegung einer Höhe für das Bild */
+    object-fit: cover; /* Das Bild so skalieren, dass es den verfügbaren Raum ausfüllt */
+  }
