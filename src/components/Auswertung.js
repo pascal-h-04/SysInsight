@@ -32,7 +32,7 @@ const Auswertung = () => {
 
       <Row>
         <Col className="d-flex justify-content-end">
-          <Button variant="primary">Auswertung anzeigen</Button>
+          <Button variant="primary">Angeboote anzeigen</Button>
         </Col>
       </Row>
     </Container>
