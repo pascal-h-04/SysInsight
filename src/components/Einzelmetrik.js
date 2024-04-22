@@ -1,8 +1,8 @@
 import React from 'react';
 import { ProgressBar, Card } from 'react-bootstrap';
-import './TopicMetric.css';
+import './Einzelmetrik.css'; // Hier wurde der Dateiname entsprechend der Übersetzung angepasst
 
-const TopicMetric = ({ title, value }) => {
+const Einzelmetrik = ({ title, value }) => {
   let metricColorClass = '';
   if (value >= 8) {
     metricColorClass = 'high';
@@ -13,7 +13,7 @@ const TopicMetric = ({ title, value }) => {
   }
 
   return (
-    <Card className={`topic-metric ${metricColorClass} mb-4`}>
+    <Card className={`einzelmetrik ${metricColorClass} mb-4`}>
       <Card.Body>
         <Card.Title>{title}</Card.Title>
         <Card.Text>{`Bewertung: ${value}/10`}</Card.Text>
@@ -23,4 +23,4 @@ const TopicMetric = ({ title, value }) => {
   );
 };
 
-export default TopicMetric;
+export default Einzelmetrik;
