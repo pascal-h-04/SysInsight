@@ -4,7 +4,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import "./Angebotsseite.css";
 
-const Angebotseite = () => { // Fix: Add '=>' after 'const Angebotseite'
+const Angebotseite = () => {
     const [angebote, setAngebote] = useState([
         { id: 1, name: "Angebot 1", description: "Beschreibung für Angebot 1", image: "bild1.jpg" },
         { id: 2, name: "Angebot 2", description: "Beschreibung für Angebot 2", image: "bild2.jpg" },

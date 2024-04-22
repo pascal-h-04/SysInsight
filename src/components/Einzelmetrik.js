@@ -1,6 +1,6 @@
 import React from 'react';
 import { ProgressBar, Card } from 'react-bootstrap';
-import './Einzelmetrik.css'; // Hier wurde der Dateiname entsprechend der Übersetzung angepasst
+import './Einzelmetrik.css'; 
 
 const Einzelmetrik = ({ title, value }) => {
   let metricColorClass = '';

@@ -11,7 +11,7 @@ const Auswertung = () => {
     { id: 1, title: "Mobiles Arbeiten", value: 7 },
     { id: 2, title: "Flexibles Arbeitszeitmodell", value: 8 },
     { id: 3, title: "Home Office Ausstattung", value: 6 },
-    { id: 4, title: "Kommunikationswerkzeuge", value: 9 }
+    { id: 4, title: "Kommunikationswerkzeuge", value: 2 }
   ]);
 
   const [unternehmensangebote, setUnternehmensangebote] = useState([
