@@ -10,7 +10,7 @@ import KommunikationsToolsIcon from '../imgs/KommunikationsTools.png';
 
 
 
-const Auswertung = () => {
+const Auswertung = ({ navigateToAngebotseite }) => { // navigateToAngebotseite als Prop erhalten
   const [gesamtmetrikWert, setGesamtmetrikWert] = useState(70);
 
   const [einzelmetriken, setEinzelmetriken] = useState([
@@ -46,7 +46,7 @@ const Auswertung = () => {
       <h1 className="mb-4">Ihre personalisierte Auswertung</h1>
       <Row>
         <Col md={12}>
-          <GeneralMetric />
+          <Gesamtmetrik value={gesamtmetrikWert} />
         </Col>
       </Row>
 
@@ -76,9 +76,11 @@ const Auswertung = () => {
   
       <Row>
         <Col className="d-flex justify-content-end">
-          <Button variant="primary">Angebot senden</Button>
+        <Button variant="primary" onClick={navigateToAngebotseite}>Angebotseite anzeigen</Button>
+          {/* Hier wird der Button hinzugefügt, der zur Angebotsseite führt */}
         </Col>
       </Row>
+      
     </Container>
   );
   

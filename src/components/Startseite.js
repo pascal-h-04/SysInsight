@@ -3,11 +3,21 @@ import { useState } from 'react';
 import Fragen from './Fragen.js';
 import { Button } from 'react-bootstrap';
 import Auswertung from './Auswertung.js';
+import Angebotseite from './Angebotseite'; // Importiere die Angebotsseite
+
 
 const Startseite = () => {
     const [showStartScreen, setShowStartScreen] = useState(true);
     const [showQuestions, setShowQuestions] = useState(false);
     const [showResult, setShowResult] = useState(false);
+    const [showAngebotseite, setShowAngebotseite] = useState(false);
+
+    const navigateToAngebotseite = () => {
+        setShowAngebotseite(true);
+        setShowStartScreen(false);
+        setShowQuestions(false);
+        setShowResult(false);
+    };
 
     return (
         <div className="page-content">
@@ -33,7 +43,8 @@ const Startseite = () => {
             
 
             {showQuestions && <Fragen />}
-            {showResult && <Auswertung />}
+            {showResult && <Auswertung navigateToAngebotseite={navigateToAngebotseite} />} {/* navigateToAngebotseite als Prop übergeben */}
+            {showAngebotseite && <Angebotseite />}
         </div>
 
     );
