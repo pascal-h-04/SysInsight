@@ -5,11 +5,13 @@ import './Unternehmensangebot.css';
 const Unternehmensangebot = ({ angebot }) => {
   return (
     <Card className="unternehmensangebote mb-4">
+      <div className="image-container">
+        <img src={angebot.image} alt="Angebot Bild" className="angebot-image" />
+      </div>
       <Card.Body>
         <Card.Title>{angebot.title}</Card.Title>
         <Card.Text>
           {angebot.description}
-          {/* Weitere Angebote hier */}
         </Card.Text>
       </Card.Body>
     </Card>

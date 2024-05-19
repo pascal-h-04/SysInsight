@@ -4,9 +4,9 @@ import './Gesamtmetrik.css';
 
 const Gesamtmetrik = ({ value }) => {
   let metricColorClass = '';
-  if (value >= 8) {
+  if (value >= 70) {
     metricColorClass = 'high';
-  } else if (value >= 5) {
+  } else if (value >= 30) {
     metricColorClass = 'medium';
   } else {
     metricColorClass = 'low';
@@ -15,7 +15,7 @@ const Gesamtmetrik = ({ value }) => {
   return (
     <Card className={`gesamtmetrik ${metricColorClass}`}>
       <Card.Body>
-        <Card.Title>Ihr Digital Workplace ist:</Card.Title>
+        <Card.Title>Ihr Digital Workplace ist insgesamt:</Card.Title>
         <ProgressBar now={value} label={`${value}%`} />
       </Card.Body>
     </Card>
