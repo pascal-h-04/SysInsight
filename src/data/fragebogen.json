@@ -1,15 +1,7 @@
 [
   {
     "id": "unternehmensnamen",
-    "category": "Allgemein",
-    "question": "Allgemein: kreativere Eingabemöglichkeiten z.B. Dateien hochladen, Spracheingabe",
-    "type": "text",
-    "weight": 1,
-    "mandatory": false
-  },
-  {
-    "id": "unternehmensnamen",
-    "category": "Allgemein",
+    "category": "Allgemeines",
     "question": "Name des Unternehmens:",
     "type": "text",
     "weight": 1,
@@ -156,7 +148,7 @@
   },
   {
     "id": "authentifizierungsmethode",
-    "category": "Security",
+    "category": "IT-Sicherheit",
     "question": "Welche Authentifizierungsmethode nutzen Sie?",
     "type": "select",
     "options": [
@@ -205,7 +197,7 @@
   },
   {
     "id": "email",
-    "category": "Kontakt",
+    "category": "Kontaktaufnahme",
     "question": "Ihre E-Mail-Adresse:",
     "type": "text",
     "mandatory": true

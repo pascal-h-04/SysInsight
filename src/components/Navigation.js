@@ -1,11 +1,20 @@
 import "./Navigation.css";
 import React from "react";
+import { Link, useNavigate } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import Button from "react-bootstrap/Button";
 import Logo from "../imgs/logo.png";
+import {
+  FaUser,
+  FaInfoCircle,
+  FaNewspaper,
+  FaArrowLeft,
+  FaArrowRight,
+} from "react-icons/fa";
+import { CgInsights } from "react-icons/cg";
 
 function Navigation({ isLoggedIn, handleLogout }) {
   const devMaterial = [
@@ -71,6 +80,8 @@ function Navigation({ isLoggedIn, handleLogout }) {
     },
   ];
 
+  const navigate = useNavigate();
+
   return (
     <Navbar
       bg="dark"
@@ -80,8 +91,8 @@ function Navigation({ isLoggedIn, handleLogout }) {
       className="bg-body-tertiary"
     >
       <Container>
-        <Navbar.Brand href="index.html" className="navbar-brand">
-          <img alt="Logo" src={Logo} className="logo" />
+        <Navbar.Brand as={Link} to="/" className="navbar-brand">
+          <img alt="SemanTec Logo" src={Logo} className="logo" />
           SemanTec
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -101,12 +112,17 @@ function Navigation({ isLoggedIn, handleLogout }) {
                 </React.Fragment>
               ))}
             </NavDropdown>
-            <Nav.Link href="index.html">My results</Nav.Link>
-            <Nav.Link href="index.html">News</Nav.Link>
-            <Nav.Link href="index.html">Who we are</Nav.Link>
-            <Nav.Link href="index.html">My profile</Nav.Link>
-            <Nav.Link href="index.html" variant="info" size="sm">
-              SysInsight
+            <Nav.Link as={Link} to="/">
+              <FaNewspaper size={20} /> News
+            </Nav.Link>
+            <Nav.Link as={Link} to="/">
+              <FaInfoCircle size={20} /> About Us
+            </Nav.Link>
+            <Nav.Link as={Link} to="/">
+              <CgInsights size={20} /> My Results
+            </Nav.Link>
+            <Nav.Link as={Link} to="/">
+              <FaUser size={20} /> Profile
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>
@@ -119,6 +135,7 @@ function Navigation({ isLoggedIn, handleLogout }) {
             onClick={(e) => {
               e.preventDefault();
               handleLogout();
+              navigate("/");
             }}
           >
             Logout

@@ -1,0 +1,17 @@
+#angebotseite {
+  margin: 50px;
+}
+
+.angebot {
+  margin: 10px 50px 20px;
+}
+
+.card {
+  width: 100%;
+}
+
+.card-img-top {
+  width: 10%;
+  height: 20px;
+  object-fit: cover;
+}

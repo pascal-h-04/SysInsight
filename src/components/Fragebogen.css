@@ -1,0 +1,44 @@
+#questions-wrapper {
+  position: relative;
+  margin: 1% 15%;
+  padding-top: 20px;
+}
+
+.info-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+.category-header {
+  font-size: 20px;
+  background-color: aquamarine;
+  border-radius: 5px;
+  padding: 5px 10px;
+  text-align: center;
+  font-weight: bold;
+  margin-top: 50px;
+  margin-bottom: 30px;
+}
+.question-row {
+  padding: 0 50px;
+}
+.switch-checkbox .form-check-input {
+  width: 15%;
+  height: 20px;
+}
+.switch-checkbox .form-check-input:checked {
+  background-color: aquamarine;
+  border-color: aquamarine;
+}
+
+.mandatory-star {
+  color: red;
+  margin-left: 5px;
+  font-size: 20px;
+}
+.zur-auswertung-btn {
+  float: right;
+  margin-top: 10px;
+  margin-bottom: 30px;
+}

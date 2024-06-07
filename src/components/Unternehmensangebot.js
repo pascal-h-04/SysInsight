@@ -1,6 +1,6 @@
-import React from 'react';
-import { Card } from 'react-bootstrap';
-import './Unternehmensangebot.css';
+import "./Unternehmensangebot.css";
+import React from "react";
+import { Card } from "react-bootstrap";
 
 const Unternehmensangebot = ({ angebot }) => {
   return (
@@ -10,9 +10,7 @@ const Unternehmensangebot = ({ angebot }) => {
       </div>
       <Card.Body>
         <Card.Title>{angebot.title}</Card.Title>
-        <Card.Text>
-          {angebot.description}
-        </Card.Text>
+        <Card.Text>{angebot.description}</Card.Text>
       </Card.Body>
     </Card>
   );

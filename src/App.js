@@ -1,34 +1,67 @@
-import './App.css';
-import { useState, useEffect } from 'react';
-import LoginScreen from './components/LoginScreen';
-import Navigation from './components/Navigation';
-import Startseite from './components/Startseite';
-import Angebotseite from './components/Angebotseite';
+import "./App.css";
+import { useState, useEffect } from "react";
+import { Routes, Route, Navigate } from "react-router-dom";
+import LoginScreen from "./components/LoginScreen";
+import Navigation from "./components/Navigation";
+import Startseite from "./components/Startseite";
+import Fragebogen from "./components/Fragebogen";
+import Angebotseite from "./components/Angebotseite";
+import Auswertung from "./components/Auswertung";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   useEffect(() => {
-    const loggedIn = localStorage.getItem('isLoggedIn') === 'true';
+    const loggedIn = localStorage.getItem("isLoggedIn") === "true";
     setIsLoggedIn(loggedIn);
   }, []);
-  const handleLoginSuccess = () => {
-    localStorage.setItem('isLoggedIn', true);
+
+  const successfullLogin = () => {
+    localStorage.setItem("isLoggedIn", true);
     setIsLoggedIn(true);
-  }
-  const handleLogout = () => {
-    localStorage.setItem('isLoggedIn', false);
+  };
+  const logout = () => {
+    localStorage.setItem("isLoggedIn", false);
     setIsLoggedIn(false);
-  }
+  };
+
   return (
     <div>
       <header>
-        <Navigation isLoggedIn={isLoggedIn} handleLogout={handleLogout}/>
+        <Navigation isLoggedIn={isLoggedIn} handleLogout={logout} />
       </header>
       <main>
-        {!isLoggedIn ? <LoginScreen loginSuccess={handleLoginSuccess} />
-        : <>
-          <Startseite />
-        </> }
+        <Routes>
+          <Route
+            path="/login"
+            element={
+              !isLoggedIn ? (
+                <LoginScreen loginSuccess={successfullLogin} />
+              ) : (
+                <Navigate to="/startseite" />
+              )
+            }
+          />
+          <Route
+            path="/startseite"
+            element={isLoggedIn ? <Startseite /> : <Navigate to="/" />}
+          />
+          <Route
+            path="/angebotseite"
+            element={isLoggedIn ? <Angebotseite /> : <Navigate to="/" />}
+          />
+          <Route
+            path="/fragebogen"
+            element={isLoggedIn ? <Fragebogen /> : <Navigate to="/" />}
+          />
+          <Route
+            path="/auswertung"
+            element={isLoggedIn ? <Auswertung /> : <Navigate to="/" />}
+          />
+          <Route
+            path="/"
+            element={<Navigate to={isLoggedIn ? "/startseite" : "/login"} />}
+          />
+        </Routes>
       </main>
     </div>
   );

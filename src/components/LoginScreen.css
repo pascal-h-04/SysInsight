@@ -1,33 +1,34 @@
 #login-frame {
-    display: flex;
-    border-radius: 3%;
-    padding: 2%;
-    margin: 3% auto;
-    width: 60%;
-    height: auto;
-    background-color: #03c7c7; 
-    animation: fadeIn 1.5s ease-in-out;
+  display: flex;
+  border-radius: 3%;
+  padding: 2%;
+  margin: 3% auto;
+  width: 60%;
+  height: 75vh;
+  background-color: #03c7c7;
+  animation: fadeIn 1.5s ease-in-out;
+  overflow: hidden;
 }
-#login-photo-div{
-    flex: 2;
+#login-photo-div {
+  flex: 2;
 }
 #login-photo-div > img {
-    width: 80%;
-    height: auto;
-    margin-left: 5%;
-    border-radius: 3%;
+  width: 70%;
+  height: auto;
+  margin-left: 7%;
+  border-radius: 3%;
 }
 #login-form {
-    flex: 1;
-    margin-left: 5%;
-    margin-right: 2%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+  flex: 1;
+  margin-left: 4%;
+  margin-right: 2%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 #login-spinner {
-    margin: 5% auto;
+  margin: 5% auto;
 }
 #quick-access {
-    margin-left: 20px;
+  margin-top: 20px;
 }
