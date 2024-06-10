@@ -13,6 +13,7 @@ function LoginScreen({ loginSuccess }) {
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [showFailureModal, setShowFailureModal] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [admin, setAdmin] = useState(false);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -29,7 +30,7 @@ function LoginScreen({ loginSuccess }) {
         setShowSuccessModal(true);
         setTimeout(() => {
           setShowSuccessModal(false);
-          loginSuccess();
+          loginSuccess(admin);
         }, 2000);
       } else {
         setShowFailureModal(true);
@@ -37,6 +38,7 @@ function LoginScreen({ loginSuccess }) {
       setLoginLoading(false);
     }, 2000);
   };
+
   return (
     <>
       <div id="login-frame">
@@ -77,11 +79,26 @@ function LoginScreen({ loginSuccess }) {
                 Show password
               </label>
             </div>
+            <div className="mb-3 form-check">
+              <input
+                type="checkbox"
+                className="form-check-input"
+                id="admin-login"
+                onChange={() => setAdmin(!admin)}
+              />
+              <label className="form-check-label" htmlFor="admin-login">
+                Admin login
+              </label>
+            </div>
             <Button variant="success" onClick={handleLogin}>
               Submit
             </Button>
             <br />
-            <Button id="quick-access" variant="warning" onClick={loginSuccess}>
+            <Button
+              id="quick-access"
+              variant="warning"
+              onClick={() => loginSuccess(admin)}
+            >
               Quick access (Dev Only)
             </Button>
             <div id="login-spinner">

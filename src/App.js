@@ -10,24 +10,37 @@ import Auswertung from "./components/Auswertung";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
+
   useEffect(() => {
     const loggedIn = localStorage.getItem("isLoggedIn") === "true";
+    const admin = localStorage.getItem("isAdmin") === "true";
     setIsLoggedIn(loggedIn);
+    setIsAdmin(admin);
   }, []);
 
-  const successfullLogin = () => {
+  const successfullLogin = (admin) => {
     localStorage.setItem("isLoggedIn", true);
+    localStorage.setItem("isAdmin", admin);
     setIsLoggedIn(true);
+    setIsAdmin(admin);
   };
+
   const logout = () => {
     localStorage.setItem("isLoggedIn", false);
+    localStorage.setItem("isAdmin", false);
     setIsLoggedIn(false);
+    setIsAdmin(false);
   };
 
   return (
     <div>
       <header>
-        <Navigation isLoggedIn={isLoggedIn} handleLogout={logout} />
+        <Navigation
+          isLoggedIn={isLoggedIn}
+          isAdmin={isAdmin}
+          handleLogout={logout}
+        />
       </header>
       <main>
         <Routes>
@@ -43,19 +56,43 @@ function App() {
           />
           <Route
             path="/startseite"
-            element={isLoggedIn ? <Startseite /> : <Navigate to="/" />}
-          />
-          <Route
-            path="/angebotseite"
-            element={isLoggedIn ? <Angebotseite /> : <Navigate to="/" />}
+            element={
+              isLoggedIn ? (
+                <Startseite isAdmin={isAdmin} />
+              ) : (
+                <Navigate to="/" />
+              )
+            }
           />
           <Route
             path="/fragebogen"
-            element={isLoggedIn ? <Fragebogen /> : <Navigate to="/" />}
+            element={
+              isLoggedIn ? (
+                <Fragebogen isAdmin={isAdmin} />
+              ) : (
+                <Navigate to="/" />
+              )
+            }
           />
           <Route
             path="/auswertung"
-            element={isLoggedIn ? <Auswertung /> : <Navigate to="/" />}
+            element={
+              isLoggedIn ? (
+                <Auswertung isAdmin={isAdmin} />
+              ) : (
+                <Navigate to="/" />
+              )
+            }
+          />
+          <Route
+            path="/angebotseite"
+            element={
+              isLoggedIn ? (
+                <Angebotseite isAdmin={isAdmin} />
+              ) : (
+                <Navigate to="/" />
+              )
+            }
           />
           <Route
             path="/"

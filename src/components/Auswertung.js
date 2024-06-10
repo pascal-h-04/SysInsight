@@ -55,7 +55,7 @@ const Auswertung = ({ navigateToAngebotseite }) => {
       <Row className="mt-4">
         <Col md={5}></Col>
         <Col md={7}>
-          <h1>Unsere Lösungen</h1>
+          <h1>Unsere Lösungen (Sind das schon Lösungen?)</h1>
         </Col>
       </Row>
 

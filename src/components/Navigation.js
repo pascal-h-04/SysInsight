@@ -7,16 +7,10 @@ import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import Button from "react-bootstrap/Button";
 import Logo from "../imgs/logo.png";
-import {
-  FaUser,
-  FaInfoCircle,
-  FaNewspaper,
-  FaArrowLeft,
-  FaArrowRight,
-} from "react-icons/fa";
+import { FaUser, FaInfoCircle, FaNewspaper } from "react-icons/fa";
 import { CgInsights } from "react-icons/cg";
 
-function Navigation({ isLoggedIn, handleLogout }) {
+function Navigation({ isLoggedIn, isAdmin, handleLogout }) {
   const devMaterial = [
     {
       name: "W3Schools",
@@ -31,6 +25,11 @@ function Navigation({ isLoggedIn, handleLogout }) {
     {
       name: "React-Bootstrap",
       url: "https://react-bootstrap.netlify.app/",
+      divider: false,
+    },
+    {
+      name: "MUI Core (UI-Libary)",
+      url: "https://mui.com/material-ui/react-slider/",
       divider: false,
     },
     {
@@ -112,23 +111,27 @@ function Navigation({ isLoggedIn, handleLogout }) {
                 </React.Fragment>
               ))}
             </NavDropdown>
-            <Nav.Link as={Link} to="/">
+            <Nav.Link as={Link} to="/" className="me-3">
               <FaNewspaper size={20} /> News
             </Nav.Link>
-            <Nav.Link as={Link} to="/">
+            <Nav.Link as={Link} to="/" className="me-3">
               <FaInfoCircle size={20} /> About Us
             </Nav.Link>
-            <Nav.Link as={Link} to="/">
+            <Nav.Link as={Link} to="/" className="me-3">
               <CgInsights size={20} /> My Results
             </Nav.Link>
-            <Nav.Link as={Link} to="/">
+            <Nav.Link as={Link} to="/" className="me-3">
               <FaUser size={20} /> Profile
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>
+        {isLoggedIn && isAdmin && (
+          <Button variant="outline-light" size="sm" className="ms-2">
+            Admin-Info
+          </Button>
+        )}
         {isLoggedIn && (
           <Button
-            href="index.html"
             variant="outline-light"
             size="sm"
             className="ms-2"

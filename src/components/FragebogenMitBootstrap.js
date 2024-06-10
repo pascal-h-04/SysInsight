@@ -7,15 +7,12 @@ import {
   Col,
   Row,
   Button,
+  ButtonGroup,
   OverlayTrigger,
   Popover,
 } from "react-bootstrap";
 import { BsInfoCircle } from "react-icons/bs";
 import { MdInsights } from "react-icons/md";
-import { MdEdit } from "react-icons/md";
-import { MdDelete } from "react-icons/md";
-import { FaSave } from "react-icons/fa";
-import { IoIosAddCircle } from "react-icons/io";
 import {
   Box,
   Slider,
@@ -25,33 +22,26 @@ import {
   FormControl,
   Select,
   TextField,
-  Radio,
-  Grid,
-  RadioGroup,
-  Tooltip,
 } from "@mui/material";
 
-const Fragebogen = ({ isAdmin }) => {
+const Fragebogen = (isAdmin) => {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({});
+
   const handleInputChange = (questionId) => (event) => {
     const { value } = event.target;
-    const { type } = event.target;
     setFormData((prevData) => ({
       ...prevData,
-      [questionId]:
-        type === "select-multiple"
-          ? typeof value === "string"
-            ? value.split(",")
-            : value
-          : value,
+      [questionId]: value,
     }));
   };
-
-  const [customizingMode, setCustomizingMode] = useState(false);
-  const customizeQuestions = () => {
-    setCustomizingMode(!customizingMode);
+  const handleMultiSelectChange = (questionId) => (event) => {
+    const { value } = event.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [questionId]: typeof value === "string" ? value.split(",") : value,
+    }));
   };
 
   const renderQuestion = (question) => {
@@ -59,40 +49,36 @@ const Fragebogen = ({ isAdmin }) => {
       case "category-btns":
         return (
           <div className="category-btns">
-            <RadioGroup
-              row
-              aria-label={question.id}
-              name={question.id}
-              value={formData[question.id] || ""}
-              onChange={handleInputChange(question.id)}
-            >
-              <Grid container spacing={2}>
-                {question.categories.map((category, index) => (
-                  <Grid item xs={6} key={index}>
-                    <FormControlLabel
-                      value={category}
-                      control={<Radio />}
-                      label={category}
-                    />
-                  </Grid>
-                ))}
-              </Grid>
-            </RadioGroup>
+            <ButtonGroup aria-label="category-buttons">
+              {question.categories.map((category, index) => (
+                <Button
+                  key={index}
+                  variant="secondary"
+                  className="category-btn"
+                  onClick={() =>
+                    setFormData((prevData) => ({
+                      ...prevData,
+                      [question.id]: category,
+                    }))
+                  }
+                >
+                  {category}
+                </Button>
+              ))}
+            </ButtonGroup>
           </div>
         );
       case "text":
         return (
-          <FormControl sx={{ width: 300 }}>
-            <TextField
-              fullWidth
-              type="text"
-              placeholder={question.placeholder}
-              required={question.mandatory}
-              inputProps={{ maxLength: question.maxLength }}
-              value={formData[question.id] || ""}
-              onChange={handleInputChange(question.id)}
-            />
-          </FormControl>
+          <TextField
+            width="300"
+            type="text"
+            placeholder={question.placeholder}
+            required={question.mandatory}
+            inputProps={{ maxLength: question.maxLength }}
+            value={formData[question.id] || ""}
+            onChange={handleInputChange(question.id)}
+          />
         );
       case "single-select":
         return (
@@ -120,7 +106,7 @@ const Fragebogen = ({ isAdmin }) => {
               multiple
               displayEmpty
               value={formData[question.id] || []}
-              onChange={handleInputChange(question.id)}
+              onChange={handleMultiSelectChange(question.id)}
               renderValue={(selected) => {
                 if (selected.length === 0) {
                   return <em>Bitte auswählen</em>;
@@ -145,26 +131,24 @@ const Fragebogen = ({ isAdmin }) => {
       case "slider":
         return (
           <Box sx={{ width: 300 }}>
-            <Tooltip title={question.info} placement="right" arrow>
-              <Slider
-                defaultValue={question.defaultValue}
-                value={formData[question.id] || question.defaultValue}
-                valueLabelDisplay={question.valueLabelDisplay}
-                step={question.step}
-                marks={question.marks.map((mark) => ({
-                  value: parseInt(mark.replace("+", "")),
-                  label: mark,
-                }))}
-                min={question.min}
-                max={question.max}
-                onChange={(event, newValue) =>
-                  setFormData((prevData) => ({
-                    ...prevData,
-                    [question.id]: newValue,
-                  }))
-                }
-              />
-            </Tooltip>
+            <Slider
+              defaultValue={question.defaultValue}
+              value={formData[question.id] || question.defaultValue}
+              valueLabelDisplay={question.valueLabelDisplay}
+              step={question.step}
+              marks={question.marks.map((mark) => ({
+                value: parseInt(mark.replace("+", "")),
+                label: mark,
+              }))}
+              min={question.min}
+              max={question.max}
+              onChange={(event, newValue) =>
+                setFormData((prevData) => ({
+                  ...prevData,
+                  [question.id]: newValue,
+                }))
+              }
+            />
           </Box>
         );
       case "checkbox":
@@ -181,6 +165,7 @@ const Fragebogen = ({ isAdmin }) => {
                 }
               />
             }
+            label={question.question}
           />
         );
       case "email":
@@ -217,24 +202,6 @@ const Fragebogen = ({ isAdmin }) => {
 
   return (
     <div id="questions-wrapper">
-      {isAdmin && (
-        <>
-          <Button variant="success" onClick={customizeQuestions}>
-            {customizingMode ? "Anpassung beenden" : "Fragebogen anpassen"}
-          </Button>
-          {customizingMode && (
-            <>
-              {" "}
-              <Button variant="success">
-                <IoIosAddCircle size={20} /> Frage hinzufügen
-              </Button>{" "}
-              <Button variant="success">
-                <FaSave size={20} /> Änderungen speichern
-              </Button>
-            </>
-          )}
-        </>
-      )}
       <div className="info-icon">
         <OverlayTrigger
           trigger="click"
@@ -264,23 +231,13 @@ const Fragebogen = ({ isAdmin }) => {
               <div className="category-header">{question.category}</div>
             )}
             <Form.Group as={Row} className="mb-3 question-row">
-              <Form.Label column sm={5} className="question">
+              <Form.Label column sm={7} className="question">
                 {question.question}
                 {question.mandatory && (
                   <span className="mandatory-star">*</span>
                 )}
               </Form.Label>
               <Col sm={5}>{renderQuestion(question)}</Col>
-              {customizingMode && !question.category && (
-                <Col sm={2}>
-                  <Button variant="light">
-                    <MdEdit size={20} />
-                  </Button>{" "}
-                  <Button variant="light">
-                    <MdDelete size={20} />
-                  </Button>
-                </Col>
-              )}
             </Form.Group>
           </React.Fragment>
         ))}

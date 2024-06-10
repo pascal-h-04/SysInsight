@@ -1,7 +1,8 @@
 #questions-wrapper {
   position: relative;
-  margin: 1% 15%;
+  margin: 1% 17%;
   padding-top: 20px;
+  font-size: 18px;
 }
 
 .info-icon {
@@ -18,16 +19,24 @@
   text-align: center;
   font-weight: bold;
   margin-top: 50px;
-  margin-bottom: 30px;
 }
 .question-row {
-  padding: 0 50px;
+  padding: 0 100px;
 }
-.switch-checkbox .form-check-input {
-  width: 15%;
+.category-btn {
+  border: 2px solid darkgray;
+  padding: 10px 15px;
+}
+.category-btn:hover {
+  background-color: lightgray;
+  color: black;
+}
+
+.checkbox .form-check-input {
+  width: 20px;
   height: 20px;
 }
-.switch-checkbox .form-check-input:checked {
+.checkbox .form-check-input:checked {
   background-color: aquamarine;
   border-color: aquamarine;
 }
