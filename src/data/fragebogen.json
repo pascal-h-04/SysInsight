@@ -4,7 +4,7 @@
     "category": "Allgemeines"
   },
   {
-    "id": "unternehmensnamen",
+    "id": "unternehmensname",
     "question": "Name des Unternehmens:",
     "type": "text",
     "maxLength": 30,
@@ -270,6 +270,7 @@
     "id": "telefonnummer",
     "question": "Ihre Telefonnummer:",
     "type": "tel",
+    "maxLength": 15,
     "placeholder": "z.B. +49 123 456789",
     "mandatory": false
   },

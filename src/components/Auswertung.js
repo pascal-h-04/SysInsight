@@ -10,7 +10,7 @@ import OfficeToolsIcon from "../imgs/OfficeTools.png";
 import KommunikationsToolsIcon from "../imgs/KommunikationsTools.png";
 import { MdOutlineLocalOffer } from "react-icons/md";
 
-const Auswertung = ({ navigateToAngebotseite }) => {
+const Auswertung = ({ isAdmin }) => {
   const navigate = useNavigate();
 
   const [gesamtmetrikWert, setGesamtmetrikWert] = useState(70);

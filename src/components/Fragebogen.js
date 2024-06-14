@@ -35,9 +35,22 @@ const Fragebogen = ({ isAdmin }) => {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({});
+
+  const [unternehmensnameError, setUnternehmensnameError] = useState(false);
+  const [rolleError, setRolleError] = useState(false);
+  const [phoneError, setPhoneError] = useState(false);
+  const [emailError, setEmailError] = useState(false);
+
   const handleInputChange = (questionId) => (event) => {
-    const { value } = event.target;
+    let { value } = event.target;
     const { type } = event.target;
+
+    if (questionId === "unternehmensname")
+      value = validateUnternehmensname(value);
+    else if (questionId === "rolle") value = validateRolle(value);
+    else if (questionId === "email") value = validateEmail(value);
+    else if (questionId === "telefonnummer") value = validatePhone(value);
+
     setFormData((prevData) => ({
       ...prevData,
       [questionId]:
@@ -47,6 +60,62 @@ const Fragebogen = ({ isAdmin }) => {
             : value
           : value,
     }));
+  };
+
+  const validateUnternehmensname = (value) => {
+    const initialValue = value;
+    value = value.replace(/[^a-zA-Z\säöüÄÖÜß()-]/g, "");
+    if (value !== initialValue) {
+      setUnternehmensnameError(true);
+    } else {
+      setUnternehmensnameError(false);
+    }
+    return value;
+  };
+
+  const validateRolle = (value) => {
+    const initialValue = value;
+    value = value.replace(/[^a-zA-Z\säöüÄÖÜß()-]/g, "");
+    if (value !== initialValue) {
+      setRolleError(true);
+    } else {
+      setRolleError(false);
+    }
+    return value;
+  };
+
+  const validateEmail = (value) => {
+    const emailRegex =
+      /^(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)])$/i;
+    if (!emailRegex.test(value)) {
+      setEmailError(true);
+    } else {
+      setEmailError(false);
+    }
+
+    return value;
+  };
+
+  const validatePhone = (value) => {
+    const initialValue = value;
+    value = value.replace(/[^0-9+\s]/g, "");
+    value = value.startsWith("+")
+      ? "+" + value.slice(1).replace(/\+/g, "")
+      : value.replace(/\+/g, "");
+    value = value.replace(/\s{2,}/g, " ");
+    if (value.length > 15) {
+      value = value.slice(0, 15);
+    }
+    if (
+      value !== initialValue ||
+      /[^0-9+\s]/.test(value) ||
+      (value.indexOf("+") > 0 && initialValue.startsWith("+"))
+    ) {
+      setPhoneError(true);
+    } else {
+      setPhoneError(false);
+    }
+    return value;
   };
 
   const [customizingMode, setCustomizingMode] = useState(false);
@@ -87,10 +156,27 @@ const Fragebogen = ({ isAdmin }) => {
               fullWidth
               type="text"
               placeholder={question.placeholder}
-              required={question.mandatory}
               inputProps={{ maxLength: question.maxLength }}
               value={formData[question.id] || ""}
               onChange={handleInputChange(question.id)}
+              error={
+                question.id === "unternehmensname"
+                  ? unternehmensnameError
+                  : question.id === "rolle"
+                  ? rolleError
+                  : false
+              }
+              helperText={
+                question.id === "unternehmensname"
+                  ? unternehmensnameError
+                    ? "Eingabe ungültig"
+                    : ""
+                  : question.id === "rolle"
+                  ? rolleError
+                    ? "Eingabe ungültig"
+                    : ""
+                  : ""
+              }
             />
           </FormControl>
         );
@@ -189,21 +275,26 @@ const Fragebogen = ({ isAdmin }) => {
             fullWidth
             type="email"
             placeholder={question.placeholder}
-            required={question.mandatory}
             value={formData[question.id] || ""}
             onChange={handleInputChange(question.id)}
+            error={emailError}
+            helperText={emailError ? "Eingabe ungültig" : ""}
           />
         );
       case "tel":
         return (
-          <TextField
-            fullWidth
-            type="tel"
-            placeholder={question.placeholder}
-            required={question.mandatory}
-            value={formData[question.id] || ""}
-            onChange={handleInputChange(question.id)}
-          />
+          <FormControl>
+            <TextField
+              fullWidth
+              type="tel"
+              placeholder={question.placeholder}
+              inputProps={{ maxLength: question.maxLength }}
+              value={formData[question.id] || ""}
+              onChange={handleInputChange(question.id)}
+              error={phoneError}
+              helperText={phoneError ? "Eingabe ungültig" : ""}
+            />
+          </FormControl>
         );
       default:
         return null;
