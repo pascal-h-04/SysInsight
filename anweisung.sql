@@ -109,9 +109,9 @@ VALUES (85, 'Kategorie 1', 1, 1),
 
 -- Angebot
 INSERT INTO Angebot (Name, Kategorie, Score, Bild, Beschreibung, EinschaetzungID)
-VALUES ('Angebot 1', 'Kategorie 1', 85, 'bild1.jpg', 'Beschreibung 1', 1),
-       ('Angebot 2', 'Kategorie 2', 90, 'bild2.jpg', 'Beschreibung 2', 2),
-       ('Angebot 3', 'Kategorie 3', 75, 'bild3.jpg', 'Beschreibung 3', 3);
+VALUES ('Angebot 1', 'Kategorie 1', 85, 'public/assets/facebook_icon.svg', 'Beschreibung 1', 1),
+       ('Angebot 2', 'Kategorie 2', 90, 'public/assets/office_icon.svg', 'Beschreibung 2', 2),
+       ('Angebot 3', 'Kategorie 3', 75, 'public/assets/zoom_icon.svg', 'Becshreibung 3', 3);
 
 -- NutzerAntworten
 INSERT INTO NutzerAntworten (NutzerID, AntwortID)
