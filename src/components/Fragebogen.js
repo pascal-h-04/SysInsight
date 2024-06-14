@@ -40,6 +40,7 @@ const Fragebogen = ({ isAdmin }) => {
   const [rolleError, setRolleError] = useState(false);
   const [phoneError, setPhoneError] = useState(false);
   const [emailError, setEmailError] = useState(false);
+  const [mandatoryErrors, setMandatoryErrors] = useState({});
 
   const handleInputChange = (questionId) => (event) => {
     let { value } = event.target;
@@ -65,7 +66,7 @@ const Fragebogen = ({ isAdmin }) => {
   const validateUnternehmensname = (value) => {
     const initialValue = value;
     value = value.replace(/[^a-zA-Z\säöüÄÖÜß()-]/g, "");
-    if (value !== initialValue) {
+    if (value !== initialValue || value === "") {
       setUnternehmensnameError(true);
     } else {
       setUnternehmensnameError(false);
@@ -76,7 +77,7 @@ const Fragebogen = ({ isAdmin }) => {
   const validateRolle = (value) => {
     const initialValue = value;
     value = value.replace(/[^a-zA-Z\säöüÄÖÜß()-]/g, "");
-    if (value !== initialValue) {
+    if (value !== initialValue || value === "") {
       setRolleError(true);
     } else {
       setRolleError(false);
@@ -85,8 +86,8 @@ const Fragebogen = ({ isAdmin }) => {
   };
 
   const validateEmail = (value) => {
-    const emailRegex =
-      /^(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)])$/i;
+    const emailRegex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/i;
+    value = value.toLowerCase();
     if (!emailRegex.test(value)) {
       setEmailError(true);
     } else {
@@ -98,11 +99,13 @@ const Fragebogen = ({ isAdmin }) => {
 
   const validatePhone = (value) => {
     const initialValue = value;
-    value = value.replace(/[^0-9+\s]/g, "");
+    value = value
+      .replace(/[^0-9+\s]/g, "")
+      .replace(/\s+/g, " ")
+      .trim();
     value = value.startsWith("+")
       ? "+" + value.slice(1).replace(/\+/g, "")
       : value.replace(/\+/g, "");
-    value = value.replace(/\s{2,}/g, " ");
     if (value.length > 15) {
       value = value.slice(0, 15);
     }
@@ -302,8 +305,19 @@ const Fragebogen = ({ isAdmin }) => {
   };
 
   const handleSubmit = () => {
-    console.log("Form Data: ", formData);
-    navigate("/auswertung", { state: { formData } });
+    const errors = {};
+    jsonFragen.forEach((question) => {
+      if (question.mandatory && !formData[question.id]) {
+        errors[question.id] = true;
+      }
+    });
+    if (Object.keys(errors).length > 0) {
+      setMandatoryErrors(errors);
+      alert("Mandatory fields not filled in!");
+    } else {
+      setMandatoryErrors({});
+      navigate("/auswertung", { state: { formData } });
+    }
   };
 
   return (
@@ -380,7 +394,13 @@ const Fragebogen = ({ isAdmin }) => {
           onClick={handleSubmit}
           className="zur-auswertung-btn"
         >
-          <MdInsights size={30} /> Zur Auswertung
+          <MdInsights size={30} /> Zur Auswertung (mit validierung)
+        </Button>
+        <Button
+          variant="primary"
+          onClick={() => navigate("/auswertung", { state: { formData } })}
+        >
+          Zur Auswertung (ohne validierung - Dev only)
         </Button>
       </Form>
     </div>
