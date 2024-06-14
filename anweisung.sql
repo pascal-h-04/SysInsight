@@ -7,7 +7,9 @@ CREATE TABLE Nutzer
 (
     ID    INT AUTO_INCREMENT PRIMARY KEY,
     Name  VARCHAR(255),
-    Email VARCHAR(255)
+    Vorname VARCHAR(255),
+    Email VARCHAR(255),
+    pw   VARCHAR(255)
 );
 
 CREATE TABLE Unternehmen
@@ -73,10 +75,10 @@ CREATE INDEX idx_angebot_kategorie ON Angebot (Kategorie);
 -- Testdaten einfügen
 
 -- Nutzer
-INSERT INTO Nutzer (Name, Email)
-VALUES ('Max Mustermann', 'max@mustermann.de'),
-       ('Erika Musterfrau', 'erika@musterfrau.de'),
-       ('Hans Müller', 'hans@mueller.de');
+INSERT INTO Nutzer (Name, Vorname, Email, pw)
+VALUES ('Mustermann', 'Max', 'max@mustermann.de', '1234'),
+       ('Musterfrau', 'Erika', 'erika@musterfrau.de', '5678'),
+       ('Müller', 'Hans', 'hans@mueller.de', '91011');
 
 -- Unternehmen
 INSERT INTO Unternehmen (Name)
