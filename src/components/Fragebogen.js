@@ -67,7 +67,7 @@ const Fragebogen = ({ isAdmin }) => {
               onChange={handleInputChange(question.id)}
             >
               <Grid container spacing={2}>
-                {question.categories.map((category, index) => (
+                {Object.keys(question.categories).map((category, index) => (
                   <Grid item xs={6} key={index}>
                     <FormControlLabel
                       value={category}
@@ -105,7 +105,7 @@ const Fragebogen = ({ isAdmin }) => {
               <MenuItem disabled value="">
                 <em>Bitte auswählen</em>
               </MenuItem>
-              {question.options.map((option, index) => (
+              {Object.keys(question.options).map((option, index) => (
                 <MenuItem key={index} value={option}>
                   {option}
                 </MenuItem>
@@ -131,7 +131,7 @@ const Fragebogen = ({ isAdmin }) => {
               <MenuItem disabled value="">
                 <em>Bitte auswählen</em>
               </MenuItem>
-              {question.options.map((option) => (
+              {Object.keys(question.options).map((option) => (
                 <MenuItem key={option} value={option}>
                   <Checkbox
                     checked={(formData[question.id] || []).indexOf(option) > -1}

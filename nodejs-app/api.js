@@ -12,10 +12,10 @@ app.use(bodyParser.json());
 
 // MySQL-Verbindung konfigurieren
 const connection = mysql.createConnection({
-  host: 'dein_host',
-  user: 'dein_benutzername',
-  password: 'dein_passwort',
-  database: 'deine_datenbank'
+  host: 'localhost',
+  user: 'root',
+  password: '123',
+  database: 'Semantec'
 });
 // Verbindung herstellen
 connection.connect((err) => {
