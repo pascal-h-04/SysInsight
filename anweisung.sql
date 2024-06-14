@@ -11,6 +11,7 @@ CREATE TABLE Nutzer
     Email         VARCHAR(255),
     pw            VARCHAR(255),
     UnternehmenID INT,
+    isAdmin       BOOLEAN DEFAULT FALSE,
     FOREIGN KEY (UnternehmenID) REFERENCES Unternehmen (ID)
 );
 
