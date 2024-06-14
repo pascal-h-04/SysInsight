@@ -16,15 +16,15 @@
     "id": "branche",
     "question": "Branche:",
     "type": "single-select",
-    "options": [
-      "Technologie",
-      "Finanzwesen",
-      "Gesundheitswesen",
-      "Bildung",
-      "Handel",
-      "Produktion",
-      "Andere"
-    ],
+    "options": {
+      "Technologie":3,
+      "Finanzwesen":0,
+      "Gesundheitswesen":0,
+      "Bildung":4,
+      "Handel":4,
+      "Produktion":5,
+      "Andere":5
+    },
     "weight": 3,
     "mandatory": true
   },
@@ -32,34 +32,11 @@
     "id": "unternehmensgroesse",
     "question": "Mitarbeiterzahl:",
     "type": "category-btns",
-    "categories": ["1 - 50", "50 - 1.000", "1001 - 5.000", "5.001+"],
+    "categories": {"1 - 50":5, "50 - 1.000":4, "1001 - 5.000":2, "5.001+":0},
     "weight": 2,
     "mandatory": true
   },
-  {
-    "id": "standort",
-    "question": "Standort des Hauptsitzes:",
-    "type": "single-select",
-    "options": [
-      "Deutschland",
-      "Österreich",
-      "Schweiz",
-      "Anderes EU-Land",
-      "Anderes Nicht-EU-Land"
-    ],
-    "weight": 1,
-    "mandatory": false
-  },
-  {
-    "id": "rolle",
-    "question": "Ihre Rolle im Unternehmen:",
-    "type": "text",
-    "maxLength": 30,
-    "placeholder": "z.B. CIO",
-    "weight": 1,
-    "mandatory": false
-  },
-
+  
   {
     "id": "kategorie_it",
     "category": "IT"
@@ -68,7 +45,7 @@
     "id": "it_infrastruktur",
     "question": "Verwaltung der IT-Infrastruktur:",
     "type": "single-select",
-    "options": ["Intern", "Extern", "Intern und Extern"],
+    "options": {"Intern":0, "Extern":5, "Intern und Extern":3},
     "weight": 1,
     "mandatory": true
   },
@@ -87,79 +64,59 @@
   },
 
   {
-    "id": "kategorie_dwp",
-    "category": "Digital Workplace"
+    "id": "kategorie_kollaboration",
+    "category": "Kollaboration"
   },
   {
     "id": "wochendurchschnitt_homeoffice_aktuell",
     "question": "Wochendurchschnitt von Homeoffice:",
     "type": "single-select",
-    "options": [
-      "0 Tage",
-      "0 - 1 Tage",
-      "1 - 2 Tage",
-      "2 - 3 Tage",
-      "3 - 4 Tage",
-      "4 - 5 Tage",
-      "5 Tage"
-    ],
+    "options": {
+      "0 Tage":5,
+      "0 - 1 Tage":5,
+      "1 - 2 Tage":4,
+      "2 - 3 Tage":3,
+      "3 - 4 Tage":2,
+      "4 - 5 Tage":1,
+      "5 Tage":0
+    },
     "weight": 2,
     "mandatory": true
   },
-  {
-    "id": "wochendurchschnitt_homeoffice_angestrebt",
-    "question": "Angestrebter Wochendurchschnitt von Homeoffice:",
-    "type": "single-select",
-    "options": [
-      "0 Tage",
-      "0 - 1 Tage",
-      "1 - 2 Tage",
-      "2 - 3 Tage",
-      "3 - 4 Tage",
-      "4 - 5 Tage",
-      "5 Tage"
-    ],
-    "weight": 3,
-    "mandatory": true
-  },
-  {
-    "id": "online_meeting_platform",
-    "question": "Genutze Meeting-Plattformen:",
-    "type": "multi-select",
-    "options": [
-      "Keine in Verwendung",
-      "Microsoft Teams",
-      "Zoom",
-      "Cisco Webex",
-      "Google Meet",
-      "Skype",
-      "Andere"
-    ],
+  { 
+    "id":"Mitarbeiterzufriedenheit_über_kolaborationstools",
+    "question": "Wie zufrieden sind die Mitarbeiter mit den kollaborativen Tools ?",
+    "type": "slider",
+    "min": 1,
+    "max": 5,
+    "step": 1,
+    "defaultValue": 3,
+    "marks": ["1", "2", "3", "4", "5"],
     "weight": 2,
-    "mandatory": true
+    "mandatory": false
   },
   {
     "id": "kollaborative_tools",
     "question": "Genutze kollaborative Tools:",
     "type": "multi-select",
-    "options": [
-      "Keine in Verwendung",
-      "Microsoft Teams",
-      "Slack",
-      "Jira",
-      "Miro",
-      "Trello",
-      "Asana",
-      "Google Workspace",
-      "Dropbox Business",
-      "Andere"
-    ],
+    "options": {
+      "Keine in Verwendung":0,
+      "Microsoft Teams":5,
+      "Slack":4,
+      "Jira":5,
+      "Miro":3,
+      "Trello":3,
+      "Asana":3,
+      "Google Workspace":3,
+      "Dropbox Business":3,
+      "Andere":0
+    },
     "weight": 2,
     "mandatory": true
   },
   {
     "id": "relevanz_office_anwendungen",
-    "question": "Relevanz von MS Office Anwendungen:",
+    "question": "Relevanz von Office Anwendungen:",
     "type": "slider",
     "min": 1,
     "max": 5,
@@ -185,7 +142,67 @@
     "weight": 1,
     "mandatory": false
   },
+  {
+    "id": "kategorie_kollaboration",
+    "category": "Kommunikation"
+  },
 
+  {
+    "id": "online_meeting_platform",
+    "question": "Genutze Meeting-Plattformen:",
+    "type": "multi-select",
+    "options": {
+      "Keine in Verwendung":0,
+      "Microsoft Teams":5,
+      "Zoom":4,
+      "Cisco Webex":3,
+      "Google Meet":3,
+      "Skype":1,
+      "Andere":0
+    },
+    "weight": 2,
+    "mandatory": true
+  },
+  {
+    "id":"effektive_kommunikation",
+    "question": "Wie effektiv ist die Kommunikation im Unternehmen?",
+    "type": "slider",
+    "min": 1,
+    "max": 5,
+    "step": 1,
+    "defaultValue": 3,
+    "marks": ["1", "2", "3", "4", "5"],
+    "weight": 2,
+    "mandatory": false
+  },
+  { 
+    "id":"Mitarbeiterkenntnisse_über_kommunkationstools",
+    "question": "Wie gut sind die Mitarbeiter über die Kommunikationstools informiert?",
+    "type": "slider",
+    "min": 1,
+    "max": 5,
+    "step": 1,
+    "defaultValue": 3,
+    "marks": ["1", "2", "3", "4", "5"],
+    "weight": 2,
+    "mandatory": false
+  },
+  {
+    "id": "kommunikation_Kunde/Zulieferer",
+    "question": "Wie kommunizieren Sie mit Ihren Kunden oder Zulieferern?",
+    "type": "multi-select",
+    "options": {
+      "Telefon": 2,
+      "E-Mail":2,
+      "Chat":3,
+      "Videokonferenz":3,
+      "Persönlich":3,
+      "CRM-System":5,
+      "Andere":2
+    },
+    "weight": 2,
+    "mandatory": false
+  },
   {
     "id": "kategorie_it_sicherheit",
     "category": "IT-Sicherheit"
@@ -194,35 +211,38 @@
     "id": "authentifizierungsmethode",
     "question": "Welche Authentifizierungsmethode nutzen Sie?",
     "type": "multi-select",
-    "options": [
-      "Keine",
-      "Passwort",
-      "Biometrische Authentifizierung",
-      "Zwei-Faktor-Authentifizierung",
-      "Single Sign-On",
-      "Unbekannt"
-    ],
+    "options": {
+      "Keine": 0,
+      "Passwort": 1,
+      "Biometrische Authentifizierung":5,
+      "Zwei-Faktor-Authentifizierung":5,
+      "Single Sign-On":5,
+      "Unbekannt":0
+    },
     "weight": 1,
     "mandatory": false
   },
   {
     "id": "vpn",
-    "question": "Wird ein VPN eingesetzt?",
-    "type": "checkbox",
+    "question": "Nutzen Sie ein VPN?",
     "weight": 1,
-    "mandatory": false
+    "type": "checkbox",
+    "options": {
+      "True": 5,
+      "False": 0
+    }
   },
   {
     "id": "schulungen",
     "question": "Wie häufig werden Mitarbeiter in IT-Sicherheit geschult?",
     "type": "single-select",
-    "options": [
-      "Keine Schulungen",
-      "Einmal jährlich",
-      "Einmal halbjährlich",
-      "Einmal monatlich",
-      "Regelmäßig"
-    ],
+    "options": {
+      "Keine Schulungen": 0,
+      "Einmal jährlich": 1,
+      "Einmal halbjährlich": 2,
+      "Einmal monatlich":4,
+      "Regelmäßig":5
+    },
     "weight": 1,
     "mandatory": false
   },
@@ -230,12 +250,12 @@
     "id": "backups",
     "question": "Inwiefern werden Backups gemacht?",
     "type": "single-select",
-    "options": [
-      "Keine Backups",
-      "Manuelle Backups",
-      "Automatische Backups",
-      "Automatische Backups und regelmäßige Tests"
-    ],
+    "options": {
+      "Keine Backups":0,
+      "Manuelle Backups":2,
+      "Automatische Backups":3,
+      "Automatische Backups und regelmäßige Tests":5
+    },
     "weight": 1,
     "mandatory": false
   },
@@ -243,7 +263,7 @@
     "id": "sicherheitsvorfaelle",
     "question": "Wie häufig treten Sicherheitsvorfälle auf?",
     "type": "single-select",
-    "options": ["Täglich", "Wöchentlich", "Monatlich", "Jährlich", "Nie"],
+    "options": {"Täglich": 0, "Wöchentlich":1, "Monatlich":2, "Jährlich":4, "Nie":5},
     "weight": 2,
     "mandatory": false
   },
@@ -252,9 +272,12 @@
     "question": "Können Sie Sicherheitsvorfälle online melden?",
     "type": "checkbox",
     "weight": 1,
-    "mandatory": false
+    "mandatory": false,
+    "options": {
+      "True": 5,
+      "False": 0
+    }
   },
-
   {
     "id": "kategorie_kontaktaufnahme",
     "category": "Kontaktaufnahme"
@@ -286,17 +309,11 @@
     "mandatory": true
   },
   {
-    "id": "Dateneingabe bestätigen",
-    "question": "Dateneingabe bestätigen:",
-    "type": "checkbox",
-    "mandatory": true
-  },
-  {
     "id": "terminplanung",
     "question": "Präferierter Tag für ein persönliches Gespräch:",
     "type": "text",
     "maxLength": 10,
     "placeholder": "z.B. 17.08.2024",
     "mandatory": false
-  }
+  } 
 ]
