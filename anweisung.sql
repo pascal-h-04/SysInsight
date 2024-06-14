@@ -5,11 +5,13 @@ USE SemanTec;
 
 CREATE TABLE Nutzer
 (
-    ID    INT AUTO_INCREMENT PRIMARY KEY,
-    Name  VARCHAR(255),
-    Vorname VARCHAR(255),
-    Email VARCHAR(255),
-    pw   VARCHAR(255)
+    ID            INT AUTO_INCREMENT PRIMARY KEY,
+    Name          VARCHAR(255),
+    Vorname       VARCHAR(255),
+    Email         VARCHAR(255),
+    pw            VARCHAR(255),
+    UnternehmenID INT,
+    FOREIGN KEY (UnternehmenID) REFERENCES Unternehmen (ID)
 );
 
 CREATE TABLE Unternehmen
@@ -36,13 +38,11 @@ CREATE TABLE Antworten
 
 CREATE TABLE Einschaetzung
 (
-    ID            INT AUTO_INCREMENT PRIMARY KEY,
-    Score         INT,
-    Kategorie     VARCHAR(255),
-    NutzerID      INT,
-    UnternehmenID INT,
-    FOREIGN KEY (NutzerID) REFERENCES Nutzer (ID),
-    FOREIGN KEY (UnternehmenID) REFERENCES Unternehmen (ID)
+    ID        INT AUTO_INCREMENT PRIMARY KEY,
+    Score     INT,
+    Kategorie VARCHAR(255),
+    NutzerID  INT,
+    FOREIGN KEY (NutzerID) REFERENCES Nutzer (ID)
 );
 
 CREATE TABLE Angebot
@@ -75,10 +75,10 @@ CREATE INDEX idx_angebot_kategorie ON Angebot (Kategorie);
 -- Testdaten einfügen
 
 -- Nutzer
-INSERT INTO Nutzer (Name, Vorname, Email, pw)
-VALUES ('Mustermann', 'Max', 'max@mustermann.de', '1234'),
-       ('Musterfrau', 'Erika', 'erika@musterfrau.de', '5678'),
-       ('Müller', 'Hans', 'hans@mueller.de', '91011');
+INSERT INTO Nutzer (Name, Vorname, Email, pw, UnternehmenID)
+VALUES ('Mustermann', 'Max', 'max@mustermann.de', '1234', 1),
+       ('Musterfrau', 'Erika', 'erika@musterfrau.de', '5678', 2),
+       ('Müller', 'Hans', 'hans@mueller.de', '91011', 3);
 
 -- Unternehmen
 INSERT INTO Unternehmen (Name)
@@ -102,10 +102,10 @@ VALUES ('Antwort 1A', 'Kategorie 1', 1),
        ('Antwort 3B', 'Kategorie 3', 3);
 
 -- Einschaetzungen
-INSERT INTO Einschaetzung (Score, Kategorie, NutzerID, UnternehmenID)
-VALUES (85, 'Kategorie 1', 1, 1),
-       (90, 'Kategorie 2', 2, 2),
-       (75, 'Kategorie 3', 3, 3);
+INSERT INTO Einschaetzung (Score, Kategorie, NutzerID)
+VALUES (85, 'Kategorie 1', 1),
+       (90, 'Kategorie 2', 2),
+       (75, 'Kategorie 3', 3);
 
 -- Angebot
 INSERT INTO Angebot (Name, Kategorie, Score, Bild, Beschreibung, EinschaetzungID)
