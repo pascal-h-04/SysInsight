@@ -9,8 +9,15 @@
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "axios": "^1.7.2",
+    "bcrypt": "^5.1.1",
     "body-parser": "^1.20.2",
     "bootstrap": "^5.3.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "express-session": "^1.18.0",
+    "jsonwebtoken": "^9.0.2",
     "mysql": "^2.18.1",
     "react": "^18.2.0",
     "react-bootstrap": "^2.10.2",
@@ -20,16 +27,14 @@
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
   },
- 
   "scripts": {
     "start": "concurrently \"npm run start:react\" \"npm run start:server\"",
     "start:react": "react-scripts start",
-    "start:server": "node nodejs-app/server.js", 
+    "start:server": "node nodejs-app/server.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-
   "eslintConfig": {
     "extends": [
       "react-app",
