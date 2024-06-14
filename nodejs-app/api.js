@@ -5,13 +5,13 @@ const bodyParser = require('body-parser');
 //App erstellen
 const app = express();
 //Port festlegen
-const port = 3000;
+const port = 5000;
 
 // Middleware für die Verarbeitung von JSON-Daten
 app.use(bodyParser.json());
 
 // MySQL-Verbindung konfigurieren
-const connection = mysql.createConnection({
+const connection = mysql.createPool({
   host: 'localhost',
   user: 'root',
   password: '123',
