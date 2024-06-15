@@ -1,42 +1,45 @@
+// LoginScreen.js
 import "./LoginScreen.css";
 import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Spinner from "react-bootstrap/Spinner";
 import Modal from "react-bootstrap/Modal";
 import ComicWelcome from "../imgs/comic_welcome.png";
+import axios from "../api/AxiosConfig"; // Passe den Pfad entsprechend an
 
 function LoginScreen({ loginSuccess }) {
-  const accounts = [{ username: "a", password: "a" }];
-  localStorage.setItem("accounts", JSON.stringify(accounts));
-
   const [loginLoading, setLoginLoading] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [showFailureModal, setShowFailureModal] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-  const [admin, setAdmin] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [error, setError] = useState(null);
 
   const handleLogin = async (e) => {
     e.preventDefault();
     setLoginLoading(true);
     const username = document.getElementById("username").value;
     const password = document.getElementById("password").value;
-    const storedAccounts = JSON.parse(localStorage.getItem("accounts"));
-    const accountExists = storedAccounts.some(
-      (account) =>
-        account.username === username && account.password === password
-    );
-    setTimeout(() => {
-      if (accountExists) {
+    const userType = isAdmin ? "admin" : "user"; // Unterscheide zwischen Admin und Benutzer
+
+    try {
+      const response = await axios.post("/login", { username, password, userType });
+      if (response.data.auth) {
         setShowSuccessModal(true);
         setTimeout(() => {
           setShowSuccessModal(false);
-          loginSuccess(admin);
+          loginSuccess(isAdmin);
         }, 2000);
       } else {
         setShowFailureModal(true);
       }
+    } catch (error) {
+      console.error("Login error:", error);
+      setError("Login failed. Please try again.");
+      setShowFailureModal(true);
+    } finally {
       setLoginLoading(false);
-    }, 2000);
+    }
   };
 
   return (
@@ -46,7 +49,7 @@ function LoginScreen({ loginSuccess }) {
           <img src={ComicWelcome} alt="SemanTec" />
         </div>
         <div id="login-form">
-          <form>
+          <form onSubmit={handleLogin}>
             <div className="mb-3">
               <label htmlFor="username" className="form-label">
                 Username
@@ -84,27 +87,30 @@ function LoginScreen({ loginSuccess }) {
                 type="checkbox"
                 className="form-check-input"
                 id="admin-login"
-                onChange={() => setAdmin(!admin)}
+                onChange={() => setIsAdmin(!isAdmin)}
               />
               <label className="form-check-label" htmlFor="admin-login">
                 Admin login
               </label>
             </div>
-            <Button variant="success" onClick={handleLogin}>
-              Submit
+            <Button variant="success" type="submit" disabled={loginLoading}>
+              {loginLoading ? (
+                <Spinner animation="border" variant="light" size="sm" />
+              ) : (
+                "Submit"
+              )}
             </Button>
             <br />
             <Button
               id="quick-access"
               variant="warning"
-              onClick={() => loginSuccess(admin)}
+              onClick={() => loginSuccess(isAdmin)}
+              disabled={loginLoading}
             >
               Quick access (Dev Only)
             </Button>
             <div id="login-spinner">
-              {loginLoading ? (
-                <Spinner animation="border" variant="primary" />
-              ) : null}
+              {loginLoading && <Spinner animation="border" variant="primary" />}
             </div>
           </form>
         </div>
@@ -119,12 +125,9 @@ function LoginScreen({ loginSuccess }) {
         <Modal.Header closeButton>
           <Modal.Title>Login Failed</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Please check your credentials and try again.</Modal.Body>
+        <Modal.Body>{error || "Please check your credentials and try again."}</Modal.Body>
         <Modal.Footer>
-          <Button
-            variant="secondary"
-            onClick={() => setShowFailureModal(false)}
-          >
+          <Button variant="secondary" onClick={() => setShowFailureModal(false)}>
             Close
           </Button>
         </Modal.Footer>
