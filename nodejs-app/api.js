@@ -5,7 +5,10 @@ const bodyParser = require('body-parser');
 //App erstellen
 const app = express();
 //Port festlegen
-const port = 5000;
+
+
+const port = 3020;
+
 
 // Middleware für die Verarbeitung von JSON-Daten
 app.use(bodyParser.json());
@@ -14,29 +17,15 @@ app.use(bodyParser.json());
 const connection = mysql.createPool({
   host: 'localhost',
   user: 'root',
-  password: '123',
+  password: '',
   database: 'Semantec'
 });
-// Verbindung herstellen
-connection.connect((err) => {
-  if (err) {
-    console.error('Fehler bei der Verbindung zur Datenbank:', err);
-    return;
-  }
-  console.log('Verbunden mit der MySQL-Datenbank!');
-});
-
-// Server starten
-app.listen(port, () => {
-  console.log(`Server gestartet auf Port ${port}`);
-}); 
-
 
 
 //Routen
 // Route: Alle Einträge löschen
 app.delete('/api/eintraege', (req, res) => {
-  connection.query('DELETE FROM deine_tabelle', (err, results) => {
+  connection.query('DELETE FROM Angebot', (err, results) => {
     if (err) {
       console.error('Fehler beim Löschen der Daten:', err);
       res.status(500).send('Serverfehler');
@@ -48,7 +37,7 @@ app.delete('/api/eintraege', (req, res) => {
 
 // Route: Alle Einträge anzeigen
 app.get('/api/eintraege', (req, res) => {
-  connection.query('SELECT * FROM deine_tabelle', (err, results) => {
+  connection.query('SELECT * FROM Angebot', (err, results) => {
     if (err) {
       console.error('Fehler beim Abrufen der Daten:', err);
       res.status(500).send('Serverfehler');
@@ -61,7 +50,7 @@ app.get('/api/eintraege', (req, res) => {
 // Route: Neuen Eintrag hinzufügen
 app.post('/api/eintraege', (req, res) => {
   const { name, beschreibung } = req.body;
-  connection.query('INSERT INTO deine_tabelle (name, beschreibung) VALUES (?, ?)', [name, beschreibung], (err, results) => {
+  connection.query('INSERT INTO Angebot(name, beschreibung) VALUES (?, ?)', [name, beschreibung], (err, results) => {
     if (err) {
       console.error('Fehler beim Hinzufügen des Eintrags:', err);
       res.status(500).send('Serverfehler');
@@ -70,4 +59,9 @@ app.post('/api/eintraege', (req, res) => {
     res.send('Eintrag hinzugefügt');
   });
 });
+
+// Server starten
+app.listen(port, () => {
+  console.log(`Server gestartet auf Port ${port}`);
+}); 
 
