@@ -31,6 +31,11 @@
   background-color: lightgray;
   color: black;
 }
+.error-text {
+  color: red;
+  font-size: 14px;
+  margin-top: 5px;
+}
 
 .checkbox .form-check-input {
   width: 20px;
@@ -50,4 +55,8 @@
   float: right;
   margin-top: 10px;
   margin-bottom: 30px;
+}
+.loading {
+  pointer-events: none;
+  opacity: 0.5;
 }

@@ -2,7 +2,7 @@ import "./Angebotseite.css";
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Angebot from "./Angebot.js";
-import { Button } from "react-bootstrap";
+import { Button, Modal } from "react-bootstrap";
 import jsonAngebote from "../data/angebote.json";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { Grid } from "@mui/material";
@@ -10,6 +10,10 @@ import { MdAdd } from "react-icons/md";
 
 const Angebotseite = ({ isAdmin }) => {
   const navigate = useNavigate();
+
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
+  const [deleteId, setDeleteId] = useState(null);
+
   const [angebote, setAngebote] = useState(jsonAngebote);
   useEffect(() => {
     setAngebote(jsonAngebote);
@@ -26,15 +30,15 @@ const Angebotseite = ({ isAdmin }) => {
   };
 
   const handleDelete = (id) => {
-    if (
-      window.confirm(
-        "Sind Sie sicher, dass Sie dieses Angebot löschen möchten?"
-      )
-    ) {
-      setAngebote((prevAngebote) =>
-        prevAngebote.filter((angebot) => angebot.id !== id)
-      );
-    }
+    setShowConfirmModal(true);
+    setDeleteId(id);
+  };
+  const confirmDelete = () => {
+    setAngebote((prevAngebote) =>
+      prevAngebote.filter((angebot) => angebot.id !== deleteId)
+    );
+    setShowConfirmModal(false);
+    setDeleteId(null);
   };
 
   const handleAdd = () => {
@@ -96,6 +100,25 @@ const Angebotseite = ({ isAdmin }) => {
           </Grid>
         ))}
       </Grid>
+      <Modal show={showConfirmModal} onHide={() => setShowConfirmModal(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>Löschung des Angebots</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          Sind Sie sicher, dass Sie dieses Angebot löschen möchten?
+        </Modal.Body>
+        <Modal.Footer>
+          <Button
+            variant="secondary"
+            onClick={() => setShowConfirmModal(false)}
+          >
+            Abbrechen
+          </Button>
+          <Button variant="danger" onClick={confirmDelete}>
+            Löschen
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 };

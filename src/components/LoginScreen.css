@@ -26,9 +26,6 @@
   flex-direction: column;
   justify-content: center;
 }
-#login-spinner {
-  margin: 5% auto;
-}
 #quick-access {
   margin-top: 20px;
 }

@@ -3,6 +3,9 @@ import { useState, useEffect } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import LoginScreen from "./components/LoginScreen";
 import Navigation from "./components/Navigation";
+import MyResults from "./components/MyResults";
+import Profile from "./components/Profile";
+import AboutUs from "./components/AboutUs";
 import Startseite from "./components/Startseite";
 import Fragebogen from "./components/Fragebogen";
 import Angebotseite from "./components/Angebotseite";
@@ -94,6 +97,19 @@ function App() {
               )
             }
           />
+          <Route
+            path="/"
+            element={<Navigate to={isLoggedIn ? "/startseite" : "/login"} />}
+          />
+          <Route
+            path="/my-results"
+            element={isLoggedIn ? <MyResults /> : <Navigate to="/login" />}
+          />
+          <Route
+            path="/profile"
+            element={isLoggedIn ? <Profile /> : <Navigate to="/login" />}
+          />
+          <Route path="/about-us" element={<AboutUs />} />
           <Route
             path="/"
             element={<Navigate to={isLoggedIn ? "/startseite" : "/login"} />}

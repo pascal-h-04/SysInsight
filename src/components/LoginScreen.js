@@ -1,11 +1,10 @@
-// LoginScreen.js
 import "./LoginScreen.css";
 import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Spinner from "react-bootstrap/Spinner";
 import Modal from "react-bootstrap/Modal";
 import ComicWelcome from "../imgs/comic_welcome.png";
-import axios from "../api/AxiosConfig"; // Passe den Pfad entsprechend an
+import axios from "../api/AxiosConfig.js";
 
 function LoginScreen({ loginSuccess }) {
   const [loginLoading, setLoginLoading] = useState(false);
@@ -20,10 +19,14 @@ function LoginScreen({ loginSuccess }) {
     setLoginLoading(true);
     const username = document.getElementById("username").value;
     const password = document.getElementById("password").value;
-    const userType = isAdmin ? "admin" : "user"; // Unterscheide zwischen Admin und Benutzer
+    const userType = isAdmin ? "admin" : "user";
 
     try {
-      const response = await axios.post("/login", { username, password, userType });
+      const response = await axios.post("/login", {
+        username,
+        password,
+        userType,
+      });
       if (response.data.auth) {
         setShowSuccessModal(true);
         setTimeout(() => {
@@ -109,9 +112,6 @@ function LoginScreen({ loginSuccess }) {
             >
               Quick access (Dev Only)
             </Button>
-            <div id="login-spinner">
-              {loginLoading && <Spinner animation="border" variant="primary" />}
-            </div>
           </form>
         </div>
       </div>
@@ -125,9 +125,14 @@ function LoginScreen({ loginSuccess }) {
         <Modal.Header closeButton>
           <Modal.Title>Login Failed</Modal.Title>
         </Modal.Header>
-        <Modal.Body>{error || "Please check your credentials and try again."}</Modal.Body>
+        <Modal.Body>
+          {error || "Please check your credentials and try again."}
+        </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={() => setShowFailureModal(false)}>
+          <Button
+            variant="secondary"
+            onClick={() => setShowFailureModal(false)}
+          >
             Close
           </Button>
         </Modal.Footer>
