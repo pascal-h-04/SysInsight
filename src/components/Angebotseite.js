@@ -2,7 +2,7 @@ import "./Angebotseite.css";
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Angebot from "./Angebot.js";
-import { Button, Modal } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import jsonAngebote from "../data/angebote.json";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { Grid } from "@mui/material";
