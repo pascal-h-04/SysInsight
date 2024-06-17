@@ -10,7 +10,8 @@
     "maxLength": 30,
     "placeholder": "z.B. SAP SE",
     "weight": 1,
-    "mandatory": false
+    "mandatory": false,
+   "internalCategory": "Allgemeines"
   },
   {
     "id": "branche",
@@ -26,7 +27,8 @@
       "Andere": 5
     },
     "weight": 3,
-    "mandatory": true
+    "mandatory": true,
+   "internalCategory": "Allgemeines"
   },
   {
     "id": "unternehmensgroesse",
@@ -39,7 +41,8 @@
       "5.001+": 0
     },
     "weight": 2,
-    "mandatory": true
+    "mandatory": true,
+   "internalCategory": "Allgemeines"
   },
 
   {
@@ -52,7 +55,8 @@
     "type": "single-select",
     "options": { "Intern": 0, "Extern": 5, "Intern und Extern": 3 },
     "weight": 1,
-    "mandatory": true
+    "mandatory": true,
+   "internalCategory": "IT"
   },
   {
     "id": "grosse_it_abteilung",
@@ -65,7 +69,8 @@
     "marks": ["1", "50", "100+"],
     "valueLabelDisplay": "auto",
     "weight": 2,
-    "mandatory": true
+    "mandatory": true,
+    "internalCategory": "IT"
   },
 
   {
@@ -86,7 +91,8 @@
       "5 Tage": 0
     },
     "weight": 2,
-    "mandatory": true
+    "mandatory": true,
+    "internalCategory": "Kollaboration"
   },
   {
     "id": "Mitarbeiterzufriedenheit_über_kolaborationstools",
@@ -99,7 +105,8 @@
     "marks": ["1", "2", "3", "4", "5"],
     "info": "1 = Sehr unzufrieden, 2 = Unzufrieden, 3 = Neutral, 4 = Zufrieden, 5 = Sehr zufrieden",
     "weight": 2,
-    "mandatory": false
+    "mandatory": false,
+    "internalCategory": "Kollaboration"
   },
   {
     "id": "kollaborative_tools",
@@ -118,7 +125,8 @@
       "Andere": 0
     },
     "weight": 2,
-    "mandatory": true
+    "mandatory": true,
+    "internalCategory": "Kollaboration"
   },
   {
     "id": "relevanz_office_anwendungen",
@@ -132,7 +140,8 @@
     "info": "1 = Irrelevant (wird nicht genutzt), 2 = Geringe Relevanz (wird selten genutzt), 3 = Mittlere Relevanz (wird mehrmals die Woche genutzt), 4 = Hohe Relevanz (wird täglich genutzt), 5 = Sehr hohe Relevanz (wird mehrfach täglich genutzt)",
     "valueLabelDisplay": "off",
     "weight": 2,
-    "mandatory": true
+    "mandatory": true,
+    "internalCategory": "Kollaboration"
   },
   {
     "id": "relevanz_mobile_endgeraete",
@@ -146,7 +155,8 @@
     "info": "1 = Irrelevant (wird nicht genutzt), 2 = Geringe Relevanz (wird selten genutzt), 3 = Mittlere Relevanz (wird mehrmals die Woche genutzt), 4 = Hohe Relevanz (wird täglich genutzt), 5 = Sehr hohe Relevanz (wird mehrfach täglich genutzt)",
     "valueLabelDisplay": "off",
     "weight": 1,
-    "mandatory": false
+    "mandatory": false,
+    "internalCategory": "Kollaboration"
   },
   {
     "id": "kategorie_kollaboration",
@@ -167,7 +177,8 @@
       "Andere": 0
     },
     "weight": 2,
-    "mandatory": true
+    "mandatory": true,
+    "internalCategory": "Kommunikation"
   },
   {
     "id": "effektive_kommunikation",
@@ -180,7 +191,8 @@
     "marks": ["1", "2", "3", "4", "5"],
     "info": "1 = Sehr ineffektiv, 2 = Ineffektiv, 3 = Neutral, 4 = Effektiv, 5 = Sehr effektiv",
     "weight": 2,
-    "mandatory": false
+    "mandatory": false,
+    "internalCategory": "Kommunikation"
   },
   {
     "id": "Mitarbeiterkenntnisse_über_kommunkationstools",
@@ -193,7 +205,8 @@
     "marks": ["1", "2", "3", "4", "5"],
     "info": "1 = Sehr schlecht informiert, 2 = Schlecht informiert, 3 = Neutral, 4 = Gut informiert, 5 = Sehr gut informiert",
     "weight": 2,
-    "mandatory": false
+    "mandatory": false,
+    "internalCategory": "Kommunikation"
   },
   {
     "id": "kommunikation_Kunde/Zulieferer",
@@ -209,7 +222,8 @@
       "Andere": 2
     },
     "weight": 2,
-    "mandatory": false
+    "mandatory": false,
+    "internalCategory": "Kommunikation"
   },
   {
     "id": "kategorie_it_sicherheit",
@@ -228,7 +242,8 @@
       "Unbekannt": 0
     },
     "weight": 1,
-    "mandatory": true
+    "mandatory": false,
+    "internalCategory": "IT-Sicherheit"
   },
   {
     "id": "vpn",
@@ -238,7 +253,8 @@
     "options": {
       "True": 5,
       "False": 0
-    }
+    },
+    "internalCategory": "IT-Sicherheit"
   },
   {
     "id": "schulungen",
@@ -252,7 +268,8 @@
       "Regelmäßig": 5
     },
     "weight": 1,
-    "mandatory": false
+    "mandatory": false,
+    "internalCategory": "IT-Sicherheit"
   },
   {
     "id": "backups",
@@ -265,7 +282,8 @@
       "Automatische Backups und regelmäßige Tests": 5
     },
     "weight": 1,
-    "mandatory": false
+    "mandatory": false,
+    "internalCategory": "IT-Sicherheit"
   },
   {
     "id": "sicherheitsvorfaelle",
@@ -279,7 +297,8 @@
       "Nie": 5
     },
     "weight": 2,
-    "mandatory": false
+    "mandatory": false,
+    "internalCategory": "IT-Sicherheit"
   },
   {
     "id": "meldesystem",
@@ -290,7 +309,8 @@
     "options": {
       "True": 5,
       "False": 0
-    }
+    },
+    "internalCategory": "IT-Sicherheit"
   },
   {
     "id": "kategorie_kontaktaufnahme",
@@ -301,7 +321,8 @@
     "question": "Ihre E-Mail-Adresse:",
     "type": "email",
     "placeholder": "z.B. name@example.com",
-    "mandatory": true
+    "mandatory": true,
+    "internalCategory": "Kontaktaufnahme"
   },
   {
     "id": "telefonnummer",
@@ -309,25 +330,29 @@
     "type": "tel",
     "maxLength": 15,
     "placeholder": "z.B. +49 123 456789",
-    "mandatory": false
+    "mandatory": false,
+    "internalCategory": "Kontaktaufnahme"
   },
   {
     "id": "newsletter",
     "question": "Newsletter:",
     "type": "checkbox",
-    "mandatory": false
+    "mandatory": false,
+    "internalCategory": "Kontaktaufnahme"
   },
   {
     "id": "adbs",
     "question": "AGBs und Datenschutzverordnung gelesen:",
     "type": "checkbox",
-    "mandatory": true
+    "mandatory": true,
+    "internalCategory": "Kontaktaufnahme"
   },
   {
     "id": "terminplanung",
     "question": "Präferierter Tag für ein persönliches Gespräch:",
     "type": "date",
     "label": "Datum",
-    "mandatory": false
+    "mandatory": false,
+    "internalCategory": "Kontaktaufnahme"
   }
 ]

@@ -280,9 +280,10 @@ const Fragebogen = () => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const newErrors = {};
+    const enrichedFormData = {}; //Fragen mit internalCategory
     jsonFragen.forEach((question) => {
       if (
         question.mandatory &&
@@ -291,6 +292,15 @@ const Fragebogen = () => {
       ) {
         newErrors[question.id] = true;
       }
+      // Bereite die Formulardaten mit Kategorieinformationen vor
+    if (formData[question.id]) {
+      enrichedFormData[question.id] = {
+        answer: formData[question.id],
+        internalCategory: question.internalCategory || 'Uncategorized', // Standardwert, falls keine Kategorie vorhanden
+        weight: question.weight || 0,
+      };
+    }
+
     });
     setErrors(newErrors);
     if (Object.keys(newErrors).length === 0) {
@@ -304,9 +314,43 @@ const Fragebogen = () => {
         }, 2000);
       }, 2000);
     } else {
+      //setMandatoryErrors({}); vorheriger Stand
       setShowFailureModal(true);
+    
+  
+  
+      try {
+        console.log("Fragebogen_1 Form Data: ", enrichedFormData); // Hier wird formData in der Konsole angezeigt
+
+        const response = await fetch('http://localhost:3001/api/submit', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(enrichedFormData),
+          
+        });
+        console.log('Response status:', response.status); // Debugging: Zeige den Status der Antwort
+
+        /*if (response.ok) {
+          const data = await response.json();
+          console.log('Response data:', data); // Debugging: Zeige die Antwortdaten an
+          navigate('/auswertung', { state: { results: data } });
+        } else {
+          console.error('Response not OK:', response.status, response.statusText);
+          alert('Error submitting the form');
+        }*/
+
+
+      } catch (error) {
+        console.log("Fragebogen_2 Form Data: ",enrichedFormData); // formData in der Konsole angezeigen
+        console.error('Error:', error);
+        alert('Error submitting the form');
+      }
     }
   };
+  
+  
 
   return (
     <div id="questions-wrapper" className={evaluationLoading ? "loading" : ""}>
@@ -401,5 +445,6 @@ const Fragebogen = () => {
     </div>
   );
 };
+
 
 export default Fragebogen;
