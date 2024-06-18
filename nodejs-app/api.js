@@ -60,6 +60,19 @@ app.post('/api/eintraege', (req, res) => {
   });
 });
 
+// Route: Neuen Eintrag hinzufügen
+app.post('/api/eintraege', (req, res) => {
+  const { name, beschreibung } = req.body;
+  connection.query('INSERT INTO Antwort(name, beschreibung) VALUES (?, ?)', [name, beschreibung], (err, results) => {
+    if (err) {
+      console.error('Fehler beim Hinzufügen des Eintrags:', err);
+      res.status(500).send('Serverfehler');
+      return;
+    }
+    res.send('Eintrag hinzugefügt');
+  });
+});
+
 // Server starten
 app.listen(port, () => {
   console.log(`Server gestartet auf Port ${port}`);
