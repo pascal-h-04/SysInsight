@@ -56,7 +56,7 @@
     "options": { "Intern": 0, "Extern": 5, "Intern und Extern": 3 },
     "weight": 1,
     "mandatory": true,
-   "internalCategory": "IT"
+   "internalCategory": "Security"
   },
   {
     "id": "grosse_it_abteilung",
@@ -70,7 +70,7 @@
     "valueLabelDisplay": "auto",
     "weight": 2,
     "mandatory": true,
-    "internalCategory": "IT"
+    "internalCategory": "Security"
   },
 
   {
@@ -243,7 +243,7 @@
     },
     "weight": 1,
     "mandatory": false,
-    "internalCategory": "IT-Sicherheit"
+    "internalCategory": "Security"
   },
   {
     "id": "vpn",
@@ -254,7 +254,7 @@
       "True": 5,
       "False": 0
     },
-    "internalCategory": "IT-Sicherheit"
+    "internalCategory": "Security"
   },
   {
     "id": "schulungen",
@@ -269,7 +269,7 @@
     },
     "weight": 1,
     "mandatory": false,
-    "internalCategory": "IT-Sicherheit"
+    "internalCategory": "Security"
   },
   {
     "id": "backups",
@@ -283,7 +283,7 @@
     },
     "weight": 1,
     "mandatory": false,
-    "internalCategory": "IT-Sicherheit"
+    "internalCategory": "Security"
   },
   {
     "id": "sicherheitsvorfaelle",

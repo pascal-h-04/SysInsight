@@ -24,7 +24,6 @@ app.use(bodyParser.json());
 app.post('/api/submit', (req, res) => {
   const formData = req.body;
   //console.log('Server: Received form data:', formData); // Gibt die empfangenen Daten in der Konsole aus
-
   // Verarbeite die Formulardaten mit der Auswertungsfunktion
   const results = processFormData(formData);
   console.log('Server: Processed results:', results); // Gibt die verarbeiteten Daten in der Konsole aus
