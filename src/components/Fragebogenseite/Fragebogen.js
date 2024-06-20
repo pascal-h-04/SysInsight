@@ -1,7 +1,7 @@
 import "./Fragebogen.css";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import jsonFragen from "../data/fragebogen.json";
+import jsonFragen from "../../data/fragebogen.json";
 import {
   Form,
   Col,

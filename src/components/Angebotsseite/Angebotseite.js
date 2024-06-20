@@ -3,10 +3,11 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Angebot from "./Angebot.js";
 import { Button } from "react-bootstrap";
-import jsonAngebote from "../data/angebote.json";
+import jsonAngebote from "../../data/angebote.json";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { Grid } from "@mui/material";
 import { MdAdd } from "react-icons/md";
+import { Modal } from "react-bootstrap";
 
 const Angebotseite = ({ isAdmin }) => {
   const navigate = useNavigate();

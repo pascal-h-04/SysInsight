@@ -5,9 +5,9 @@ import Gesamtmetrik from "./Gesamtmetrik";
 import Einzelmetrik from "./Einzelmetrik";
 import Unternehmensangebot from "./Unternehmensangebot";
 import { Container, Row, Col, Button } from "react-bootstrap";
-import SecurityIcon from "../imgs/Security.png";
-import OfficeToolsIcon from "../imgs/OfficeTools.png";
-import KommunikationsToolsIcon from "../imgs/KommunikationsTools.png";
+import SecurityIcon from "../../imgs/Security.png";
+import OfficeToolsIcon from "../../imgs/OfficeTools.png";
+import KommunikationsToolsIcon from "../../imgs/KommunikationsTools.png";
 import { MdOutlineLocalOffer } from "react-icons/md";
 
 const Auswertung = ({ isAdmin }) => {

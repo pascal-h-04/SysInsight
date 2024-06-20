@@ -1,15 +1,15 @@
 import "./App.css";
 import { useState, useEffect } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
-import LoginScreen from "./components/LoginScreen";
+import LoginScreen from "./components/Loginseite/LoginScreen";
 import Navigation from "./components/Navigation";
-import MyResults from "./components/MyResults";
-import Profile from "./components/Profile";
-import AboutUs from "./components/AboutUs";
-import Startseite from "./components/Startseite";
-import Fragebogen from "./components/Fragebogen";
-import Angebotseite from "./components/Angebotseite";
-import Auswertung from "./components/Auswertung";
+import MyResults from "./components/Ergebnisseite/MyResults";
+import Profile from "./components/Profilseite/Profile";
+import AboutUs from "./components/Über_Uns_Seite/AboutUs";
+import Startseite from "./components/Startseite/Startseite";
+import Fragebogen from "./components/Fragebogenseite/Fragebogen";
+import Angebotseite from "./components/Angebotsseite/Angebotseite";
+import Auswertung from "./components/Auswertungsseite/Auswertung";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
