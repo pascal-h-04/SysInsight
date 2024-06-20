@@ -8,6 +8,7 @@ import { IoMdArrowRoundBack } from "react-icons/io";
 import { Grid } from "@mui/material";
 import { MdAdd } from "react-icons/md";
 import { Modal } from "react-bootstrap";
+import LöschenBestätigenPopup from "./LöschenBestätigenPopup.js"; // Import the new component
 
 const Angebotseite = ({ isAdmin }) => {
   const navigate = useNavigate();
@@ -101,25 +102,11 @@ const Angebotseite = ({ isAdmin }) => {
           </Grid>
         ))}
       </Grid>
-      <Modal show={showConfirmModal} onHide={() => setShowConfirmModal(false)}>
-        <Modal.Header closeButton>
-          <Modal.Title>Löschung des Angebots</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          Sind Sie sicher, dass Sie dieses Angebot löschen möchten?
-        </Modal.Body>
-        <Modal.Footer>
-          <Button
-            variant="secondary"
-            onClick={() => setShowConfirmModal(false)}
-          >
-            Abbrechen
-          </Button>
-          <Button variant="danger" onClick={confirmDelete}>
-            Löschen
-          </Button>
-        </Modal.Footer>
-      </Modal>
+      <LöschenBestätigenPopup
+        show={showConfirmModal}
+        onHide={() => setShowConfirmModal(false)}
+        onConfirm={confirmDelete}
+      />
     </div>
   );
 };
