@@ -1,69 +1,53 @@
-const { json } = require("body-parser");
-//Entschlüsseln des JSON-Files
+function processFormData(questions) {
+  console.log('Aus Auswertung.js: Processing form data:', questions);
 
-function processFormData(formData, questions) {
-  console.log('Aus Auswertung.js: Processing form data:', formData);
+
   let scoreGeneral = 0;
   let scoreSecurity = 0;
   let scoreKollaboration = 0;
   let scoreKommunikation = 0;
-  // Extrahiere Paare aus FragenID und Antworten
-  const pairs = Object.entries(formData).map(([id, { answer, internalCategory, weight, score }]) => {
-    // Finde die Frage in den Fragen mit der entsprechenden ID
-    const question = questions.find(q => q.id === id);
-    // Hole den Wert aus den Options, falls die Frage diesen hat
-    let score = answer;
-    if (question && question.type === 'single-select') {
-      score = question.options[answer];
-    } else if (question && question.type === 'multi-select') {
-      score = answer.reduce((sum, option) => sum + question.options[option], 0);
-    } else if(question && question.id === "grosse_it_abteilung"){
-        score = Math.floor(score/100);
-    } 
-    scoreBerechnen(id, weight, score, internalCategory);
-    return {
-      id,
-      answer,
-      internalCategory,
-      weight,
-      score 
-    };
-  }); 
 
-  // Gib die Paare in der Konsole aus
-  pairs.forEach((pair) => {
-    console.log(`Auswertungsseite FragenID: ${pair.id}, Antwort: ${pair.answer}, Kategorie: ${pair.internalCategory}, Gewichtung: ${pair.weight}, score-Wert: ${pair.score}`);
+  questions.forEach(q => {
+    if(!q) console.log('Error: Question is undefined');
+    let score = 0;
+
+    if (q && q.type === 'single-select') {
+      score = q.options[q.answer] || 0;
+    } else if (q && q.type === 'multi-select') {
+      score = q.answer.reduce((sum, option) => sum + (q.options[option] || 0), 0);
+    } else if (q.id === "grosse_it_abteilung") {
+      score = Math.floor(q.answer / 100);
+    } else if (q && q.type === "checkbox") {
+      score = q.answer ? 5 : 0;
+    }
+
+    scoreBerechnen(score, q.weight, q.internalCategory);
   });
 
-  // Hier könnte man die Formulardaten weiter verarbeiten, z.B. Scores berechnen
-  // Für den Moment geben wir einfach die extrahierten Paare zurück
-  return pairs;
-}
-
-function scoreBerechnen(id, weight, score, category) {
-
-  switch(category){
-    case "security":
-      scoreSecurity += score * weight;
-      break;
-    case "kollaboration":
-      scoreKollaboration += score * weight;
-      break;
-    case "kommunikation":
-      scoreKommunikation += score * weight;
-      break;
+  function scoreBerechnen(score, weight, category) {
+    const weightedScore = score * weight;
+    switch (category) {
+      case "Security":
+        scoreSecurity += weightedScore;
+        break;
+      case "Kollaboration":
+        scoreKollaboration += weightedScore;
+        break;
+      case "Kommunikation":
+        scoreKommunikation += weightedScore;
+        break;
+    }
+    scoreGeneral += weightedScore;  // Updated to add weightedScore instead of score
   }
-  scoreGeneral = score * weight;
-  console.log("ScoreGeneral: " + scoreGeneral);
-}
 
+  return {
+    scoreGeneral,
+    scoreSecurity,
+    scoreKollaboration,
+    scoreKommunikation
+  };
+}
 
 module.exports = {
   processFormData,
 };
-
-
-
-
-
-
