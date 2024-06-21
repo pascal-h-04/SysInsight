@@ -1,7 +1,7 @@
 -- Datenbank und Tabellen erstellen
-DROP DATABASE IF EXISTS SemanTec;
-CREATE DATABASE IF NOT EXISTS SemanTec;
-USE SemanTec;
+DROP DATABASE IF EXISTS SysInsight;
+CREATE DATABASE IF NOT EXISTS SysInsight;
+USE SysInsight;
 
 CREATE TABLE Nutzer
 (
