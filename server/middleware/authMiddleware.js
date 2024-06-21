@@ -1,18 +1,25 @@
-// middleware/authMiddleware.js
-const jwt = require('jsonwebtoken');
+/*const verifyToken = require('./verifyToken');
+const authMiddleware = (req, res, next) => {
+  verifyToken(req, res, next);
+};
+module.exports = authMiddleware; */
 
-const verifyJWT = (req, res, next) => {
+const jwt = require("jsonwebtoken");
+
+const verifyToken = (req, res, next) => {
   const token = req.cookies.jwt;
+
   if (!token) {
-    return res.status(403).send("A token is required for authentication");
+    return res.status(403).send("Token wird zur Authentifizierung benötigt");
   }
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = decoded;
-  } catch (err) {
-    return res.status(401).send("Invalid Token");
+    const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+    req.user = decodedToken;
+  } catch (error) {
+    return res.status(401).send("Token ist invalide");
   }
+
   return next();
 };
 
-module.exports = verifyJWT;
+module.exports = verifyToken;

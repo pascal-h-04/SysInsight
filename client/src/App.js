@@ -4,7 +4,6 @@ import { Routes, Route, Navigate } from "react-router-dom";
 // geplant: import Router from "./Router"; und dann <Router /> in return
 import LoginScreen from "./components/Loginseite/LoginScreen";
 import Navigation from "./components/Navigation";
-import MyResults from "./components/Ergebnisseite/MyResults";
 import Profile from "./components/Profilseite/Profile";
 import AboutUs from "./components/Über_Uns_Seite/AboutUs";
 import Startseite from "./components/Startseite/Startseite";
@@ -101,10 +100,6 @@ function App() {
           <Route
             path="/"
             element={<Navigate to={isLoggedIn ? "/startseite" : "/login"} />}
-          />
-          <Route
-            path="/my-results"
-            element={isLoggedIn ? <MyResults /> : <Navigate to="/login" />}
           />
           <Route
             path="/profile"

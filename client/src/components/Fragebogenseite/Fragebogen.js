@@ -2,15 +2,14 @@ import "./Fragebogen.css";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import jsonFragen from "../../data/fragebogen.json";
-import {
-  Knopfgruppe,
-  Textfeld,
-  Einzelauswahl,
-  Mehrfachauswahl,
-  Schieberegler,
-  Ankreuzbox,
-  Datumsauswahl,
-} from "./Eingabeformate";
+import Knopfgruppe from "./Eingabeformate/Knopfgruppe.js";
+import Textfeld from "./Eingabeformate/Textfeld.js";
+import Einzelauswahl from "./Eingabeformate/Einzelauswahl.js";
+import Mehrfachauswahl from "./Eingabeformate/Mehrfachauswahl.js";
+import Schieberegler from "./Eingabeformate/Schieberegler.js";
+import Ankreuzbox from "./Eingabeformate/Ankreuzbox.js";
+import Schalter from "./Eingabeformate/Schalter.js";
+import Datumsauswahl from "./Eingabeformate/Datumsauswahl.js";
 import { Form, Col, Row, Button, Spinner } from "react-bootstrap";
 import { MdInsights } from "react-icons/md";
 import CustomPopup from "./CustomPopup.js";
@@ -26,7 +25,7 @@ const Fragebogen = () => {
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [showFailureModal, setShowFailureModal] = useState(false);
 
-  const handleChange = (questionId, value, type = "input") => {
+  const handleInputChange = (questionId, value, type = "input") => {
     if (type === "date") {
       setFormData((prevData) => ({ ...prevData, [questionId]: value }));
     } else {
@@ -48,6 +47,9 @@ const Fragebogen = () => {
               : validatedValue
             : validatedValue,
       }));
+      if (validatedValue) {
+        setErrors((prevErrors) => ({ ...prevErrors, [questionId]: false }));
+      }
     }
   };
 
@@ -58,23 +60,30 @@ const Fragebogen = () => {
   const validateInput = (value, type, id) => {
     const inputValidationRules = {
       string: (x) => x.replace(/[^a-zA-Z\säöüÄÖÜß()-]/g, ""),
-      email: (x) =>
-        /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/i.test(x.toLowerCase()),
+      email: (x) => {
+        const cleanedValue = x.toLowerCase();
+        const isValid = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/i.test(
+          cleanedValue
+        );
+        updateErrors(id, !isValid);
+        return cleanedValue;
+      },
       phone: (x) => {
-        x = x
+        const cleanedValue = x
           .replace(/[^0-9+]/g, "")
           .replace(/\++/g, "+")
           .slice(0, 15);
-        return /^[+]?[0-9]{1,15}$/.test(x);
+        const isValid = /^[+]?[0-9]{1,15}$/.test(cleanedValue);
+        updateErrors(id, !isValid);
+        return isValid ? cleanedValue : "";
       },
     };
     if (inputValidationRules[type]) {
       const cleanedValue = inputValidationRules[type](value);
-      const isValid =
-        type === "email" || type === "phone"
-          ? cleanedValue
-          : cleanedValue === value && value !== "";
-      updateErrors(id, !isValid);
+      if (type === "string") {
+        const isValid = cleanedValue === value && value !== "";
+        updateErrors(id, !isValid);
+      }
       return cleanedValue;
     }
     return value;
@@ -86,6 +95,7 @@ const Fragebogen = () => {
     "single-select": Einzelauswahl,
     "multi-select": Mehrfachauswahl,
     slider: Schieberegler,
+    toggle: Schalter,
     checkbox: Ankreuzbox,
     email: Textfeld,
     tel: Textfeld,
@@ -98,8 +108,7 @@ const Fragebogen = () => {
     const commonPropsOfInputComponents = {
       question,
       formData,
-      setFormData,
-      handleChange,
+      handleInputChange,
       errors,
     };
     return <GenericComponent {...commonPropsOfInputComponents} />;
@@ -125,7 +134,6 @@ const Fragebogen = () => {
         };
       }
     });
-
     setErrors(newErrors);
     if (Object.keys(newErrors).length === 0) {
       setEvaluationLoading(true);

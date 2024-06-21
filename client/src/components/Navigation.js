@@ -8,14 +8,13 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import Button from "react-bootstrap/Button";
 import Logo from "../imgs/logo.png";
 import { FaUser, FaInfoCircle } from "react-icons/fa";
-import { CgInsights } from "react-icons/cg";
 
 function Navigation({ isLoggedIn, isAdmin, handleLogout }) {
+  const navigate = useNavigate();
+
   const adminNavigation = [
     { name: "Angebotsübersicht", url: "/angebotseite", divider: false },
   ];
-
-  const navigate = useNavigate();
 
   return (
     <Navbar
@@ -48,9 +47,6 @@ function Navigation({ isLoggedIn, isAdmin, handleLogout }) {
             {isLoggedIn && (
               <>
                 <div className="nav-left-spacing" />
-                <Nav.Link as={Link} to="/my-results" className="me-3">
-                  <CgInsights size={20} /> My Results
-                </Nav.Link>
                 <Nav.Link as={Link} to="/profile" className="me-3">
                   <FaUser size={20} /> Profile
                 </Nav.Link>

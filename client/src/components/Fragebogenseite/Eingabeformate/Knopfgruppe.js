@@ -9,7 +9,7 @@ const Knopfgruppe = ({ question, formData, handleInputChange, errors }) => {
         aria-label={question.id}
         name={question.id}
         value={formData[question.id] || ""}
-        onChange={handleInputChange(question.id)}
+        onChange={(e) => handleInputChange(question.id, e.target.value)}
       >
         <Grid container spacing={2}>
           {Object.keys(question.categories).map((category, index) => (

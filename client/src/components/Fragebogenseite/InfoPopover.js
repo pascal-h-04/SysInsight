@@ -11,15 +11,19 @@ const InfoPopover = () => {
         key="leftInfoPopover"
         placement="left"
         overlay={
-          <Popover id="left-info-popover">
+          <Popover className="left-info-popover">
             <Popover.Header as="h3">Information und Hinweise</Popover.Header>
             <Popover.Body>
-              Bitte fülle alle Pflichtfelder aus, bevor du das Formular
-              absenden. Diese erkennst du am roten Sternchen (*) neben der
-              Frage. Bei manchen Dropdowns ist eine Mehrfachauswahl möglich.
-              Klicke dazu auf die gewünschten Optionen. Achte auf Richtigkeit
-              und Sauberkeit der Dateneingabe, da dies Maßgeblich die Auswertung
-              beeinflusst.
+              Bitte fülle alle <strong>Pflichtfelder</strong> aus, bevor du das
+              Formular absenden. Diese erkennst du am roten Sternchen (*) neben
+              der Frage.
+              <br />
+              Bei manchen Dropdowns ist eine Mehrfachauswahl möglich. Klicke
+              dazu auf die gewünschten Optionen.
+              <br />
+              <br />
+              <strong>Achte auf Richtigkeit und Sauberkeit</strong> der
+              Dateneingabe, da dies Maßgeblich die Auswertung beeinflusst.
             </Popover.Body>
           </Popover>
         }
