@@ -1,14 +1,13 @@
-import React from "react";
 import { Modal, Button } from "react-bootstrap";
 
 const LöschenBestätigenPopup = ({ show, onHide, onConfirm }) => {
   return (
     <Modal show={show} onHide={onHide}>
       <Modal.Header closeButton>
-        <Modal.Title>Löschung des Angebots</Modal.Title>
+        <Modal.Title>Löschvorgang bestätigen</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        Sind Sie sicher, dass Sie dieses Angebot löschen möchten?
+        Bist du dir sicher, dass du diese Angebot endgültig löschen möchtest?
       </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={onHide}>

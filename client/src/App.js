@@ -1,6 +1,7 @@
 import "./App.css";
 import { useState, useEffect } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
+// geplant: import Router from "./Router"; und dann <Router /> in return
 import LoginScreen from "./components/Loginseite/LoginScreen";
 import Navigation from "./components/Navigation";
 import MyResults from "./components/Ergebnisseite/MyResults";

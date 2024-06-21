@@ -7,7 +7,6 @@ import jsonAngebote from "../../data/angebote.json";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { Grid } from "@mui/material";
 import { MdAdd } from "react-icons/md";
-import { Modal } from "react-bootstrap";
 import LöschenBestätigenPopup from "./LöschenBestätigenPopup.js"; // Import the new component
 
 const Angebotseite = ({ isAdmin }) => {
