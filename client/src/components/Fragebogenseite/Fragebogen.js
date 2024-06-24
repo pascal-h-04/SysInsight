@@ -294,10 +294,16 @@ const Fragebogen = () => {
       }
       // Bereite die Formulardaten mit Kategorieinformationen vor
       if (formData[question.id]) {
+        const answer = formData[question.id];
+        let score = 0;
+        if (question.options && question.options[answer]!==undefined) {
+          score = question.options[answer];
+        }
         enrichedFormData[question.id] = {
           answer: formData[question.id],
           internalCategory: question.internalCategory || "Uncategorized", // Standardwert, falls keine Kategorie vorhanden
           weight: question.weight || 0,
+          score: score,
         };
       }
     });
