@@ -4,7 +4,7 @@ const nodemailer = require('nodemailer');
 const path = require('path');
 
 const app = express();
-const port = 3000;
+const port = 3045;
 
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '../client')));
@@ -13,7 +13,7 @@ const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
         user: 'semantec.sysinsight@gmail.com',
-        pass: 'xyckjricrbdgkfxt' // Verwende hier das App-spezifische Passwort
+        pass: 'gbnuepaayjznleml' // Verwende hier das App-spezifische Passwort
     },
     logger: true, // Protokollierung aktivieren
     debug: true  // Debugging aktivieren
