@@ -1,38 +1,33 @@
-// src/components/PrivateRoutes.js
-import React from 'react';
-import { Outlet, Navigate } from 'react-router-dom';
-import axios from "../api/AxiosConfig";
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
+import { Outlet, Navigate } from "react-router-dom";
+import axios from "../api/axiosConfigWithToken";
 
 function PrivateRoutes() {
   const [currentUser, setCurrentUser] = useState(false);
-  const [loading, setLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const token = localStorage.getItem('jwtToken');
+    const token = localStorage.getItem("jwtToken");
     if (token) {
-      axios.get('/verifyToken', {
-        headers: { 'Authorization': `Bearer ${token}` }
-      })
+      axios
+        .get("/verifyToken", {
+          headers: { Authorization: `Bearer ${token}` },
+        })
         .then((response) => {
           setCurrentUser(response.data.loggedIn);
-          setLoading(false);
+          setIsLoading(false);
         })
         .catch((error) => {
           console.error("Error verifying token:", error);
-          setLoading(false);
+          setIsLoading(false);
         });
     } else {
-      setLoading(false);
+      setIsLoading(false);
     }
   }, []);
-  
-  if (loading) {
-    return (
-      <div>
-        <p>Loading...</p>
-      </div>
-    );
+
+  if (isLoading) {
+    return <div>Wird geladen ...</div>;
   }
 
   return currentUser ? <Outlet /> : <Navigate to="/" />;

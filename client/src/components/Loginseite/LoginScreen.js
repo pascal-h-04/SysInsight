@@ -4,7 +4,7 @@ import Button from "react-bootstrap/Button";
 import Spinner from "react-bootstrap/Spinner";
 import Modal from "react-bootstrap/Modal";
 import ComicWelcome from "../../imgs/comic_welcome.png";
-import axios from "../../api/AxiosConfig.js";
+import axios from "../../api/axiosConfigWithToken.js";
 
 function LoginScreen({ loginSuccess }) {
   const [loginLoading, setLoginLoading] = useState(false);
