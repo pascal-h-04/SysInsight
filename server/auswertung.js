@@ -6,24 +6,26 @@ function processFormData(formData) {
   let scoreKollaboration = 0;
   let scoreKommunikation = 0;
 
-  Object.values(formData).forEach(q => {
+  // Protokollieren der Antworten
+  Object.entries(formData).forEach(([questionId, q]) => {
     if (!q) {
       console.log('Error: Question is undefined');
       return;
     }
 
+    console.log(`Question ID: ${questionId}`);
+    console.log(`Answer: ${q.answer}`);
+    console.log(`Category: ${q.internalCategory}`);
+    console.log(`Weight: ${q.weight}`);
+    console.log(`Score: ${q.score}`);
+
     let score = q.score || 0;
 
-    // Es wird angenommen, dass `q.score` bereits gesetzt ist in den angereicherten Formulardaten
-    if (q.type === 'multi-select') {
-      score = q.answer.reduce((sum, option) => sum + (q.options[option] || 0), 0);
-    } else if (q.id === "grosse_it_abteilung") {
-      score = Math.floor(q.answer / 100);
-    } else if (q.type === "checkbox") {
-      score = q.answer ? 5 : 0;
-    }
 
     scoreBerechnen(score, q.weight, q.internalCategory);
+    scoreSecurity = scoreSecurity /7;
+    scoreKollaboration = scoreKollaboration /5;
+    scoreKommunikation = scoreKommunikation /4;
   });
 
   function scoreBerechnen(score, weight, category) {
@@ -38,8 +40,10 @@ function processFormData(formData) {
       case "Kommunikation":
         scoreKommunikation += weightedScore;
         break;
+      case "Allgemeines": 
+        scoreGeneral += weightedScore;
+        break;
     }
-    scoreGeneral += weightedScore;  // Updated to add weightedScore instead of score
   }
 
   return {

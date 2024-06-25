@@ -7,6 +7,7 @@ import Unternehmensangebot from "./Unternehmensangebot";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { MdOutlineLocalOffer } from "react-icons/md";
 import dreiAngeboteBeiAuswertung from "../../data/dreiAngeboteBeiAuswertung";
+import { processFormData } from "../../../../server/auswertung";  
 
 const Auswertung = ({ isAdmin }) => {
   const navigate = useNavigate();

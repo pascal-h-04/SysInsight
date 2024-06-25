@@ -11,7 +11,7 @@
     "placeholder": "z.B. SAP SE",
     "weight": 1,
     "mandatory": false,
-    "internalCategory": "Allgemeines"
+    "internalCategory": "ignore"
   },
   {
     "id": "branche",
@@ -26,7 +26,7 @@
       "Produktion": 5,
       "Andere": 5
     },
-    "weight": 3,
+    "weight": 1,
     "mandatory": true,
     "internalCategory": "Allgemeines"
   },
@@ -40,15 +40,11 @@
       "1001 - 5.000": 2,
       "5.001+": 0
     },
-    "weight": 2,
+    "weight": 1,
     "mandatory": true,
     "internalCategory": "Allgemeines"
   },
 
-  {
-    "id": "kategorie_it",
-    "category": "IT"
-  },
   {
     "id": "it_infrastruktur",
     "question": "Verwaltung der IT-Infrastruktur:",
@@ -56,7 +52,7 @@
     "options": { "Intern": 0, "Extern": 5, "Intern und Extern": 3 },
     "weight": 1,
     "mandatory": true,
-    "internalCategory": "Security"
+    "internalCategory": "Allgemeines"
   },
   {
     "id": "grosse_it_abteilung",
@@ -68,9 +64,9 @@
     "defaultValue": 0,
     "marks": ["1", "50", "100+"],
     "valueLabelDisplay": "auto",
-    "weight": 2,
+    "weight": 1,
     "mandatory": true,
-    "internalCategory": "Security"
+    "internalCategory": "Allgemeines"
   },
 
   {
@@ -90,7 +86,7 @@
       "4 - 5 Tage": 1,
       "5 Tage": 0
     },
-    "weight": 2,
+    "weight": 1,
     "mandatory": true,
     "internalCategory": "Kollaboration"
   },
@@ -104,7 +100,7 @@
     "defaultValue": 3,
     "marks": ["1", "2", "3", "4", "5"],
     "info": "1 = Sehr unzufrieden, 2 = Unzufrieden, 3 = Neutral, 4 = Zufrieden, 5 = Sehr zufrieden",
-    "weight": 2,
+    "weight": 1,
     "mandatory": false,
     "internalCategory": "Kollaboration"
   },
@@ -124,7 +120,7 @@
       "Dropbox Business": 3,
       "Andere": 0
     },
-    "weight": 2,
+    "weight": 1,
     "mandatory": true,
     "internalCategory": "Kollaboration"
   },
@@ -139,7 +135,7 @@
     "marks": ["1", "2", "3", "4", "5"],
     "info": "1 = Irrelevant (wird nicht genutzt), 2 = Geringe Relevanz (wird selten genutzt), 3 = Mittlere Relevanz (wird mehrmals die Woche genutzt), 4 = Hohe Relevanz (wird täglich genutzt), 5 = Sehr hohe Relevanz (wird mehrfach täglich genutzt)",
     "valueLabelDisplay": "off",
-    "weight": 2,
+    "weight": 1,
     "mandatory": true,
     "internalCategory": "Kollaboration"
   },
@@ -176,7 +172,7 @@
       "Skype": 1,
       "Andere": 0
     },
-    "weight": 2,
+    "weight": 1,
     "mandatory": true,
     "internalCategory": "Kommunikation"
   },
@@ -190,7 +186,7 @@
     "defaultValue": 3,
     "marks": ["1", "2", "3", "4", "5"],
     "info": "1 = Sehr ineffektiv, 2 = Ineffektiv, 3 = Neutral, 4 = Effektiv, 5 = Sehr effektiv",
-    "weight": 2,
+    "weight": 1,
     "mandatory": false,
     "internalCategory": "Kommunikation"
   },
@@ -204,7 +200,7 @@
     "defaultValue": 3,
     "marks": ["1", "2", "3", "4", "5"],
     "info": "1 = Sehr schlecht informiert, 2 = Schlecht informiert, 3 = Neutral, 4 = Gut informiert, 5 = Sehr gut informiert",
-    "weight": 2,
+    "weight": 1,
     "mandatory": false,
     "internalCategory": "Kommunikation"
   },
@@ -221,7 +217,7 @@
       "CRM-System": 5,
       "Andere": 2
     },
-    "weight": 2,
+    "weight": 1,
     "mandatory": false,
     "internalCategory": "Kommunikation"
   },
@@ -296,9 +292,9 @@
       "Jährlich": 4,
       "Nie": 5
     },
-    "weight": 2,
+    "weight": 1,
     "mandatory": false,
-    "internalCategory": "IT-Sicherheit"
+    "internalCategory": "Security"
   },
   {
     "id": "meldesystem",
@@ -310,7 +306,7 @@
       "True": 5,
       "False": 0
     },
-    "internalCategory": "IT-Sicherheit"
+    "internalCategory": "Security"
   },
   {
     "id": "kategorie_kontaktaufnahme",
@@ -322,7 +318,7 @@
     "type": "email",
     "placeholder": "z.B. name@example.com",
     "mandatory": true,
-    "internalCategory": "Kontaktaufnahme"
+    "internalCategory": "ignore"
   },
   {
     "id": "telefonnummer",
@@ -331,21 +327,21 @@
     "maxLength": 15,
     "placeholder": "z.B. +49 123 456789",
     "mandatory": false,
-    "internalCategory": "Kontaktaufnahme"
+    "internalCategory": "ignore"
   },
   {
     "id": "newsletter",
     "question": "Newsletter:",
     "type": "checkbox",
     "mandatory": false,
-    "internalCategory": "Kontaktaufnahme"
+    "internalCategory": "ignore"
   },
   {
     "id": "agbs",
     "question": "AGBs und Datenschutzverordnung gelesen:",
     "type": "checkbox",
     "mandatory": true,
-    "internalCategory": "Kontaktaufnahme"
+    "internalCategory": "ignore"  
   },
   {
     "id": "terminplanung",
@@ -353,6 +349,6 @@
     "type": "date",
     "label": "Datum",
     "mandatory": false,
-    "internalCategory": "Kontaktaufnahme"
+    "internalCategory": "ignore"
   }
 ]
