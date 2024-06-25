@@ -2,15 +2,14 @@ const express = require('express');
 const app = express();
 const port = 3001;
 const bodyParser = require('body-parser');
+const jwt = require('jsonwebtoken');
 const cors = require('cors');
+
+
 require('dotenv').config();
 const { processFormData } = require('./auswertung'); // Importiere die Auswertungsfunktion
 
-app.use(cors({
-  origin: process.env.CORS_ORIGIN,
-  methods: ['GET', 'POST', 'DELETE', 'PUT'],
-  credentials: true,
-}));
+
 
 app.use(cors({
   origin: 'http://localhost:3000', // Erlaube Anfragen von http://localhost:3000
@@ -31,18 +30,49 @@ app.post('/api/submit', (req, res) => {
   res.json(results); // Sende die verarbeiteten Ergebnisse zurück
 });
 
+//Login Neu
+// Beispiel: Datenbank-Simulation für Benutzer
+const users = [
+  { id: 1, username: 'user', password: 'password', isAdmin: false },
+  { id: 2, username: 'admin', password: 'password', isAdmin: true },
+];
+
+// Middleware
+app.use(cors());
+
+// Login Route
+app.post('/api/login', (req, res) => {
+  const { username, password } = req.body;
+
+// Simuliere die Authentifizierung gegen eine Datenbank
+  const user = users.find(
+    (user) => user.username === username && user.password === password
+  );
+
+  if (user) {
+    res.json({
+      auth: true,
+      isAdmin: user.isAdmin,
+    });
+  } else {
+    res.json({ auth: false });
+  }
+});
+
+
+
+
+
+
+//Ende Login neu
+
+
+
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}/`);
   console.log('Hello World');
 });
 
-const session = require('express-session');
 
-/*app.use(session({
-  secret: process.env.SESSION_SECRET,
-  resave: false,
-  saveUninitialized: true,
-  cookie: { secure: false } // Für Produktionsumgebungen auf true setzen
-}));*/
 
-app.use('/api', require('./authRoutes'));
+

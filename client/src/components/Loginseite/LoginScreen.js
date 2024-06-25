@@ -4,7 +4,7 @@ import Button from "react-bootstrap/Button";
 import Spinner from "react-bootstrap/Spinner";
 import Modal from "react-bootstrap/Modal";
 import ComicWelcome from "../../imgs/comic_welcome.png";
-import axios from "../../api/axiosConfigWithToken.js";
+import axios from 'axios';
 
 function LoginScreen({ loginSuccess }) {
   const [loginLoading, setLoginLoading] = useState(false);
@@ -17,33 +17,33 @@ function LoginScreen({ loginSuccess }) {
   const handleLogin = async (e) => {
     e.preventDefault();
     setLoginLoading(true);
-    const username = document.getElementById("username").value;
-    const password = document.getElementById("password").value;
-    const userType = isAdmin ? "admin" : "user";
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
 
     try {
-      const response = await axios.post("/login", {
+      const response = await axios.post('http://localhost:3001/api/login', {
         username,
         password,
-        userType,
       });
+
       if (response.data.auth) {
         setShowSuccessModal(true);
         setTimeout(() => {
           setShowSuccessModal(false);
-          loginSuccess(isAdmin);
+          loginSuccess(response.data.isAdmin); // Übergebe isAdmin an den loginSuccess-Handler
         }, 2000);
       } else {
         setShowFailureModal(true);
       }
     } catch (error) {
-      console.error("Login error:", error);
-      setError("Login failed. Please try again.");
+      console.error('Login error:', error);
+      setError('Login failed. Please try again.');
       setShowFailureModal(true);
     } finally {
       setLoginLoading(false);
     }
   };
+
 
   return (
     <>
