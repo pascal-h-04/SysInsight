@@ -1,8 +1,9 @@
-/*const verifyToken = require('./verifyToken');
+/*
+const verifyToken = require('./verifyToken');
 const authMiddleware = (req, res, next) => {
   verifyToken(req, res, next);
 };
-module.exports = authMiddleware; */
+module.exports = authMiddleware; 
 
 const jwt = require("jsonwebtoken");
 
@@ -22,4 +23,4 @@ const verifyToken = (req, res, next) => {
   return next();
 };
 
-module.exports = verifyToken;
+module.exports = verifyToken;*/

@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
+/*import { useState, useEffect } from "react";
 import { Outlet, Navigate } from "react-router-dom";
-import axios from "../api/axiosConfigWithToken";
+import axios from "../client/src/api/axiosConfigWithToken";
 
 function PrivateRoutes() {
   const [currentUser, setCurrentUser] = useState(false);
@@ -33,4 +33,4 @@ function PrivateRoutes() {
   return currentUser ? <Outlet /> : <Navigate to="/" />;
 }
 
-export default PrivateRoutes;
+export default PrivateRoutes;*/

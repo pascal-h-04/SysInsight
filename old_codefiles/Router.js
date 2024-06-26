@@ -1,4 +1,4 @@
-import { Route, Routes, Navigate } from "react-router-dom";
+/*import { Route, Routes, Navigate } from "react-router-dom";
 import PrivateRoutes from "./components/PrivateRoutes";
 
 import LoginScreen from "./components/Loginseite/LoginScreen";
@@ -27,3 +27,4 @@ function Router() {
 }
 
 export default Router;
+*/
