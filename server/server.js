@@ -2,14 +2,9 @@ const express = require('express');
 const app = express();
 const port = 3001;
 const bodyParser = require('body-parser');
-const jwt = require('jsonwebtoken');
 const cors = require('cors');
-
-
 require('dotenv').config();
 const { processFormData } = require('./auswertung'); // Importiere die Auswertungsfunktion
-
-
 
 app.use(cors({
   origin: 'http://localhost:3000', // Erlaube Anfragen von http://localhost:3000
@@ -19,32 +14,25 @@ app.use(cors({
 
 app.use(bodyParser.json());
 
-
-app.post('/api/submit', (req, res) => {
-  const formData = req.body;
-  //console.log('Server: Received form data:', formData); // Gibt die empfangenen Daten in der Konsole aus
-  // Verarbeite die Formulardaten mit der Auswertungsfunktion
-  const results = processFormData(formData);
-  console.log('Server: Processed results:', results); // Gibt die verarbeiteten Daten in der Konsole aus
-
-  res.json(results); // Sende die verarbeiteten Ergebnisse zurück
-});
-
-//Login Neu
 // Beispiel: Datenbank-Simulation für Benutzer
 const users = [
   { id: 1, username: 'user', password: 'password', isAdmin: false },
   { id: 2, username: 'admin', password: 'password', isAdmin: true },
+
 ];
 
-// Middleware
-app.use(cors());
+// Route zum Verarbeiten von Formulardaten
+app.post('/api/submit', (req, res) => {
+  const formData = req.body;
+  const results = processFormData(formData);
+  res.json(results); // Sende die verarbeiteten Ergebnisse zurück
+});
 
 // Login Route
 app.post('/api/login', (req, res) => {
   const { username, password } = req.body;
 
-// Simuliere die Authentifizierung gegen eine Datenbank
+  // Simuliere die Authentifizierung gegen eine Datenbank
   const user = users.find(
     (user) => user.username === username && user.password === password
   );
@@ -59,20 +47,52 @@ app.post('/api/login', (req, res) => {
   }
 });
 
+// Adminmanagement
+// Endpoint to get user role by username
+app.get('/api/user/:username', (req, res) => {
+  const { username } = req.params;
+  const user = users.find(user => user.username === username);
 
-
-
-
-
-//Ende Login neu
-
-
-
-app.listen(port, () => {
-  console.log(`Server running at http://localhost:${port}/`);
-  console.log('Hello World');
+  if (user) {
+    res.json({ role: user.isAdmin ? 'admin' : 'user' });
+  } else {
+    res.status(404).json({ error: 'User not found' });
+  }
 });
 
+// Endpoint to promote user to admin by username
+app.post('/api/user/:username/promote', (req, res) => {
+  const username = req.params.username;
+  const user = users.find(u => u.username === username);
+  if (user) {
+    user.isAdmin = true;
+    res.json({ message: 'User promoted to admin' });
+  } else {
+    res.status(404).json({ error: 'User not found' });
+  }
+});
 
+// Endpoint to remove admin rights from user by username
+app.post('/api/user/:username/remove', (req, res) => {
+  const username = req.params.username;
+  const user = users.find(u => u.username === username);
+  if (user) {
+    user.isAdmin = false;
+    res.json({ message: 'Admin rights removed' });
+  } else {
+    res.status(404).json({ error: 'User not found' });
+  }
+});
 
+// Endpoint to search users by username
+app.get('/api/users/search', (req, res) => {
+  const query = req.query.q.toLowerCase();
+  const results = users.filter(user => user.username.toLowerCase().includes(query));
+  res.json(results);
+});
 
+// Start the server
+app.listen(port, () => {
+  console.log(`Server running at http://localhost:${port}/`);
+  console.log("Hello World!");
+});

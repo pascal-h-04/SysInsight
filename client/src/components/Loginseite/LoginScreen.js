@@ -1,5 +1,6 @@
 import "./LoginScreen.css";
 import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Spinner from "react-bootstrap/Spinner";
 import Modal from "react-bootstrap/Modal";
@@ -7,12 +8,15 @@ import ComicWelcome from "../../imgs/comic_welcome.png";
 import axios from 'axios';
 
 function LoginScreen({ loginSuccess }) {
+  const navigate = useNavigate();
+
   const [loginLoading, setLoginLoading] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [showFailureModal, setShowFailureModal] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
   const [error, setError] = useState(null);
+
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -30,7 +34,9 @@ function LoginScreen({ loginSuccess }) {
         setShowSuccessModal(true);
         setTimeout(() => {
           setShowSuccessModal(false);
+          
           loginSuccess(response.data.isAdmin); // Übergebe isAdmin an den loginSuccess-Handler
+          
         }, 2000);
       } else {
         setShowFailureModal(true);

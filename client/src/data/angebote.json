@@ -4,7 +4,7 @@
     "name": "Microsoft Teams",
     "kategorie": "Kommunikation",
     "score": "5",
-    "bild": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Microsoft_Office_Teams_%282018%E2%80%93present%29.svg/1200px-Microsoft_Office_Teams_%282018%E2%80%93present%29.svg.png",
+    "bild": "https://cdn.pixabay.com/photo/2022/01/27/07/17/microsoft-teams-6971301_1280.png",
     "beschreibung": "Microsoft Teams ist ein cloudbasierter Dienst, der Chat, Besprechungen, Notizen und Anhänge kombiniert. Teams bietet eine zentrale Anlaufstelle für die Zusammenarbeit, sodass Teams jederzeit und überall zusammenarbeiten können."
   },
   {
@@ -12,7 +12,7 @@
     "name": "Zoom und Slack",
     "kategorie": "Kommunikation",
     "score": "4",
-    "bild": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Zoom_Video_Communications_logo.svg/1200px-Zoom_Video_Communications_logo.svg.png",
+    "bild": "https://breezeblog.s3.amazonaws.com/13/slack_vs_zoom.jpg",
     "beschreibung": "Zoom ist eine Videokonferenzsoftware, die Videokonferenzen, Online-Meetings, Chat und mobile Zusammenarbeit kombiniert. Slack ist ein cloudbasierter Instant-Messaging-Dienst, der für Teams und Unternehmen entwickelt wurde."
   },
   {
@@ -20,7 +20,7 @@
     "name": "Google Meet",
     "kategorie": "Kommunikation",
     "score": "3",
-    "bild": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Google_Meet_icon_%282020%29.svg/1200px-Google_Meet_icon_%282020%29.svg.png",
+    "bild": "https://fonts.gstatic.com/s/i/productlogos/meet_2020q4/v1/web-96dp/logo_meet_2020q4_color_2x_web_96dp.png",
     "beschreibung": "Google Meet ist ein Videokonferenzdienst, der von Google entwickelt wurde. Er ermöglicht es Benutzern, Videokonferenzen mit bis zu 100 Teilnehmern durchzuführen. "
   },
   {
