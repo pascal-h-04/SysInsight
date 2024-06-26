@@ -1,8 +1,10 @@
 const express = require("express");
-const mysql = require("mysql");
+//const mysql = require("mysql");
+const mysql = require("mysql2");
 const bodyParser = require("body-parser");
 
 const app = express();
+app.use(express.json());
 const dbport = 3002;
 
 // Middleware für JSON-Requests
@@ -17,7 +19,7 @@ const connection = mysql.createPool({
 });
 
 // Alle Angebote löschen
-app.delete("/api/anbote", (req, res) => {
+app.delete("/api/angebote", (req, res) => {
   connection.query("DELETE FROM Angebote", (err, results) => {
     if (err) {
       console.error("Fehler beim Löschen der Daten:", err);
@@ -151,5 +153,5 @@ app.put("/api/angebote/:id", (req, res) => {
 
 // Server starten
 app.listen(dbport, () => {
-  console.log(`Server gestartet auf Port ${dbport}`);
+  console.log(`Server für Datenbankabfragen gestartet auf Port ${dbport}`);
 });
