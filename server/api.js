@@ -41,6 +41,7 @@ app.get("/api/eintraege", (req, res) => {
   });
 });
 eintraege
+
 // Neuen Eintrag hinzufügen
 app.post("/api/", (req, res) => {
   const { name, beschreibung } = req.body;
