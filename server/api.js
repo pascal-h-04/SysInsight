@@ -13,7 +13,7 @@ const connection = mysql.createPool({
   host: "localhost",
   user: "root",
   password: "",
-  database: "Semantec",
+  database: "SysInsight",
 });
 
 // Routen
@@ -40,9 +40,9 @@ app.get("/api/eintraege", (req, res) => {
     res.json(results);
   });
 });
-
+eintraege
 // Neuen Eintrag hinzufügen
-app.post("/api/eintraege", (req, res) => {
+app.post("/api/", (req, res) => {
   const { name, beschreibung } = req.body;
   connection.query(
     "INSERT INTO Angebot(name, beschreibung) VALUES (?, ?)",
@@ -58,12 +58,13 @@ app.post("/api/eintraege", (req, res) => {
   );
 });
 
-// Neuen Eintrag hinzufügen
-app.post("/api/eintraege", (req, res) => {
-  const { name, beschreibung } = req.body;
+
+// Neue Antwort hinzufügen
+app.post("/api/angebot", (req, res) => {
+  const { name, beschreibung, fragenId } = req.body;
   connection.query(
-    "INSERT INTO Antwort(name, beschreibung) VALUES (?, ?)",
-    [name, beschreibung],
+    "INSERT INTO Antwort(Antwort, Kategorie, FragenID) VALUES (?, ?, ?)",
+    [name, beschreibung, fragenId],
     (err, results) => {
       if (err) {
         console.error("Fehler beim Hinzufügen des Eintrags:", err);
@@ -75,10 +76,8 @@ app.post("/api/eintraege", (req, res) => {
   );
 });
 
-// Server starten
-app.listen(port, () => {
-  console.log(`Server gestartet auf Port ${port}`);
-});
+
+
 
 // Nutzer anlegen
 app.post("/api/nutzer", (req, res) => {
@@ -149,6 +148,8 @@ app.get("/api/einschätzung", (req, res) => {
   });
 });
 
+
+
 // Eintrag aktualisieren
 app.put("/api/eintraege/:id", (req, res) => {
   const { id } = req.params; // ID des zu aktualisierenden Eintrags
@@ -170,4 +171,8 @@ app.put("/api/eintraege/:id", (req, res) => {
       res.send("Eintrag aktualisiert");
     }
   );
+});
+// Server starten
+app.listen(port, () => {
+  console.log(`Server gestartet auf Port ${port}`);
 });
