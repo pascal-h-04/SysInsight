@@ -1,6 +1,6 @@
 import "./App.css";
 import { useState, useEffect } from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 // geplant: import Router from "./Router"; und dann <Router /> in return
 import LoginScreen from "./components/Loginseite/LoginScreen";
 import Navigation from "./components/Navigation";
@@ -13,6 +13,7 @@ import Auswertung from "./components/Auswertungsseite/Auswertung";
 import Adminmanagement from "./components/Adminpage/Adminmanagement";
 
 function App() {
+  const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
 
@@ -28,6 +29,7 @@ function App() {
     localStorage.setItem("isAdmin", admin);
     setIsLoggedIn(true);
     setIsAdmin(admin);
+    {admin ? navigate("/adminmanagement") : navigate("/auswertung")}
   };
 
   const logout = () => {
@@ -48,17 +50,7 @@ function App() {
       </header>
       <main>
         <Routes>
-          <Route
-            path="/login"
-            element={
-              !isLoggedIn ? (
-                <LoginScreen loginSuccess={successfullLogin} />
-              ) : (
-                <Navigate to="/startseite" />
-              )
-            }
-          />
-          <Route
+        <Route
             path="/"
             element={
                 <Startseite isAdmin={isAdmin} /> 
@@ -73,38 +65,33 @@ function App() {
             }
           />
           <Route
+            path="/login"
+            element={
+                <LoginScreen loginSuccess={successfullLogin} />
+            }
+          />
+          
+          <Route
             path="/auswertung"
             element={
-              isLoggedIn ? (
                 <Auswertung isAdmin={isAdmin} />
-              ) : (
-                <Navigate to="/" />
-              )
             }
           />
           <Route
             path="/angebotseite"
             element={
-              isLoggedIn ? (
                 <Angebotseite isAdmin={isAdmin} />
-              ) : (
-                <Navigate to="/" />
-              )
             }
           />
           <Route
             path="/adminmanagement"
             element={
-              isLoggedIn ? (
                 <Adminmanagement isAdmin={isAdmin} />
-              ) : (
-                <Navigate to="/" />
-              )
             }
           />
           <Route
             path="/profile"
-            element={isLoggedIn ? <Profile /> : <Navigate to="/login" />}
+            element={<Profile />}
           />
           <Route path="/about-us" element={<AboutUs />} />
         

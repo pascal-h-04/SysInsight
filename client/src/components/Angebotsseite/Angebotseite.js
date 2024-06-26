@@ -65,14 +65,16 @@ const Angebotseite = ({ isAdmin }) => {
 
   return (
     <div id="angebotseite">
+      {!isAdmin && (
       <Button variant="primary" onClick={() => navigate("/auswertung")}>
         <IoMdArrowRoundBack size={25} />
         Zurück
-      </Button>{" "}
+      </Button> )}
+
       {isAdmin && (
         <>
           <Button
-            variant="success"
+            variant={customizingMode ? "warning" : "success"}
             onClick={() => setCustomizingMode(!customizingMode)}
           >
             {customizingMode ? "Anpassung beenden" : "Angebote anpassen"}

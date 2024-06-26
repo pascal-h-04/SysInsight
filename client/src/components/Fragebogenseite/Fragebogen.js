@@ -153,7 +153,7 @@ const Fragebogen = () => {
         setShowSuccessModal(true);
         setTimeout(() => {
           setShowSuccessModal(false);
-          navigate("/auswertung", { state: { formData } });
+          navigate("/login", { state: { formData } });
         }, 2000);
       }, 2000);
 
@@ -217,7 +217,7 @@ const Fragebogen = () => {
           ) : (
             <>
               <MdInsights size={30} />
-              Zur Auswertung (mit validierung)
+              Zur Auswertung (mit validierung, über Login)
             </>
           )}
         </Button>
@@ -226,7 +226,14 @@ const Fragebogen = () => {
           disabled={evaluationLoading}
           onClick={() => navigate("/auswertung", { state: { formData } })}
         >
-          Zur Auswertung (ohne validierung - Dev only)
+          Zur Auswertung (ohne validierung - Dev only - direkt)
+        </Button>
+        <Button
+          variant="primary"
+          disabled={evaluationLoading}
+          onClick={() => navigate("/login", { state: { formData } })}
+        >
+          Zur Auswertung (ohne validierung - Dev only - über login)
         </Button>
       </Form>
       <CustomPopup
