@@ -3,35 +3,34 @@ const mysql = require("mysql");
 const bodyParser = require("body-parser");
 
 const app = express();
-
-const port = 3020;
+const dbport = 3002;
 
 // Middleware für JSON-Requests
 app.use(bodyParser.json());
 
 const connection = mysql.createPool({
-  host: "localhost",
+  host: "127.0.0.1",
   user: "root",
   password: "",
-  database: "SysInsight",
+  database: "mydatabase",
+  port: 3306
 });
 
-// Routen
-// Alle Einträge löschen
-app.delete("/api/eintraege", (req, res) => {
-  connection.query("DELETE FROM Angebot", (err, results) => {
+// Alle Angebote löschen
+app.delete("/api/anbote", (req, res) => {
+  connection.query("DELETE FROM Angebote", (err, results) => {
     if (err) {
       console.error("Fehler beim Löschen der Daten:", err);
       res.status(500).send("Serverfehler");
       return;
     }
-    res.send("Alle Einträge gelöscht");
+    res.send("Alle Angebote gelöscht");
   });
 });
 
-// Alle Einträge anzeigen
-app.get("/api/eintraege", (req, res) => {
-  connection.query("SELECT * FROM Angebot", (err, results) => {
+// Alle Angebote anzeigen
+app.get("/api/angebote", (req, res) => {
+  connection.query("SELECT * FROM Angebote", (err, results) => {
     if (err) {
       console.error("Fehler beim Abrufen der Daten:", err);
       res.status(500).send("Serverfehler");
@@ -40,71 +39,49 @@ app.get("/api/eintraege", (req, res) => {
     res.json(results);
   });
 });
-eintraege
 
-// Neuen Eintrag hinzufügen
-app.post("/api/", (req, res) => {
-  const { name, beschreibung } = req.body;
+// Neues Angebot hinzufügen
+app.post("/api/angebote", (req, res) => {
+  const { Name, Score, category, Beschreibung, Bild, NutzerID } = req.body;
   connection.query(
-    "INSERT INTO Angebot(name, beschreibung) VALUES (?, ?)",
-    [name, beschreibung],
+    "INSERT INTO Angebote (Name, Score, category, Beschreibung, Bild, NutzerID) VALUES (?, ?, ?, ?, ?, ?)",
+    [Name, Score, category, Beschreibung, Bild, NutzerID],
     (err, results) => {
       if (err) {
         console.error("Fehler beim Hinzufügen des Eintrags:", err);
         res.status(500).send("Serverfehler");
         return;
       }
-      res.send("Eintrag hinzugefügt");
+      res.send("Angebot hinzugefügt");
     }
   );
 });
-
-
-// Neue Antwort hinzufügen
-app.post("/api/angebot", (req, res) => {
-  const { name, beschreibung, fragenId } = req.body;
-  connection.query(
-    "INSERT INTO Antwort(Antwort, Kategorie, FragenID) VALUES (?, ?, ?)",
-    [name, beschreibung, fragenId],
-    (err, results) => {
-      if (err) {
-        console.error("Fehler beim Hinzufügen des Eintrags:", err);
-        res.status(500).send("Serverfehler");
-        return;
-      }
-      res.send("Eintrag hinzugefügt");
-    }
-  );
-});
-
-
-
 
 // Nutzer anlegen
 app.post("/api/nutzer", (req, res) => {
-  const { name, beschreibung } = req.body;
+  const { Name, pw, isAdmin } = req.body;
   connection.query(
-    "INSERT INTO Nutzer(name, Passwort) VALUES (?, ?)",
-    [name, beschreibung],
+    "INSERT INTO Nutzer (Name, pw, isAdmin) VALUES (?, ?, ?)",
+    [Name, pw, isAdmin],
     (err, results) => {
       if (err) {
         console.error("Fehler beim Hinzufügen des Eintrags:", err);
         res.status(500).send("Serverfehler");
         return;
       }
-      res.send("Eintrag hinzugefügt");
+      res.send("Nutzer hinzugefügt");
     }
   );
 });
 
 // Nutzer Passwort ändern
-app.put("/api/nutzer/:name", (req, res) => {
-  const { name } = req.params; // Name des zu aktualisierenden Eintrags
-  const { passwort } = req.body; // Neues Passwort für den Eintrag
+app.put("/api/nutzer/:id", (req, res) => {
+  const { id } = req.params;
+  const { pw } = req.body;
 
   connection.query(
-    "UPDATE Nutzer SET passwort = ? WHERE name = ?",
-    [passwort, name],
+    "UPDATE Nutzer SET pw = ? WHERE ID = ?",
+    [pw, id],
     (err, results) => {
       if (err) {
         console.error("Fehler beim Aktualisieren des Eintrags:", err);
@@ -112,36 +89,36 @@ app.put("/api/nutzer/:name", (req, res) => {
         return;
       }
       if (results.affectedRows === 0) {
-        res.status(404).send("Eintrag nicht gefunden");
+        res.status(404).send("Nutzer nicht gefunden");
         return;
       }
-      res.send("Eintrag aktualisiert");
+      res.send("Nutzer Passwort aktualisiert");
     }
   );
 });
 
 // Einschätzung anlegen
-app.post("/api/einschätzung", (req, res) => {
-  const { nutzerId, score, Kategorie } = req.body;
+app.post("/api/einschaetzung", (req, res) => {
+  const { ScoreKollaboration, ScoreKommunikation, ScoreSecurity, ScoreGeneral, NutzerID } = req.body;
   connection.query(
-    "INSERT INTO Einschätzung (nutzerId, score, Kategorie) VALUES (?, ?, ?)",
-    [nutzerId, score, Kategorie],
+    "INSERT INTO Einschaetzung (ScoreKollaboration, ScoreKommunikation, ScoreSecurity, ScoreGeneral, NutzerID) VALUES (?, ?, ?, ?, ?)",
+    [ScoreKollaboration, ScoreKommunikation, ScoreSecurity, ScoreGeneral, NutzerID],
     (err, results) => {
       if (err) {
-        console.error("Fehler beim Hinzufügen des Eintrags:", err);
+        console.error("Fehler beim Hinzufügen der Einschätzung:", err);
         res.status(500).send("Serverfehler");
         return;
       }
-      res.send("Eintrag hinzugefügt");
+      res.send("Einschätzung hinzugefügt");
     }
   );
 });
 
-// Einschätzung abrufen
-app.get("/api/einschätzung", (req, res) => {
-  connection.query("SELECT * FROM Einschätzung", (err, results) => {
+// Einschätzungen abrufen
+app.get("/api/einschaetzungen", (req, res) => {
+  connection.query("SELECT * FROM Einschaetzung", (err, results) => {
     if (err) {
-      console.error("Fehler beim Abrufen der Einträge:", err);
+      console.error("Fehler beim Abrufen der Einschätzungen:", err);
       res.status(500).send("Serverfehler");
       return;
     }
@@ -149,16 +126,14 @@ app.get("/api/einschätzung", (req, res) => {
   });
 });
 
-
-
 // Eintrag aktualisieren
-app.put("/api/eintraege/:id", (req, res) => {
-  const { id } = req.params; // ID des zu aktualisierenden Eintrags
-  const { name, beschreibung } = req.body; // Neue Werte für den Eintrag
+app.put("/api/angebote/:id", (req, res) => {
+  const { id } = req.params;
+  const { Name, Score, category, Beschreibung, Bild, NutzerID } = req.body;
 
   connection.query(
-    "UPDATE Angebot SET name = ?, beschreibung = ? WHERE id = ?",
-    [name, beschreibung, id],
+    "UPDATE Angebote SET Name = ?, Score = ?, category = ?, Beschreibung = ?, Bild = ?, NutzerID = ? WHERE ID = ?",
+    [Name, Score, category, Beschreibung, Bild, NutzerID, id],
     (err, results) => {
       if (err) {
         console.error("Fehler beim Aktualisieren des Eintrags:", err);
@@ -166,14 +141,15 @@ app.put("/api/eintraege/:id", (req, res) => {
         return;
       }
       if (results.affectedRows === 0) {
-        res.status(404).send("Eintrag nicht gefunden");
+        res.status(404).send("Angebot nicht gefunden");
         return;
       }
-      res.send("Eintrag aktualisiert");
+      res.send("Angebot aktualisiert");
     }
   );
 });
+
 // Server starten
-app.listen(port, () => {
-  console.log(`Server gestartet auf Port ${port}`);
+app.listen(dbport, () => {
+  console.log(`Server gestartet auf Port ${dbport}`);
 });

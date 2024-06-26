@@ -29,7 +29,11 @@ function processFormData(formData) {
   });
 
   function scoreBerechnen(score, weight, category) {
+    console.log(typeof scoreGeneral);
+    console.log(typeof weight);
+    console.log(typeof score);
     const weightedScore = score * weight;
+    console.log(typeof weightedScore);
     switch (category) {
       case "Security":
         scoreSecurity += weightedScore;
@@ -42,10 +46,13 @@ function processFormData(formData) {
         break;
       case "Allgemeines": 
         scoreGeneral += weightedScore;
+        console.log(typeof scoreGeneral);
+        break;  
+      case "ignore":
         break;
     }
   }
-
+  
   return {
     scoreGeneral,
     scoreSecurity,
