@@ -14,6 +14,8 @@ function Navigation({ isLoggedIn, isAdmin, handleLogout }) {
 
   const adminNavigation = [
     { name: "Angebotsübersicht", url: "/angebotseite", divider: false },
+    { name: "Adminmanagement", url: "/adminmanagement", divider: false },
+
   ];
 
   return (

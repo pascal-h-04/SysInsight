@@ -10,6 +10,7 @@ import Startseite from "./components/Startseite/Startseite";
 import Fragebogen from "./components/Fragebogenseite/Fragebogen";
 import Angebotseite from "./components/Angebotsseite/Angebotseite";
 import Auswertung from "./components/Auswertungsseite/Auswertung";
+import Adminmanagement from "./components/Adminpage/Adminmanagement";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -58,23 +59,17 @@ function App() {
             }
           />
           <Route
-            path="/startseite"
+            path="/"
             element={
-              isLoggedIn ? (
-                <Startseite isAdmin={isAdmin} />
-              ) : (
-                <Navigate to="/" />
-              )
+                <Startseite isAdmin={isAdmin} /> 
             }
           />
           <Route
             path="/fragebogen"
             element={
-              isLoggedIn ? (
+  
                 <Fragebogen isAdmin={isAdmin} />
-              ) : (
-                <Navigate to="/" />
-              )
+
             }
           />
           <Route
@@ -98,18 +93,21 @@ function App() {
             }
           />
           <Route
-            path="/"
-            element={<Navigate to={isLoggedIn ? "/startseite" : "/login"} />}
+            path="/adminmanagement"
+            element={
+              isLoggedIn ? (
+                <Adminmanagement isAdmin={isAdmin} />
+              ) : (
+                <Navigate to="/" />
+              )
+            }
           />
           <Route
             path="/profile"
             element={isLoggedIn ? <Profile /> : <Navigate to="/login" />}
           />
           <Route path="/about-us" element={<AboutUs />} />
-          <Route
-            path="/"
-            element={<Navigate to={isLoggedIn ? "/startseite" : "/login"} />}
-          />
+        
         </Routes>
       </main>
     </div>
