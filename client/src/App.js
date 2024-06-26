@@ -10,7 +10,7 @@ import Startseite from "./components/Startseite/Startseite";
 import Fragebogen from "./components/Fragebogenseite/Fragebogen";
 import Angebotseite from "./components/Angebotsseite/Angebotseite";
 import Auswertung from "./components/Auswertungsseite/Auswertung";
-import Adminmanagement from "./components/Adminpage/Adminmanagement";
+import Usermanagement from "./components/Adminpage/Usermanagement";
 
 function App() {
   const navigate = useNavigate();
@@ -29,7 +29,7 @@ function App() {
     localStorage.setItem("isAdmin", admin);
     setIsLoggedIn(true);
     setIsAdmin(admin);
-    {admin ? navigate("/adminmanagement") : navigate("/auswertung")}
+    {admin ? navigate("/usermanagement") : navigate("/auswertung")}
   };
 
   const logout = () => {
@@ -84,9 +84,9 @@ function App() {
             }
           />
           <Route
-            path="/adminmanagement"
+            path="/usermanagement"
             element={
-                <Adminmanagement isAdmin={isAdmin} />
+                <Usermanagement isAdmin={isAdmin} />
             }
           />
           <Route

@@ -72,6 +72,18 @@ app.post('/api/user/:username/promote', (req, res) => {
   }
 });
 
+// Endpoint to remove admin rights from user by username
+app.post('/api/user/:username/remove', (req, res) => {
+  const username = req.params.username;
+  const user = users.find(u => u.username === username);
+  if (user) {
+    user.isAdmin = false;
+    res.json({ message: 'Admin rights removed' });
+  } else {
+    res.status(404).json({ error: 'User not found' });
+  }
+});
+
 // Endpoint to search users by username
 app.get('/api/users/search', (req, res) => {
   const query = req.query.q.toLowerCase();
