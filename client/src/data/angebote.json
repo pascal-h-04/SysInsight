@@ -28,7 +28,7 @@
     "name": "Microsoft Office 365",
     "kategorie": "Office-Tools",
     "score": "5",
-    "bild": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Microsoft_Office_Teams_%282018%E2%80%93present%29.svg/1200px-Microsoft_Office_Teams_%282018%E2%80%93present%29.svg.png",
+    "bild": "https://i0.wp.com/surface-world.de/wp-content/uploads/2021/08/surface-for-business-office-365.jpg?fit=1280%2C720&ssl=1",
     "beschreibung": "Microsoft Office 365 ist ein cloudbasierter Dienst, der eine Vielzahl von Anwendungen und Diensten für die Zusammenarbeit und Produktivität bietet. Dazu gehören Word, Excel, PowerPoint, Outlook, OneNote, SharePoint, Teams und mehr. "
   },
   {
@@ -36,7 +36,7 @@
     "name": "Google Workspace",
     "kategorie": "Office-Tools",
     "score": "4",
-    "bild": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_Workspace_Logo.svg/1200px-Google_Workspace_Logo.svg.png",
+    "bild": "https://www.happtiq.com/wp-content/uploads/2023/03/9f6a0ede-job-postition.png",
     "beschreibung": "Google Workspace ist eine Suite von cloudbasierten Produktivitäts- und Zusammenarbeitswerkzeugen, die von Google entwickelt wurden. Dazu gehören Gmail, Drive, Docs, Sheets, Slides, Calendar und mehr. "
   },
   {
@@ -44,7 +44,7 @@
     "name": "Zoho office suite",
     "kategorie": "Office-Tools",
     "score": "3",
-    "bild": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Zoho_Office_Suite_logo.svg/1200px-Zoho_Office_Suite_logo.svg.png",
+    "bild": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlrj7XZSmwSgJlqYsnL6FDVXnlpVfB69fN9Q&s",
     "beschreibung": "Zoho Office Suite ist eine cloudbasierte Produktivitäts- und Zusammenarbeitsplattform, die eine Vielzahl von Anwendungen und Diensten wie Writer, Sheet, Show, Mail, Meeting und mehr umfasst. "
   },
   {
@@ -52,7 +52,7 @@
     "name": "Apple iWork",
     "kategorie": "Office-Tools",
     "score": "2",
-    "bild": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Zoho_Office_Suite_logo.svg/1200px-Zoho_Office_Suite_logo.svg.png",
+    "bild": "https://www.heise.de/imgs/18/3/1/1/4/4/5/2/iwork-transparent-c768df3f545e53b2.png",
     "beschreibung": "Apple iWork ist eine Suite von Produktivitätsanwendungen, die von Apple entwickelt wurden. Dazu gehören Pages, Numbers und Keynote. "
   },
   {
@@ -60,7 +60,7 @@
     "name": "Mobile Device Management (MDM) mit entsprechenden Office Tools",
     "kategorie": "Office-Tools",
     "score": "1",
-    "bild": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Zoho_Office_Suite_logo.svg/1200px-Zoho_Office_Suite_logo.svg.png",
+    "bild": "https://cnc-ltd.co.uk/wp-content/uploads/mobile-device-management-scaled.jpg",
     "beschreibung": "Mobile Device Management (MDM) ist eine Technologie, die es Unternehmen ermöglicht, die mobilen Geräte ihrer Mitarbeiter zu verwalten und zu sichern. Dies kann in Kombination mit Office-Tools wie Microsoft Office 365 oder Google Workspace verwendet werden, um die Produktivität und Sicherheit der Mitarbeiter zu verbessern. "
   },
   {
@@ -68,7 +68,7 @@
     "name": "Mural",
     "kategorie": "Office-Tools",
     "score": "5",
-    "bild": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Zoho_Office_Suite_logo.svg/1200px-Zoho_Office_Suite_logo.svg.png",
+    "bild": "https://assets.reviews.omr.com/rvnz0b95hap3hi5g85vlufsgy2sr?optimize=low&auto=webp&format=jpg",
     "beschreibung": "Mural ist eine digitale Arbeitsbereichs- und Kollaborationsplattform, die es Teams ermöglicht, Ideen zu erfassen, zu organisieren und zu teilen. Mural bietet eine Vielzahl von Tools und Funktionen, die die Zusammenarbeit und Kreativität fördern. "
   },
   {
@@ -84,7 +84,7 @@
     "name": "Endpoint-Security-Lösungen",
     "kategorie": "IT-Security",
     "score": "4",
-    "bild": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Zoho_Office_Suite_logo.svg/1200px-Zoho_Office_Suite_logo.svg.png",
+    "bild": "https://www.is-its.org/wp-content/uploads/2022/07/2019_09-Cybersecurity-Informationssicherheit.jpg",
     "beschreibung": "Endpoint-Security-Lösungen sind Technologien, die entwickelt wurden, um Endgeräte wie Laptops, Smartphones und Tablets vor Bedrohungen zu schützen. Dazu gehören Antivirensoftware, Firewalls, Verschlüsselung, Zugriffskontrolle und mehr. "
   },
   {
@@ -92,7 +92,7 @@
     "name": "Cloud-Security-Lösungen",
     "kategorie": "IT-Security",
     "score": "3",
-    "bild": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Zoho_Office_Suite_logo.svg/1200px-Zoho_Office_Suite_logo.svg.png",
+    "bild": "https://www.secion.de/assets/images/2/vernachlaessigte_cloud_security-4edd193b.jpeg",
     "beschreibung": "Cloud-Security-Lösungen sind Technologien, die entwickelt wurden, um die Sicherheit von Cloud-Diensten und -Anwendungen zu gewährleisten. Dazu gehören Verschlüsselung, Zugriffskontrolle, Sicherheitsüberwachung und mehr. "
   },
   {
@@ -100,7 +100,7 @@
     "name": "Vulnerability-Management-Lösungen",
     "kategorie": "IT-Security",
     "score": "2",
-    "bild": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Zoho_Office_Suite_logo.svg/1200px-Zoho_Office_Suite_logo.svg.png",
+    "bild": "https://www.tripwire.com/sites/default/files/The-Five-Stages-of-Vulnerability-Management.jpg",
     "beschreibung": "Vulnerability-Management-Lösungen sind Technologien, die entwickelt wurden, um Schwachstellen in IT-Systemen und -Anwendungen zu identifizieren, zu bewerten und zu beheben. Dazu gehören Schwachstellen-Scans, Risikobewertungen, Patch-Management und mehr. "
   },
   {
@@ -108,7 +108,7 @@
     "name": "Penetration-Testing-Services",
     "kategorie": "IT-Security",
     "score": "1",
-    "bild": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Zoho_Office_Suite_logo.svg/1200px-Zoho_Office_Suite_logo.svg.png",
+    "bild": "https://fiverr-res.cloudinary.com/images/t_main1,q_auto,f_auto,q_auto,f_auto/gigs/228354960/original/8bc8d68d4fc150bdde3ae6a41e939c21f0e36144/small-web-or-service-pentest.png",
     "beschreibung": "Penetration-Testing-Services sind Dienstleistungen, die von Sicherheitsunternehmen angeboten werden, um die Sicherheit von IT-Systemen und -Anwendungen zu testen. Dabei werden gezielte Angriffe simuliert, um Schwachstellen zu identifizieren und zu beheben. "
   },
   {
@@ -116,7 +116,7 @@
     "name": "Sicherheitsbewusstseinsschulungen für Mitarbeiter",
     "kategorie": "IT-Security",
     "score": "5",
-    "bild": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Zoho_Office_Suite_logo.svg/1200px-Zoho_Office_Suite_logo.svg.png",
+    "bild": "https://www.gecko.de/wp-content/uploads/2023/08/cyber-security-awareness-it-security-schulung-1024x576.jpg",
     "beschreibung": "Sicherheitsbewusstseinsschulungen für Mitarbeiter sind Schulungen, die entwickelt wurden, um Mitarbeiter über die Bedeutung von IT-Sicherheit und bewährte Sicherheitspraktiken zu informieren. Dies kann dazu beitragen, das Sicherheitsbewusstsein der Mitarbeiter zu stärken und das Risiko von Sicherheitsvorfällen zu reduzieren. "
   }
 ]
