@@ -51,6 +51,19 @@ function processFormData(formData) {
       case "ignore":
         break;
     }
+    fetch('api/einschätzung', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        ScoreKollaboration: scoreKollaboration,
+        ScoreKommunikation: scoreKommunikation,
+        ScoreSecurity: scoreSecurity,
+        ScoreGeneral: scoreGeneral,
+        NutzerID: 2,
+      }),
+    })
   }
   
   return {

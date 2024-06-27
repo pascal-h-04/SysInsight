@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 
 const app = express();
 app.use(express.json());
+app.use(bodyParser.json());
 const dbport = 3002;
 
 // Middleware für JSON-Requests
@@ -99,28 +100,24 @@ app.put("/api/nutzer/:id", (req, res) => {
   );
 });
 
-// Einschätzung anlegen
-app.post("/api/einschaetzung", (req, res) => {
-  const { ScoreKollaboration, ScoreKommunikation, ScoreSecurity, ScoreGeneral, NutzerID } = req.body;
-  connection.query(
-    "INSERT INTO Einschaetzung (ScoreKollaboration, ScoreKommunikation, ScoreSecurity, ScoreGeneral, NutzerID) VALUES (?, ?, ?, ?, ?)",
-    [ScoreKollaboration, ScoreKommunikation, ScoreSecurity, ScoreGeneral, NutzerID],
-    (err, results) => {
-      if (err) {
-        console.error("Fehler beim Hinzufügen der Einschätzung:", err);
-        res.status(500).send("Serverfehler");
-        return;
-      }
-      res.send("Einschätzung hinzugefügt");
-    }
-  );
-});
 
-// Einschätzungen abrufen
+// Alle Einschätzungen anzeigen
 app.get("/api/einschaetzungen", (req, res) => {
   connection.query("SELECT * FROM Einschaetzung", (err, results) => {
     if (err) {
-      console.error("Fehler beim Abrufen der Einschätzungen:", err);
+      console.error("Fehler beim Abrufen der Daten:", err);
+      res.status(500).send("Serverfehler");
+      return;
+    }
+    res.json(results);
+  });
+});
+
+// Alle Angebote anzeigen
+app.get("/api/angebote", (req, res) => {
+  connection.query("SELECT * FROM Angebote", (err, results) => {
+    if (err) {
+      console.error("Fehler beim Abrufen der Daten:", err);
       res.status(500).send("Serverfehler");
       return;
     }
@@ -147,6 +144,23 @@ app.put("/api/angebote/:id", (req, res) => {
         return;
       }
       res.send("Angebot aktualisiert");
+    }
+  );
+});
+
+app.post("/api/einschaetzung", (req, res) => {
+  const { ScoreKollaboration, ScoreKommunikation, ScoreSecurity, ScoreGeneral, NutzerID } = req.body;
+  
+  connection.query(
+    "INSERT INTO Einschaetzung (ScoreKollaboration, ScoreKommunikation, ScoreSecurity, ScoreGeneral, NutzerID) VALUES (?, ?, ?, ?, ?)",
+    [ScoreKollaboration, ScoreKommunikation, ScoreSecurity, ScoreGeneral, NutzerID],
+    (err, results) => {
+      if (err) {
+        console.error("Fehler beim Hinzufügen der Einschätzung:", err);
+        return res.status(500).send("Fehler beim Hinzufügen der Einschätzung: " + err.message);
+      }
+      console.log("Einschätzung hinzugefügt:", results);
+      return res.sendStatus(200);
     }
   );
 });
