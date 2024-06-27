@@ -15,7 +15,6 @@ function Navigation({ isLoggedIn, isAdmin, handleLogout }) {
   const adminNavigation = [
     { name: "Angebotsübersicht", url: "/angebotseite", divider: false },
     { name: "Usermanagement", url: "/usermanagement", divider: false },
-
   ];
 
   return (
@@ -46,24 +45,25 @@ function Navigation({ isLoggedIn, isAdmin, handleLogout }) {
                 ))}
               </NavDropdown>
             )}
-              <>
-                <div className="nav-left-spacing" />
-                {isLoggedIn &&
+            <>
+              <div className="nav-left-spacing" />
+              {isLoggedIn && (
                 <Nav.Link as={Link} to="/profile" className="me-3">
                   <FaUser size={20} /> Profile
                 </Nav.Link>
-                }
-                <Nav.Link as={Link} to="/about-us" className="me-3">
-                  <FaInfoCircle size={20} /> About Us
-                </Nav.Link>
-              </>
+              )}
+              <Nav.Link as={Link} to="/about-us" className="me-3">
+                <FaInfoCircle size={20} /> About Us
+              </Nav.Link>
+            </>
           </Nav>
         </Navbar.Collapse>
         {isLoggedIn && isAdmin && (
-          <Button variant="outline-light" size="sm" className="ms-2">
-            Admin-Info
-          </Button>
+          <span className="ms-2" style={{ color: "white" }}>
+            Admin-View   
+          </span>
         )}
+
         {isLoggedIn && (
           <Button
             variant="outline-light"
