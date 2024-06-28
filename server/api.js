@@ -2,13 +2,18 @@ const express = require("express");
 //const mysql = require("mysql");
 const mysql = require("mysql2");
 const bodyParser = require("body-parser");
-
+const cors = require('cors');
 const app = express();
 app.use(express.json());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }))
 const dbport = 3002;
+
 
 // Middleware für JSON-Requests
 app.use(bodyParser.json());
+// CORS middleware
+app.use(cors());
 
 const connection = mysql.createPool({
   host: "127.0.0.1",
@@ -46,7 +51,7 @@ app.get("/api/angebote", (req, res) => {
 app.post("/api/angebote", (req, res) => {
   const { Name, Score, category, Beschreibung, Bild, NutzerID } = req.body;
   connection.query(
-    "INSERT INTO Angebote (Name, Score, category, Beschreibung, Bild, NutzerID) VALUES (?, ?, ?, ?, ?, ?)",
+    "INSERT INTO Angebote (Name, Score, category, Beschreibung, Bild) VALUES (?, ?, ?, ?, ?)",
     [Name, Score, category, Beschreibung, Bild, NutzerID],
     (err, results) => {
       if (err) {
@@ -99,28 +104,26 @@ app.put("/api/nutzer/:id", (req, res) => {
   );
 });
 
-// Einschätzung anlegen
-app.post("/api/einschaetzung", (req, res) => {
-  const { ScoreKollaboration, ScoreKommunikation, ScoreSecurity, ScoreGeneral, NutzerID } = req.body;
-  connection.query(
-    "INSERT INTO Einschaetzung (ScoreKollaboration, ScoreKommunikation, ScoreSecurity, ScoreGeneral, NutzerID) VALUES (?, ?, ?, ?, ?)",
-    [ScoreKollaboration, ScoreKommunikation, ScoreSecurity, ScoreGeneral, NutzerID],
-    (err, results) => {
-      if (err) {
-        console.error("Fehler beim Hinzufügen der Einschätzung:", err);
-        res.status(500).send("Serverfehler");
-        return;
-      }
-      res.send("Einschätzung hinzugefügt");
+
+//  Einschätzungen anzeigen
+app.get("/api/einschaetzungen/:NutzerID", (req, res) => {
+  const NutzerID = req.params.NutzerID; // Nutze req.params.NutzerID hier
+  connection.query("SELECT * FROM Einschaetzung WHERE NutzerID = ?", NutzerID, (err, results) => {
+    if (err) {
+      console.error("Fehler beim Abrufen der Daten:", err);
+      res.status(500).send("Serverfehler");
+      return;
     }
-  );
+    res.json(results);
+  });
 });
 
-// Einschätzungen abrufen
-app.get("/api/einschaetzungen", (req, res) => {
-  connection.query("SELECT * FROM Einschaetzung", (err, results) => {
+
+// Alle Angebote anzeigen
+app.get("/api/angebote", (req, res) => {
+  connection.query("SELECT * FROM Angebote", (err, results) => {
     if (err) {
-      console.error("Fehler beim Abrufen der Einschätzungen:", err);
+      console.error("Fehler beim Abrufen der Daten:", err);
       res.status(500).send("Serverfehler");
       return;
     }
@@ -147,6 +150,24 @@ app.put("/api/angebote/:id", (req, res) => {
         return;
       }
       res.send("Angebot aktualisiert");
+    }
+  );
+});
+
+//Einschätzung hinzufügen
+app.post("/api/einschaetzung", (req, res) => {
+  const { ScoreKollaboration, ScoreKommunikation, ScoreSecurity, ScoreGeneral, NutzerID } = req.body;
+  
+  connection.query(
+    "INSERT INTO Einschaetzung (ScoreKollaboration, ScoreKommunikation, ScoreSecurity, ScoreGeneral, NutzerID) VALUES (?, ?, ?, ?, ?)",
+    [ScoreKollaboration, ScoreKommunikation, ScoreSecurity, ScoreGeneral, NutzerID],
+    (err, results) => {
+      if (err) {
+        console.error("Fehler beim Hinzufügen der Einschätzung:", err);
+        return res.status(500).send("Fehler beim Hinzufügen der Einschätzung: " + err.message);
+      }
+      console.log("Einschätzung hinzugefügt:", results);
+      return res.sendStatus(200);
     }
   );
 });

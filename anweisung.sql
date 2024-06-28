@@ -18,7 +18,7 @@ CREATE TABLE Einschaetzung
     ScoreSecurity INT,
     ScoreGeneral INT,
     NutzerID      INT,
-    FOREIGN KEY (NutzerID) REFERENCES Nutzer(ID),
+    FOREIGN KEY (NutzerID) REFERENCES Nutzer(ID)
 );
 
 CREATE  TABLE Angebote
@@ -29,8 +29,6 @@ CREATE  TABLE Angebote
     category      VARCHAR(255),
     Beschreibung  VARCHAR(255),
     Bild           VARCHAR(255),
-    NutzerID      INT,
-    FOREIGN KEY (NutzerID) REFERENCES Nutzer(ID),
 );
 
 -- Beispielzeile für die Tabelle Nutzer
