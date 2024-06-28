@@ -13,6 +13,7 @@ function LoginScreen({ loginSuccess }) {
   const [loginLoading, setLoginLoading] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [showFailureModal, setShowFailureModal] = useState(false);
+  const [showInfoModal, setShowInfoModal] = useState(true);  // Modal beim ersten Laden anzeigen
   const [showPassword, setShowPassword] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
   const [error, setError] = useState(null);
@@ -127,6 +128,7 @@ function LoginScreen({ loginSuccess }) {
         </Modal.Header>
         <Modal.Body>Nice to see you again!</Modal.Body>
       </Modal>
+
       <Modal show={showFailureModal} onHide={() => setShowFailureModal(false)}>
         <Modal.Header closeButton>
           <Modal.Title>Login Failed</Modal.Title>
@@ -143,6 +145,24 @@ function LoginScreen({ loginSuccess }) {
           </Button>
         </Modal.Footer>
       </Modal>
+        
+      <Modal show={showInfoModal} onHide={() => setShowInfoModal(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>Information</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          Du möchtest deine Einschätzung und personalisierten Angebote sehen? Dann logge dich hier mit deinen Zugangsdaten, die du per E-Mail erhalten hast, ein!
+        </Modal.Body>
+        <Modal.Footer>
+          <Button
+            variant="secondary"
+            onClick={() => setShowInfoModal(false)}
+          >
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
     </>
   );
 }
