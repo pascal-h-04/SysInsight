@@ -2,14 +2,18 @@ const express = require("express");
 //const mysql = require("mysql");
 const mysql = require("mysql2");
 const bodyParser = require("body-parser");
-
+const cors = require('cors');
 const app = express();
 app.use(express.json());
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }))
 const dbport = 3002;
+
 
 // Middleware für JSON-Requests
 app.use(bodyParser.json());
+// CORS middleware
+app.use(cors());
 
 const connection = mysql.createPool({
   host: "127.0.0.1",
@@ -47,7 +51,7 @@ app.get("/api/angebote", (req, res) => {
 app.post("/api/angebote", (req, res) => {
   const { Name, Score, category, Beschreibung, Bild, NutzerID } = req.body;
   connection.query(
-    "INSERT INTO Angebote (Name, Score, category, Beschreibung, Bild, NutzerID) VALUES (?, ?, ?, ?, ?, ?)",
+    "INSERT INTO Angebote (Name, Score, category, Beschreibung, Bild) VALUES (?, ?, ?, ?, ?)",
     [Name, Score, category, Beschreibung, Bild, NutzerID],
     (err, results) => {
       if (err) {
@@ -101,9 +105,10 @@ app.put("/api/nutzer/:id", (req, res) => {
 });
 
 
-// Alle Einschätzungen anzeigen
-app.get("/api/einschaetzungen", (req, res) => {
-  connection.query("SELECT * FROM Einschaetzung", (err, results) => {
+//  Einschätzungen anzeigen
+app.get("/api/einschaetzungen/:NutzerID", (req, res) => {
+  const NutzerID = req.params.NutzerID; // Nutze req.params.NutzerID hier
+  connection.query("SELECT * FROM Einschaetzung WHERE NutzerID = ?", NutzerID, (err, results) => {
     if (err) {
       console.error("Fehler beim Abrufen der Daten:", err);
       res.status(500).send("Serverfehler");
@@ -112,6 +117,7 @@ app.get("/api/einschaetzungen", (req, res) => {
     res.json(results);
   });
 });
+
 
 // Alle Angebote anzeigen
 app.get("/api/angebote", (req, res) => {
@@ -148,6 +154,7 @@ app.put("/api/angebote/:id", (req, res) => {
   );
 });
 
+//Einschätzung hinzufügen
 app.post("/api/einschaetzung", (req, res) => {
   const { ScoreKollaboration, ScoreKommunikation, ScoreSecurity, ScoreGeneral, NutzerID } = req.body;
   

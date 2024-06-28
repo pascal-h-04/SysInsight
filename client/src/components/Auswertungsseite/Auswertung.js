@@ -1,5 +1,5 @@
 import "./Auswertung.css";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Gesamtmetrik from "./Gesamtmetrik";
 import Einzelmetrik from "./Einzelmetrik";
@@ -7,15 +7,43 @@ import Unternehmensangebot from "./Unternehmensangebot";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { MdOutlineLocalOffer } from "react-icons/md";
 import dreiAngeboteBeiAuswertung from "../../data/dreiAngeboteBeiAuswertung";
+import axios from "axios";
 
 const Auswertung = ({ isAdmin }) => {
   const navigate = useNavigate();
+  const [einschaetzungenData, setEinschaetzungenData] = useState(null);
+  const [scoreSecurity, setScoreSecurity] = useState(0);
+  const [scoreKollaboration, setScoreKollaboration] = useState(0);
+  const [scoreKommunikation, setScoreKommunikation] = useState(0);
+  const [scoreGeneral, setScoreGeneral] = useState(0);
 
-  const gesamtmetrikFürDev = 72;
+  useEffect(() => {
+    const fetchEinschaetzungen = async (nutzerID) => {
+      try {
+        const response = await axios.get(`http://localhost:3002/api/einschaetzungen/${nutzerID}`);
+        setEinschaetzungenData(response.data);
+        console.log('Einschätzungen:', response.data);
+        const einschaetzung = response.data[0];
+        setScoreSecurity(einschaetzung.ScoreSecurity);
+        setScoreKollaboration(einschaetzung.ScoreKollaboration);
+        setScoreKommunikation(einschaetzung.ScoreKommunikation);
+        setScoreGeneral(einschaetzung.ScoreGeneral);
+      } catch (error) {
+        console.error('Fehler beim Abrufen der Einschätzungen:', error);
+       
+      }
+    };
+    fetchEinschaetzungen(1); // Hier müsstest du die Nutzer-ID dynamisch setzen
+  }, []); 
+
+  // Gesamtmeterik für Development (beispielhaft)
+  const gesamtmetrikFürDev = scoreGeneral;
+
+  // Einzelmetriken für Development
   const einzelmetrikenFürDev = [
-    { id: 1, title: "Security", value: 7 },
-    { id: 2, title: "Office-Tools", value: 8 },
-    { id: 3, title: "Kommunikations-Tools", value: 2 },
+    { id: 1, title: "Security", value: scoreSecurity},
+    { id: 2, title: "Office-Tools", value: scoreKollaboration },
+    { id: 3, title: "Kommunikations-Tools", value: scoreKommunikation },
   ];
 
   return (
