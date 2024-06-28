@@ -1,6 +1,6 @@
-DROP DATABASE IF EXISTS SysInsight;
-CREATE DATABASE IF NOT EXISTS SysInsight;
-USE SysInsight;
+DROP DATABASE IF EXISTS mydatabase;
+CREATE DATABASE IF NOT EXISTS mydatabase;
+USE mydatabase;
 
 CREATE TABLE Nutzer
 (
@@ -28,7 +28,7 @@ CREATE  TABLE Angebote
     Score         INT,
     category      VARCHAR(255),
     Beschreibung  VARCHAR(255),
-    Bild           VARCHAR(255),
+    Bild           VARCHAR(255)
 );
 
 -- Beispielzeile für die Tabelle Nutzer
@@ -39,5 +39,5 @@ INSERT INTO Einschaetzung (ScoreKollaboration, ScoreKommunikation, ScoreSecurity
 VALUES (8, 7, 9, 8, 1);  -- Angenommen, NutzerID 1 gehört zu 'Max Mustermann'
 
 -- Beispielzeile für die Tabelle Angebote
-INSERT INTO Angebote (Name, Score, category, Beschreibung, Bild, NutzerID) 
-VALUES ('Produkt A', 95, 'Elektronik', 'Ein fortschrittliches Elektronikprodukt.', 'bild_pfad/produktA.jpg', 1);  -- Wieder NutzerID 1 für 'Max Mustermann'
+INSERT INTO Angebote (Name, Score, category, Beschreibung, Bild) 
+VALUES ('Produkt A', 95, 'Elektronik', 'Ein fortschrittliches Elektronikprodukt.', 'bild_pfad/produktA.jpg');
