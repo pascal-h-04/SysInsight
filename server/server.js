@@ -17,7 +17,7 @@ app.use(bodyParser.json());
 // Beispiel: Datenbank-Simulation für Benutzer
 const users = [
   { id: 1, username: 'user', password: 'password', isAdmin: false },
-  { id: 2, username: 'admin', password: 'password', isAdmin: true },
+  { id: 2, username: 'admin', password: 'password', isAdmin: true},
 
 ];
 
@@ -41,6 +41,7 @@ app.post('/api/login', (req, res) => {
     res.json({
       auth: true,
       isAdmin: user.isAdmin,
+      userID: user.id
     });
   } else {
     res.json({ auth: false });

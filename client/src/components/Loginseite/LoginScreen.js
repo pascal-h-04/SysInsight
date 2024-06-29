@@ -32,11 +32,12 @@ function LoginScreen({ loginSuccess }) {
       });
 
       if (response.data.auth) {
+        const userID = response.data.userID; // Nutzer-ID aus der Antwort extrahieren
         setShowSuccessModal(true);
         setTimeout(() => {
           setShowSuccessModal(false);
           
-          loginSuccess(response.data.isAdmin); // Übergebe isAdmin an den loginSuccess-Handler
+          loginSuccess(response.data.isAdmin, userID); // Übergebe isAdmin an den loginSuccess-Handler
           
         }, 2000);
       } else {

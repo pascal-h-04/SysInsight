@@ -17,9 +17,9 @@ const Auswertung = ({ isAdmin }) => {
   const [scoreKommunikation, setScoreKommunikation] = useState(0);
 
   useEffect(() => {
-    const fetchEinschaetzungen = async (nutzerID) => {
+    const fetchEinschaetzungen = async (userID) => {
       try {
-        const response = await axios.get(`http://localhost:3002/api/einschaetzungen/${nutzerID}`);
+        const response = await axios.get(`http://localhost:3002/api/einschaetzungen/${userID}`);
         setEinschaetzungenData(response.data);
         console.log('Einschätzungen:', response.data);
         const einschaetzung = response.data[0];
@@ -31,7 +31,8 @@ const Auswertung = ({ isAdmin }) => {
        
       }
     };
-    fetchEinschaetzungen(2); // Hier müsstest du die Nutzer-ID dynamisch setzen
+    fetchEinschaetzungen(1); // Hier müsstest du die Nutzer-ID dynamisch setzen
+    //fetchEinschaetzungen(userID);
   }, []); 
 
   // Gesamtmeterik für Development (beispielhaft)
