@@ -27,7 +27,7 @@ CREATE  TABLE Angebote
     Name          VARCHAR(255),
     Score         INT,
     category      VARCHAR(255),
-    Beschreibung  VARCHAR(255),
+    Beschreibung  LONGTEXT(255),
     Bild           VARCHAR(255)
 );
 
@@ -39,5 +39,4 @@ INSERT INTO Einschaetzung (ScoreKollaboration, ScoreKommunikation, ScoreSecurity
 VALUES (8, 7, 9, 8, 1);  -- Angenommen, NutzerID 1 gehört zu 'Max Mustermann'
 
 -- Beispielzeile für die Tabelle Angebote
-INSERT INTO Angebote (Name, Score, category, Beschreibung, Bild) 
-VALUES ('Produkt A', 95, 'Elektronik', 'Ein fortschrittliches Elektronikprodukt.', 'bild_pfad/produktA.jpg');
+

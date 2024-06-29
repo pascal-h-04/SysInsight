@@ -15,7 +15,6 @@ const Auswertung = ({ isAdmin }) => {
   const [scoreSecurity, setScoreSecurity] = useState(0);
   const [scoreKollaboration, setScoreKollaboration] = useState(0);
   const [scoreKommunikation, setScoreKommunikation] = useState(0);
-  const [scoreGeneral, setScoreGeneral] = useState(0);
 
   useEffect(() => {
     const fetchEinschaetzungen = async (nutzerID) => {
@@ -27,17 +26,16 @@ const Auswertung = ({ isAdmin }) => {
         setScoreSecurity(einschaetzung.ScoreSecurity);
         setScoreKollaboration(einschaetzung.ScoreKollaboration);
         setScoreKommunikation(einschaetzung.ScoreKommunikation);
-        setScoreGeneral(einschaetzung.ScoreGeneral);
       } catch (error) {
         console.error('Fehler beim Abrufen der Einschätzungen:', error);
        
       }
     };
-    fetchEinschaetzungen(1); // Hier müsstest du die Nutzer-ID dynamisch setzen
+    fetchEinschaetzungen(2); // Hier müsstest du die Nutzer-ID dynamisch setzen
   }, []); 
 
   // Gesamtmeterik für Development (beispielhaft)
-  const gesamtmetrikFürDev = scoreGeneral;
+  const gesamtmetrikFürDev = (scoreSecurity + scoreKollaboration + scoreKommunikation)/3;
 
   // Einzelmetriken für Development
   const einzelmetrikenFürDev = [
