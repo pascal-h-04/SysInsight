@@ -9,7 +9,7 @@ import { MdOutlineLocalOffer } from "react-icons/md";
 import dreiAngeboteBeiAuswertung from "../../data/dreiAngeboteBeiAuswertung";
 import axios from "axios";
 
-const Auswertung = ({ isAdmin }) => {
+const Auswertung = ({ isAdmin, userID }) => {
   const navigate = useNavigate();
   const [einschaetzungenData, setEinschaetzungenData] = useState(null);
   const [scoreSecurity, setScoreSecurity] = useState(0);
@@ -31,18 +31,23 @@ const Auswertung = ({ isAdmin }) => {
        
       }
     };
-    fetchEinschaetzungen(1); // Hier müsstest du die Nutzer-ID dynamisch setzen
-    //fetchEinschaetzungen(userID);
-  }, []); 
+    if (userID) {
+      fetchEinschaetzungen(userID);
+    } else {
+      console.error('UserID not provided');
+      // Handle error condition (optional)
+    }
+  }, [userID]);
+  
 
   // Gesamtmeterik für Development (beispielhaft)
   const gesamtmetrikFürDev = (scoreSecurity + scoreKollaboration + scoreKommunikation)/3;
 
   // Einzelmetriken für Development
   const einzelmetrikenFürDev = [
-    { id: 1, title: "Security", value: scoreSecurity},
-    { id: 2, title: "Office-Tools", value: scoreKollaboration },
-    { id: 3, title: "Kommunikations-Tools", value: scoreKommunikation },
+    { id: 1, title: "IT-Sicherheit", value: scoreSecurity},
+    { id: 2, title: "Kollaboration", value: scoreKollaboration },
+    { id: 3, title: "Kommunikation", value: scoreKommunikation },
   ];
 
   return (

@@ -10,11 +10,20 @@ const Usermanagement = () => {
   const searchUserAndRole = async () => {
     setLoading(true);
     try {
-      const response = await axios.get(
-        `http://localhost:3001/api/user/${searchQuery}`
+      const response = await axios.post(
+        `http://localhost:3002/api/user`,
+        {
+          Name: searchQuery,
+        
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        }
       );
-      if (response.data.role) {
-        setRole(response.data.role);
+      if (response.data.auth) {
+        setRole(response.data.isAdmin ? 'admin' : 'user');
         setMessage("");
       } else {
         setRole("");
@@ -30,7 +39,9 @@ const Usermanagement = () => {
 
   const promoteToAdmin = async () => {
     try {
-      await axios.post(`http://localhost:3001/api/user/${searchQuery}/promote`);
+      await axios.post(`http://localhost:3002/api/user/promote`, {
+        Name: searchQuery
+      });
       setRole("admin");
       setMessage("User promoted to admin");
     } catch (error) {
@@ -38,9 +49,11 @@ const Usermanagement = () => {
     }
   };
 
-  const removeAdminRights = async () => { // Corrected function name to removeAdminRights
+  const removeAdminRights = async () => {
     try {
-      await axios.post(`http://localhost:3001/api/user/${searchQuery}/remove`);
+      await axios.post(`http://localhost:3002/api/user/remove`, {
+        Name: searchQuery
+      });
       setRole("user");
       setMessage("Admin rights removed");
     } catch (error) {

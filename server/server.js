@@ -28,25 +28,6 @@ app.post('/api/submit', (req, res) => {
   res.json(results); // Sende die verarbeiteten Ergebnisse zurück
 });
 
-// Login Route
-app.post('/api/login', (req, res) => {
-  const { username, password } = req.body;
-
-  // Simuliere die Authentifizierung gegen eine Datenbank
-  const user = users.find(
-    (user) => user.username === username && user.password === password
-  );
-
-  if (user) {
-    res.json({
-      auth: true,
-      isAdmin: user.isAdmin,
-      userID: user.id
-    });
-  } else {
-    res.json({ auth: false });
-  }
-});
 
 // Adminmanagement
 // Endpoint to get user role by username

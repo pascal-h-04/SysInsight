@@ -22,13 +22,13 @@ function LoginScreen({ loginSuccess }) {
   const handleLogin = async (e) => {
     e.preventDefault();
     setLoginLoading(true);
-    const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
+    const Name = document.getElementById('username').value;
+    const pw = document.getElementById('password').value;
 
     try {
-      const response = await axios.post('http://localhost:3001/api/login', {
-        username,
-        password,
+      const response = await axios.post('http://localhost:3002/api/login', {
+        Name,
+        pw,
       });
 
       if (response.data.auth) {
