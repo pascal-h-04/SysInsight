@@ -6,8 +6,9 @@ import { MdEdit, MdDelete, MdSave } from "react-icons/md";
 import { FiPackage } from "react-icons/fi";
 
 const Angebot = ({ data, isAdmin, onEdit, onDelete, onSave }) => {
-  const [editMode, setEditMode] = useState(data.name === "" && isAdmin);
+  const [editMode, setEditMode] = useState(isAdmin && data.Name === "");
   const [editData, setEditData] = useState(data);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setEditData((prevData) => ({
@@ -20,42 +21,43 @@ const Angebot = ({ data, isAdmin, onEdit, onDelete, onSave }) => {
     onSave(editData);
     setEditMode(false);
   };
+
   return (
     <Card>
       {editMode ? (
         <Card.Body>
           <Form.Control
             type="text"
-            name="name"
-            value={editData.name}
+            name="Name"
+            value={editData.Name}
             onChange={handleChange}
             placeholder="Name"
           />
           <Form.Control
             type="text"
-            name="kategorie"
-            value={editData.kategorie}
+            name="category"
+            value={editData.category}
             onChange={handleChange}
-            placeholder="Kategorie"
+            placeholder="category"
           />
           <Form.Control
             type="number"
-            name="score"
-            value={editData.score}
+            name="Score"
+            value={editData.Score}
             onChange={handleChange}
             placeholder="Score"
           />
           <Form.Control
             as="textarea"
-            name="beschreibung"
-            value={editData.beschreibung}
+            name="Beschreibung"
+            value={editData.Beschreibung}
             onChange={handleChange}
             placeholder="Beschreibung"
           />
           <Form.Control
             type="text"
-            name="bild"
-            value={editData.bild}
+            name="Bild"
+            value={editData.Bild}
             onChange={handleChange}
             placeholder="Bild URL"
           />
@@ -70,13 +72,13 @@ const Angebot = ({ data, isAdmin, onEdit, onDelete, onSave }) => {
         </Card.Body>
       ) : (
         <>
-          <Card.Img variant="top" src={data.bild} className="angebot-img" />
+          <Card.Img variant="top" src={data.Bild} className="angebot-img" />
           <FiPackage size={50} className="angebot-icon" />
           <Card.Body>
-            <Card.Title>{data.name}</Card.Title>
-            <Card.Text>Kategorie: {data.kategorie}</Card.Text>
-            <Card.Text>Score: {data.score}</Card.Text>
-            <Card.Text>Beschreibung: {data.beschreibung}</Card.Text>
+            <Card.Title>{data.Name}</Card.Title>
+            <Card.Text>Kategorie: {data.category}</Card.Text>
+            <Card.Text>Score: {data.Score}</Card.Text>
+            <Card.Text>Beschreibung: {data.Beschreibung}</Card.Text>
             <Button>
               <CiMail size={20} /> Angebot erhalten
             </Button>
@@ -87,7 +89,7 @@ const Angebot = ({ data, isAdmin, onEdit, onDelete, onSave }) => {
                   <Button variant="success" onClick={() => setEditMode(true)}>
                     <MdEdit size={20} />
                   </Button>{" "}
-                  <Button variant="success" onClick={() => onDelete(data.id)}>
+                  <Button variant="danger" onClick={() => onDelete(data.ID)}>
                     <MdDelete size={20} />
                   </Button>
                 </div>

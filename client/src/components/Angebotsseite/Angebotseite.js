@@ -3,68 +3,130 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Angebot from "./Angebot.js";
 import { Button } from "react-bootstrap";
-import jsonAngebote from "../../data/angebote.json";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { Grid } from "@mui/material";
 import { MdAdd } from "react-icons/md";
 import LöschenBestätigenPopup from "./LöschenBestätigenPopup.js"; // Import the new component
+import axios from "axios";
 
 const Angebotseite = ({ isAdmin }) => {
   const navigate = useNavigate();
-
+  const [einschaetzungenData, setEinschaetzungenData] = useState(null);
+  const [scoreSecurity, setScoreSecurity] = useState(0);
+  const [scoreKollaboration, setScoreKollaboration] = useState(0);
+  const [scoreKommunikation, setScoreKommunikation] = useState(0);
+  const apiUrlAngebote = "http://localhost:3002/api/angebote"; // Replace with your actual API endpoint
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [deleteId, setDeleteId] = useState(null);
-
-  const [angebote, setAngebote] = useState(jsonAngebote);
+  const [angebote, setAngebote] = useState([]);
+  
   useEffect(() => {
-    setAngebote(jsonAngebote);
-  }, []);
+    const fetchEinschaetzungen = async (nutzerID) => {
+      try {
+        const response = await axios.get(`http://localhost:3002/api/einschaetzungen/${nutzerID}`);
+        setEinschaetzungenData(response.data);
+        console.log('Einschätzungen:', response.data);
+        const einschaetzung = response.data[0];
+        setScoreSecurity(einschaetzung.ScoreSecurity);
+        setScoreKollaboration(einschaetzung.ScoreKollaboration);
+        setScoreKommunikation(einschaetzung.ScoreKommunikation);
+      } catch (error) {
+        console.error('Fehler beim Abrufen der Einschätzungen:', error);
+      }
+    };
+    // Hier sollte die Nutzer-ID dynamisch gesetzt werden, je nachdem, welcher Nutzer gerade eingeloggt ist.
+    fetchEinschaetzungen(4); // Beispielhaft mit Nutzer-ID 2
+    const fetchOffersByCategories = async () => {
+      const categories = [
+        { kategorie: 'IT-Sicherheit', score: scoreSecurity },
+        { kategorie: 'Kollaboration', score: scoreKollaboration },
+        { kategorie: 'Kommunikation', score: scoreKommunikation }
+      ];
+      
+      const fetchedOffers = [];
+      
+      for (const category of categories) {
+        try {
+          const response = await axios.get(apiUrlAngebote, { params: { kategorie: category.kategorie, score: category.score } });
+          console.log(`Angebote mit Kategorie '${category.kategorie}' und Score ${category.score}:`, response.data);
+          fetchedOffers.push(...response.data);
+        } catch (error) {
+          console.error(`Fehler beim Abrufen von Angeboten mit Kategorie '${category.kategorie}' und Score ${category.score}:`, error);
+        }
+      }
+      
+      setAngebote(fetchedOffers);
+      console.log('Angebote:', fetchedOffers); // Corrected variable name here to 'fetchedOffers'
+    };
+    
+
+    fetchOffersByCategories();
+    
+    
+  }, [scoreSecurity, scoreKollaboration, scoreKommunikation]);
+
 
   const [customizingMode, setCustomizingMode] = useState(false);
 
-  const handleEdit = (updatedAngebot) => {
+
+  //ganzes Customizing auslagern
+  const handleEdit = (updatedAngebot) => { //muss noch mit der API verbunden werden
     setAngebote((prevAngebote) =>
       prevAngebote.map((angebot) =>
-        angebot.id === updatedAngebot.id ? updatedAngebot : angebot
+        angebot.ID === updatedAngebot.ID ? updatedAngebot : angebot
       )
     );
   };
 
-  const handleDelete = (id) => {
+  const handleDelete = (ID) => { //muss noch mit der API verbunden werden
     setShowConfirmModal(true);
-    setDeleteId(id);
+    setDeleteId(ID);
   };
+
   const confirmDelete = () => {
     setAngebote((prevAngebote) =>
-      prevAngebote.filter((angebot) => angebot.id !== deleteId)
+      prevAngebote.filter((angebot) => angebot.ID !== deleteId)
     );
     setShowConfirmModal(false);
     setDeleteId(null);
   };
 
-  const handleAdd = () => {
+  const handleAdd = async () => {
     const newAngebot = {
-      id: (angebote.length + 1).toString().padStart(2, "0"),
-      name: "",
-      kategorie: "",
-      score: "",
-      bild: "",
-      beschreibung: "",
+      Name: "",
+      category: "",
+      Score: "",
+      Bild: "",
+      Beschreibung: "",
+      NutzerID: 1, // Annahme: NutzerID muss gesetzt sein, z.B. aus dem State oder einer Authentifizierung
     };
-    setAngebote((prevAngebote) => [newAngebot, ...prevAngebote]);
-    setCustomizingMode(true);
+  
+    try {
+      // POST-Anfrage an die API senden
+      const response = await axios.post('/api/angebote', newAngebot);
+  
+      // Erfolgreiche Antwort behandeln
+      console.log(response.data); // Zum Testen oder für Feedback
+  
+      // Das folgende Setzen von State kann abhängig von deiner App-Logik variieren
+      setAngebote((prevAngebote) => [newAngebot, ...prevAngebote]);
+      setCustomizingMode(true); // Optional: Setzen des Customizing-Modus
+    } catch (error) {
+      console.error('Fehler beim Hinzufügen des Angebots:', error);
+      // Hier kannst du eine Fehlerbehandlung einfügen, z.B. Benutzer benachrichtigen
+    }
   };
 
   const handleSave = (newAngebot) => {
     setAngebote((prevAngebote) =>
       prevAngebote.map((angebot) =>
-        angebot.id === newAngebot.id ? newAngebot : angebot
+        angebot.ID === newAngebot.ID ? newAngebot : angebot
       )
     );
   };
 
   return (
-    <div id="angebotseite">
+    <div ID="angebotseite">
       {!isAdmin && (
       <Button variant="primary" onClick={() => navigate("/auswertung")}>
         <IoMdArrowRoundBack size={25} />
@@ -92,7 +154,7 @@ const Angebotseite = ({ isAdmin }) => {
       <h1 className="h1-with-spacing">Ihre personalisierten Angebote:</h1>
       <Grid container spacing={2}>
         {angebote.map((angebot) => (
-          <Grid item key={angebot.id} xs={6}>
+          <Grid item key={angebot.ID} xs={6}>
             <Angebot
               data={angebot}
               onEdit={handleEdit}

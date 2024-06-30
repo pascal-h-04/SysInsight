@@ -23,21 +23,22 @@ const connection = mysql.createPool({
   port: 3306
 });
 
-// Alle Angebote löschen
-app.delete("/api/angebote", (req, res) => {
-  connection.query("DELETE FROM Angebote", (err, results) => {
-    if (err) {
-      console.error("Fehler beim Löschen der Daten:", err);
-      res.status(500).send("Serverfehler");
-      return;
-    }
-    res.send("Alle Angebote gelöscht");
-  });
-});
 
-// Alle Angebote anzeigen
+
+//  Angebot anzeigen
 app.get("/api/angebote", (req, res) => {
-  connection.query("SELECT * FROM Angebote", (err, results) => {
+  const { category, score } = req.query;
+  let query = "SELECT * FROM Angebote WHERE 1=1";
+  const queryParams = [];
+  if (category) {
+    query += " AND category = ?";
+    queryParams.push(category);
+  }
+  if (score) {
+    query += " AND Score = ?";
+    queryParams.push(score);
+  }
+  connection.query(query, queryParams, (err, results) => {
     if (err) {
       console.error("Fehler beim Abrufen der Daten:", err);
       res.status(500).send("Serverfehler");
@@ -46,6 +47,7 @@ app.get("/api/angebote", (req, res) => {
     res.json(results);
   });
 });
+
 
 // Neues Angebot hinzufügen
 app.post("/api/angebote", (req, res) => {
@@ -77,6 +79,104 @@ app.post("/api/nutzer", (req, res) => {
         return;
       }
       res.send("Nutzer hinzugefügt");
+    }
+  );
+});
+
+//Login bzw. Nutzer überprüfen
+app.post("/api/login", (req, res) => {
+  const { Name, pw } = req.body;
+
+  connection.query(
+    "SELECT * FROM Nutzer WHERE Name = ? AND pw = ?",
+    [Name, pw],
+    (err, results) => {
+      if (err) {
+        console.error("Fehler beim Abrufen der Daten:", err);
+        res.status(500).send("Serverfehler");
+        return;
+      }
+      if (results.length > 0) {
+        const user = results[0];
+        res.json({
+          auth: true,
+          isAdmin: user.isAdmin, 
+          userID: user.ID 
+        });
+      } else {
+        res.json({ auth: false });
+      }
+    }
+  );
+});
+
+// API zum Abrufen des Benutzers und seiner Rolle
+app.post("/api/user", (req, res) => {
+  const { Name} = req.body;
+
+  connection.query(
+    "SELECT * FROM Nutzer WHERE Name = ?",
+    [Name],
+    (err, results) => {
+      if (err) {
+        console.error("Fehler beim Abrufen der Daten:", err);
+        res.status(500).send("Serverfehler");
+        return;
+      }
+      if (results.length > 0) {
+        const user = results[0];
+        res.json({
+          auth: true,
+          isAdmin: user.isAdmin,
+          userID: user.ID
+        });
+      } else {
+        res.json({ auth: false });
+      }
+    }
+  );
+});
+
+// API zum Befördern eines Nutzers zum Admin
+app.post("/api/user/promote", (req, res) => {
+  const { Name } = req.body;
+
+  connection.query(
+    "UPDATE Nutzer SET isAdmin = 1 WHERE Name = ?",
+    [Name],
+    (err, results) => {
+      if (err) {
+        console.error("Fehler beim Aktualisieren des Eintrags:", err);
+        res.status(500).send("Serverfehler");
+        return;
+      }
+      if (results.affectedRows === 0) {
+        res.status(404).send("Nutzer nicht gefunden");
+        return;
+      }
+      res.send("Nutzer zu Admin befördert");
+    }
+  );
+});
+
+// API zum Entfernen der Admin-Rechte eines Nutzers
+app.post("/api/user/remove", (req, res) => {
+  const { Name } = req.body;
+
+  connection.query(
+    "UPDATE Nutzer SET isAdmin = 0 WHERE Name = ?",
+    [Name],
+    (err, results) => {
+      if (err) {
+        console.error("Fehler beim Aktualisieren des Eintrags:", err);
+        res.status(500).send("Serverfehler");
+        return;
+      }
+      if (results.affectedRows === 0) {
+        res.status(404).send("Nutzer nicht gefunden");
+        return;
+      }
+      res.send("Admin-Rechte entfernt");
     }
   );
 });
