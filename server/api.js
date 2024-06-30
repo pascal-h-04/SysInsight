@@ -205,6 +205,7 @@ app.put("/api/nutzer/:id", (req, res) => {
 });
 
 
+
 //  Einschätzungen anzeigen
 app.get("/api/einschaetzungen/:NutzerID", (req, res) => {
   const NutzerID = req.params.NutzerID; // Nutze req.params.NutzerID hier

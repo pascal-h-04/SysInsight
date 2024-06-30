@@ -17,7 +17,7 @@ app.use(bodyParser.json());
 // Beispiel: Datenbank-Simulation für Benutzer
 const users = [
   { id: 1, username: 'user', password: 'password', isAdmin: false },
-  { id: 2, username: 'admin', password: 'password', isAdmin: true },
+  { id: 2, username: 'admin', password: 'password', isAdmin: true},
 
 ];
 
@@ -28,24 +28,6 @@ app.post('/api/submit', (req, res) => {
   res.json(results); // Sende die verarbeiteten Ergebnisse zurück
 });
 
-// Login Route
-app.post('/api/login', (req, res) => {
-  const { username, password } = req.body;
-
-  // Simuliere die Authentifizierung gegen eine Datenbank
-  const user = users.find(
-    (user) => user.username === username && user.password === password
-  );
-
-  if (user) {
-    res.json({
-      auth: true,
-      isAdmin: user.isAdmin,
-    });
-  } else {
-    res.json({ auth: false });
-  }
-});
 
 // Adminmanagement
 // Endpoint to get user role by username

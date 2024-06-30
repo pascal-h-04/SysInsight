@@ -16,27 +16,34 @@ function App() {
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [userID, setUserID] = useState(null); 
 
   useEffect(() => {
     const loggedIn = localStorage.getItem("isLoggedIn") === "true";
     const admin = localStorage.getItem("isAdmin") === "true";
+    const storedUserID = localStorage.getItem("userID");
     setIsLoggedIn(loggedIn);
     setIsAdmin(admin);
+    setUserID(storedUserID);
   }, []);
 
-  const successfullLogin = (admin) => {
+  const successfullLogin = (admin, userID) => {
     localStorage.setItem("isLoggedIn", true);
     localStorage.setItem("isAdmin", admin);
+    localStorage.setItem("userID", userID);
     setIsLoggedIn(true);
     setIsAdmin(admin);
+    setUserID(userID);
     {admin ? navigate("/usermanagement") : navigate("/auswertung")}
   };
 
   const logout = () => {
     localStorage.setItem("isLoggedIn", false);
     localStorage.setItem("isAdmin", false);
+    localStorage.removeItem("userID");
     setIsLoggedIn(false);
     setIsAdmin(false);
+    setUserID(null);
   };
 
   return (
@@ -53,14 +60,14 @@ function App() {
         <Route
             path="/"
             element={
-                <Startseite isAdmin={isAdmin} /> 
+                <Startseite isAdmin={isAdmin} userID={userID}/> 
             }
           />
           <Route
             path="/fragebogen"
             element={
   
-                <Fragebogen isAdmin={isAdmin} />
+                <Fragebogen isAdmin={isAdmin} userID={userID} />
 
             }
           />
@@ -74,19 +81,19 @@ function App() {
           <Route
             path="/auswertung"
             element={
-                <Auswertung isAdmin={isAdmin} />
+                <Auswertung isAdmin={isAdmin} userID={userID} />
             }
           />
           <Route
             path="/angebotseite"
             element={
-                <Angebotseite isAdmin={isAdmin} />
+                <Angebotseite isAdmin={isAdmin} userID={userID}/>
             }
           />
           <Route
             path="/usermanagement"
             element={
-                <Usermanagement isAdmin={isAdmin} />
+                <Usermanagement isAdmin={isAdmin} userID={userID}/>
             }
           />
           <Route

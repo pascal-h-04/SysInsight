@@ -14,7 +14,7 @@ const dreiAngeboteBeiAuswertung = [
     id: 2,
     title: "Steigern Sie Ihre Produktivität",
     description:
-      "Mit unseren Büroanwendungen können Unternehmen effizient arbeiten, Dokumente erstellen, Tabellenkalkulationen durchführen und Präsentationen erstellen. Unsere maßgeschneiderten Lösungen bieten flexible und benutzerfreundliche Tools wie Microsoft Office, Google Workspace und weitere, um die Produktivität und Zusammenarbeit im Büro zu maximieren.",
+      "Mit unseren Büroanwendungen können Unternehmen effizient arbeiten, Dokumente erstellen, Tabellenkalkulationen durchführen und Präsentationen erstellen. Unsere maßgeschneiderten Lösungen bieten flexible und benutzerfreundliche Tools wie Microsoft Office und weitere, um die Produktivität und Zusammenarbeit im Büro zu maximieren.",
     image: OfficeToolsIcon,
   },
   {

@@ -7,6 +7,10 @@ function processFormData(formData) {
   let scoreSecurity = 0;
   let scoreKollaboration = 0;
   let scoreKommunikation = 0;
+  const email = formData.email.answer;
+  const password = 'password';
+
+
   // Protokollieren der Antworten
   Object.entries(formData).forEach(([questionId, q]) => {
     if (!q) {
@@ -19,6 +23,9 @@ function processFormData(formData) {
     console.log(`Category: ${q.internalCategory}`);
     console.log(`Weight: ${q.weight}`);
     console.log(`Score: ${q.score}`);
+
+    console.log("Email-Adresse ist: " + email)
+    
 
     let score = q.score || 0;
 
@@ -54,27 +61,72 @@ function processFormData(formData) {
   scoreSecurity = scoreSecurity /7;
   scoreKollaboration = scoreKollaboration /5;
   scoreKommunikation = scoreKommunikation /4;
-  sendEinschaetzung(scoreSecurity, scoreKollaboration, scoreKommunikation, scoreGeneral, 1);
+  saveUser(email);
   
-  async function sendEinschaetzung(scoreSecurity, scoreKollaboration, scoreKommunikation, scoreGeneral, nutzerID) {
-    try {
-      const response = await axios.post(`${expressBaseUrl}/api/einschaetzung`, {
-        ScoreSecurity: scoreSecurity,
-        ScoreKollaboration: scoreKollaboration,
-        ScoreKommunikation: scoreKommunikation,
-        ScoreGeneral: scoreGeneral,
-        NutzerID: nutzerID
-      }, {
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      });
-  
-      console.log('Einschätzung erfolgreich gesendet!');
-    } catch (error) {
-      console.error('Fehler beim Senden der Einschätzung:', error.message);
+
+async function saveUser(email) {
+  try {
+    const response = await axios.post(`${expressBaseUrl}/api/nutzer`, {
+      Name: email,
+      pw: password,
+      isAdmin: false,
+    }, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+
+    console.log('User erfolgreich gesendet!');
+    // Rufe die UserID basierend auf der E-Mail-Adresse ab
+    const userID = await getUserIDFromDatabase(email, password); 
+
+    if (userID) {
+      console.log('UserID erhalten:', userID);
+      sendEinschaetzung(scoreSecurity, scoreKollaboration, scoreKommunikation, scoreGeneral, userID);
+      
+    } else {
+      console.log('UserID konnte nicht abgerufen werden.');
     }
+
+  } catch (error) {
+    console.error('Fehler beim Senden des Users:', error.message);
   }
+}
+
+
+const getUserIDFromDatabase = async (Name, pw) => {
+  try {
+    const response = await axios.post('http://localhost:3002/api/login', {
+      Name,
+      pw,
+    });
+    return response.data.userID;
+  } catch (error) {
+    console.error('Fehler beim Abrufen der UserID aus der Datenbank:', error.message);
+    throw error;
+  }
+};
+
+async function sendEinschaetzung(scoreSecurity, scoreKollaboration, scoreKommunikation, scoreGeneral, nutzerID) {
+  try {
+    const response = await axios.post(`${expressBaseUrl}/api/einschaetzung`, {
+      ScoreSecurity: scoreSecurity,
+      ScoreKollaboration: scoreKollaboration,
+      ScoreKommunikation: scoreKommunikation,
+      ScoreGeneral: scoreGeneral,
+      NutzerID: nutzerID
+    }, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+
+    console.log('Einschätzung erfolgreich gesendet!');
+  } catch (error) {
+    console.error('Fehler beim Senden der Einschätzung:', error.message);
+  }
+}
+
 
   
   return {

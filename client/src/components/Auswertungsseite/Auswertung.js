@@ -9,7 +9,7 @@ import { MdOutlineLocalOffer } from "react-icons/md";
 import dreiAngeboteBeiAuswertung from "../../data/dreiAngeboteBeiAuswertung";
 import axios from "axios";
 
-const Auswertung = ({ isAdmin }) => {
+const Auswertung = ({ isAdmin, userID }) => {
   const navigate = useNavigate();
   const [einschaetzungenData, setEinschaetzungenData] = useState(null);
   const [scoreSecurity, setScoreSecurity] = useState(0);
@@ -17,9 +17,9 @@ const Auswertung = ({ isAdmin }) => {
   const [scoreKommunikation, setScoreKommunikation] = useState(0);
 
   useEffect(() => {
-    const fetchEinschaetzungen = async (nutzerID) => {
+    const fetchEinschaetzungen = async (userID) => {
       try {
-        const response = await axios.get(`http://localhost:3002/api/einschaetzungen/${nutzerID}`);
+        const response = await axios.get(`http://localhost:3002/api/einschaetzungen/${userID}`);
         setEinschaetzungenData(response.data);
         console.log('Einschätzungen:', response.data);
         const einschaetzung = response.data[0];
@@ -31,17 +31,23 @@ const Auswertung = ({ isAdmin }) => {
        
       }
     };
-    fetchEinschaetzungen(2); // Hier müsstest du die Nutzer-ID dynamisch setzen
-  }, []); 
+    if (userID) {
+      fetchEinschaetzungen(userID);
+    } else {
+      console.error('UserID not provided');
+      // Handle error condition (optional)
+    }
+  }, [userID]);
+  
 
   // Gesamtmeterik für Development (beispielhaft)
   const gesamtmetrikFürDev = (scoreSecurity + scoreKollaboration + scoreKommunikation)/3;
 
   // Einzelmetriken für Development
   const einzelmetrikenFürDev = [
-    { id: 1, title: "Security", value: scoreSecurity},
-    { id: 2, title: "Office-Tools", value: scoreKollaboration },
-    { id: 3, title: "Kommunikations-Tools", value: scoreKommunikation },
+    { id: 1, title: "IT-Sicherheit", value: scoreSecurity},
+    { id: 2, title: "Kollaboration", value: scoreKollaboration },
+    { id: 3, title: "Kommunikation", value: scoreKommunikation },
   ];
 
   return (

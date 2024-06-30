@@ -16,8 +16,7 @@ const Gesamtmetrik = ({ value }) => {
     <Card className={`gesamtmetrik ${metricColorClass}`}>
       <Card.Body>
         <Card.Title>
-          Ihr Digital Workplace ist insgesamt: (umschreiben und label
-          vergrößern)
+          Ihr Digital Workplace Score ist insgesamt: 
         </Card.Title>
         <ProgressBar now={value} label={`${value}%`} />
       </Card.Body>
