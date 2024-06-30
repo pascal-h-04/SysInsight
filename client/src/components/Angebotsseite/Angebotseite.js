@@ -15,7 +15,8 @@ const Angebotseite = ({ isAdmin, userID }) => {
   const [scoreSecurity, setScoreSecurity] = useState(0);
   const [scoreKollaboration, setScoreKollaboration] = useState(0);
   const [scoreKommunikation, setScoreKommunikation] = useState(0);
-  const apiUrlAngebote = "http://localhost:3002/api/angebote"; // Replace with your actual API endpoint
+
+  //const apiUrlAngebote = "http://localhost:3002/api/angebote"; 
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [deleteId, setDeleteId] = useState(null);
   const [angebote, setAngebote] = useState([]);
@@ -34,9 +35,10 @@ const Angebotseite = ({ isAdmin, userID }) => {
         console.error('Fehler beim Abrufen der Einschätzungen:', error);
       }
     };
-    // Hier sollte die Nutzer-ID dynamisch gesetzt werden, je nachdem, welcher Nutzer gerade eingeloggt ist.
-    fetchEinschaetzungen(userID); // Beispielhaft mit Nutzer-ID 13
-    const fetchOffersByCategories = async () => {
+    
+    fetchEinschaetzungen(userID); 
+    
+    const fetchOffersByCategories = async (isAdmin) => {
       const scores = {
         kommunikation: scoreKommunikation,
         kollaboration: scoreKollaboration,
@@ -44,44 +46,25 @@ const Angebotseite = ({ isAdmin, userID }) => {
       };
       
       try {
-        const response = await axios.get(apiUrlAngebote, { params: { scores: JSON.stringify(scores) } });
+        if (isAdmin)
+          {
+            const response = await axios.get("http://localhost:3002/api/alleangebote");
+            console.log('Angebote:', response.data);
+            setAngebote(response.data);
+          }
+          else {
+        const response = await axios.get("http://localhost:3002/api/angebote", { params: { scores: JSON.stringify(scores) } });
         console.log('Angebote:', response.data);
         setAngebote(response.data);
+          }
       } catch (error) {
         console.error('Fehler beim Abrufen der Angebote:', error);
       }
     };
     
-    fetchOffersByCategories();
-    
+    fetchOffersByCategories(isAdmin);
 
-    /*const fetchOffersByCategories = async () => {
-      const categories = [
-        { kategorie: 'IT-Sicherheit', score: scoreSecurity },
-        { kategorie: 'Kollaboration', score: scoreKollaboration },
-        { kategorie: 'Kommunikation', score: scoreKommunikation }
-      ];
-      
-      const fetchedOffers = [];
-      
-      for (const category of categories) {
-        try {
-          const response = await axios.get(apiUrlAngebote, { params: { kategorie: category.kategorie, score: category.score } });
-          console.log(`Angebote mit Kategorie '${category.kategorie}' und Score ${category.score}:`, response.data);
-          fetchedOffers.push(...response.data);
-        } catch (error) {
-          console.error(`Fehler beim Abrufen von Angeboten mit Kategorie '${category.kategorie}' und Score ${category.score}:`, error);
-        }
-      }
-      
-      setAngebote(fetchedOffers);
-      console.log('Angebote:', fetchedOffers); 
-    };
-    
-
-    fetchOffersByCategories();*/
-
-    
+  
     
   }, [scoreSecurity, scoreKollaboration, scoreKommunikation]);
 

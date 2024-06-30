@@ -1,5 +1,4 @@
 const express = require("express");
-//const mysql = require("mysql");
 const mysql = require("mysql2");
 const bodyParser = require("body-parser");
 const cors = require('cors');
@@ -8,7 +7,6 @@ app.use(express.json());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }))
 const dbport = 3002;
-
 
 // Middleware für JSON-Requests
 app.use(bodyParser.json());
@@ -22,31 +20,6 @@ const connection = mysql.createPool({
   database: "mydatabase",
   port: 3306
 });
-
-
-
-//  Angebot anzeigen
-/*app.get("/api/angebote", (req, res) => {
-  const { category, score } = req.query;
-  let query = "SELECT * FROM Angebote WHERE 1=1";
-  const queryParams = [];
-  if (category) {
-    query += " AND category = ?";
-    queryParams.push(category);
-  }
-  if (score) {
-    query += " AND Score = ?";
-    queryParams.push(score);
-  }
-  connection.query(query, queryParams, (err, results) => {
-    if (err) {
-      console.error("Fehler beim Abrufen der Daten:", err);
-      res.status(500).send("Serverfehler");
-      return;
-    }
-    res.json(results);
-  });
-});*/
 
 // Angebot anzeigen
 app.get("/api/angebote", (req, res) => {
@@ -81,6 +54,19 @@ app.get("/api/angebote", (req, res) => {
   });
 });
 
+// Alle Angebote anzeigen
+app.get("/api/alleangebote", (req, res) => {
+  const query = "SELECT * FROM Angebote";
+
+  connection.query(query, (err, results) => {
+    if (err) {
+      console.error("Fehler beim Abrufen der Daten:", err);
+      res.status(500).send("Serverfehler");
+      return;
+    }
+    res.json(results);
+  });
+});
 
 
 // Neues Angebot hinzufügen
@@ -237,7 +223,6 @@ app.put("/api/nutzer/:id", (req, res) => {
     }
   );
 });
-
 
 
 //  Einschätzungen anzeigen
