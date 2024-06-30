@@ -27,9 +27,8 @@ function processFormData(formData) {
 
     console.log("Email-Adresse ist: " + email);
 
-    let score = q.score || 0;
 
-    scoreBerechnen(score, q.weight, q.internalCategory);
+    scoreBerechnen(q.score, q.weight, q.internalCategory);
   });
 
   mail_verschicken(email, password);
@@ -60,7 +59,9 @@ function processFormData(formData) {
   }
 
   function scoreBerechnen(score, weight, category) {
-    const weightedScore = score * weight;
+      const weightedScore = score * weight;
+      
+    
     switch (category) {
       case "Security":
         scoreSecurity += weightedScore;
@@ -78,10 +79,10 @@ function processFormData(formData) {
         break;
     }
   }
-
-  scoreSecurity = scoreSecurity / 7;
-  scoreKollaboration = scoreKollaboration / 5;
-  scoreKommunikation = scoreKommunikation / 4;
+//Scores werden durch die Anzahl der Fragen geteilt, um den Durchschnitt zu berechnen (Gewichtung wird berücksichtigt)
+  scoreSecurity = scoreSecurity / 11; 
+  scoreKollaboration = scoreKollaboration / 2;
+  scoreKommunikation = scoreKommunikation / 5;
   saveUser(email, password);
 
   async function saveUser(email, password) {

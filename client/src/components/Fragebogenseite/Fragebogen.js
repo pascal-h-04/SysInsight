@@ -125,26 +125,42 @@ const Fragebogen = () => {
       ) {
         newErrors[question.id] = true;
       }
-      // Bereite die Formulardaten mit Kategorieinformationen vor
+    
       if (formData[question.id]) {
         const answer = formData[question.id];
-        let score = formData[question.id];
-        if (question.options && question.options[answer] !== undefined) {
-          score = question.options[answer];
+        let score;
+    
+        if (Array.isArray(answer)) {
+          // Wenn die Antwort ein Array ist (Multi-Select)
+          score = answer.reduce((total, option) => {
+            if (question.options && question.options[option] !== undefined) {
+              return Math.round((total + question.options[option])/answer.length);
+            }
+            // Falls keine passende Option gefunden wird, 0 hinzufügen
+            return total;
+          }, 0);
+        } else {
+          // Single-Select oder andere Typen
+          if (question.options && question.options[answer] !== undefined) {
+            score = question.options[answer];
+          } else if (answer === true || answer === "Ja") {
+            score = 5;
+          } else if (answer === false || answer === "Nein") {
+            score = 0;
+          } else {
+            score = answer;
+          }
         }
-        if(formData[question.id] === true || formData[question.id] === "Ja"){
-          score = 5;}
-        if(formData[question.id] === false|| formData[question.id] === "Nein"){
-          score =0;}
-
+    
         enrichedFormData[question.id] = {
-          answer: formData[question.id],
+          answer: answer,
           internalCategory: question.internalCategory || "Uncategorized", // Standardwert, falls keine Kategorie vorhanden
           weight: question.weight || 0,
           score: score,
         };
       }
     });
+    
     setErrors(newErrors);
     if (Object.keys(newErrors).length === 0) {
       setEvaluationLoading(true);
