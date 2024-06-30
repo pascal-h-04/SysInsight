@@ -9,7 +9,7 @@ import { MdAdd } from "react-icons/md";
 import LöschenBestätigenPopup from "./LöschenBestätigenPopup.js"; // Import the new component
 import axios from "axios";
 
-const Angebotseite = ({ isAdmin }) => {
+const Angebotseite = ({ isAdmin, userID }) => {
   const navigate = useNavigate();
   const [einschaetzungenData, setEinschaetzungenData] = useState(null);
   const [scoreSecurity, setScoreSecurity] = useState(0);
@@ -21,9 +21,9 @@ const Angebotseite = ({ isAdmin }) => {
   const [angebote, setAngebote] = useState([]);
   
   useEffect(() => {
-    const fetchEinschaetzungen = async (nutzerID) => {
+    const fetchEinschaetzungen = async (userID) => {
       try {
-        const response = await axios.get(`http://localhost:3002/api/einschaetzungen/${nutzerID}`);
+        const response = await axios.get(`http://localhost:3002/api/einschaetzungen/${userID}`);
         setEinschaetzungenData(response.data);
         console.log('Einschätzungen:', response.data);
         const einschaetzung = response.data[0];
@@ -35,8 +35,27 @@ const Angebotseite = ({ isAdmin }) => {
       }
     };
     // Hier sollte die Nutzer-ID dynamisch gesetzt werden, je nachdem, welcher Nutzer gerade eingeloggt ist.
-    fetchEinschaetzungen(4); // Beispielhaft mit Nutzer-ID 2
+    fetchEinschaetzungen(userID); // Beispielhaft mit Nutzer-ID 13
     const fetchOffersByCategories = async () => {
+      const scores = {
+        kommunikation: scoreKommunikation,
+        kollaboration: scoreKollaboration,
+        security: scoreSecurity,
+      };
+      
+      try {
+        const response = await axios.get(apiUrlAngebote, { params: { scores: JSON.stringify(scores) } });
+        console.log('Angebote:', response.data);
+        setAngebote(response.data);
+      } catch (error) {
+        console.error('Fehler beim Abrufen der Angebote:', error);
+      }
+    };
+    
+    fetchOffersByCategories();
+    
+
+    /*const fetchOffersByCategories = async () => {
       const categories = [
         { kategorie: 'IT-Sicherheit', score: scoreSecurity },
         { kategorie: 'Kollaboration', score: scoreKollaboration },
@@ -56,11 +75,12 @@ const Angebotseite = ({ isAdmin }) => {
       }
       
       setAngebote(fetchedOffers);
-      console.log('Angebote:', fetchedOffers); // Corrected variable name here to 'fetchedOffers'
+      console.log('Angebote:', fetchedOffers); 
     };
     
 
-    fetchOffersByCategories();
+    fetchOffersByCategories();*/
+
     
     
   }, [scoreSecurity, scoreKollaboration, scoreKommunikation]);

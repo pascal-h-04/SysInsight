@@ -26,7 +26,7 @@ const connection = mysql.createPool({
 
 
 //  Angebot anzeigen
-app.get("/api/angebote", (req, res) => {
+/*app.get("/api/angebote", (req, res) => {
   const { category, score } = req.query;
   let query = "SELECT * FROM Angebote WHERE 1=1";
   const queryParams = [];
@@ -46,7 +46,41 @@ app.get("/api/angebote", (req, res) => {
     }
     res.json(results);
   });
+});*/
+
+// Angebot anzeigen
+app.get("/api/angebote", (req, res) => {
+  const { scores } = req.query;
+  
+  // Parse the scores from the query string
+  const parsedScores = JSON.parse(scores);
+
+  // Prepare SQL query
+  const query = `
+    (SELECT * FROM Angebote WHERE category = 'Kommunikation' AND Score = ? LIMIT 1)
+    UNION
+    (SELECT * FROM Angebote WHERE category = 'Kollaboration' AND Score = ? LIMIT 1)
+    UNION
+    (SELECT * FROM Angebote WHERE category = 'IT-Sicherheit' AND Score = ? LIMIT 1)
+  `;
+  
+  // Prepare query parameters
+  const queryParams = [
+    parsedScores.kommunikation,
+    parsedScores.kollaboration,
+    parsedScores.security,
+  ];
+
+  connection.query(query, queryParams, (err, results) => {
+    if (err) {
+      console.error("Fehler beim Abrufen der Daten:", err);
+      res.status(500).send("Serverfehler");
+      return;
+    }
+    res.json(results);
+  });
 });
+
 
 
 // Neues Angebot hinzufügen

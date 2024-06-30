@@ -35,16 +35,16 @@ const Auswertung_client = ({ isAdmin, userID }) => {
       fetchEinschaetzungen(userID);
     } else {
       console.error('UserID not provided');
-      // Handle error condition (optional)
+      
     }
   }, [userID]);
   
 
-  // Gesamtmeterik für Development (beispielhaft)
-  const gesamtmetrikFürDev = (scoreSecurity + scoreKollaboration + scoreKommunikation)/3;
+  // Gesamtmeterik 
+  const gesamtmetrik = ((scoreSecurity + scoreKollaboration + scoreKommunikation)/15)*100;
 
-  // Einzelmetriken für Development
-  const einzelmetrikenFürDev = [
+  // Einzelmetriken 
+  const einzelmetriken = [
     { id: 1, title: "IT-Sicherheit", value: scoreSecurity},
     { id: 2, title: "Kollaboration", value: scoreKollaboration },
     { id: 3, title: "Kommunikation", value: scoreKommunikation },
@@ -55,7 +55,7 @@ const Auswertung_client = ({ isAdmin, userID }) => {
       <h1 className="mb-4">Ihre personalisierte Auswertung</h1>
       <Row>
         <Col md={12}>
-          <Gesamtmetrik value={gesamtmetrikFürDev} />
+          <Gesamtmetrik value={gesamtmetrik} />
         </Col>
       </Row>
       <Row className="mt-4">
@@ -66,7 +66,7 @@ const Auswertung_client = ({ isAdmin, userID }) => {
       </Row>
 
       <Row className="mt-4">
-        {einzelmetrikenFürDev.map((metrik, index) => (
+        {einzelmetriken.map((metrik, index) => (
           <React.Fragment key={index}>
             <Col md={5}>
               <Einzelmetrik title={metrik.title} value={metrik.value} />

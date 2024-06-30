@@ -4,9 +4,9 @@ import './Einzelmetrik.css';
 
 const Einzelmetrik = ({ title, value }) => {
   let metricColorClass = '';
-  if (value >= 8) {
+  if (value >= 4) {
     metricColorClass = 'high';
-  } else if (value >= 5) {
+  } else if (value >= 2) {
     metricColorClass = 'medium';
   } else {
     metricColorClass = 'low';
@@ -16,8 +16,8 @@ const Einzelmetrik = ({ title, value }) => {
     <Card className={`einzelmetrik ${metricColorClass} mb-4`}>
       <Card.Body>
         <Card.Title>{title}</Card.Title>
-        <Card.Text>{`Bewertung: ${value}/10`}</Card.Text>
-        <ProgressBar now={(value / 10) * 100} />
+        <Card.Text>{`Bewertung: ${value}/5`}</Card.Text>
+        <ProgressBar now={(value / 5) * 100} />
       </Card.Body>
     </Card>
   );
