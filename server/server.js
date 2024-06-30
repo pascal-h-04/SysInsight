@@ -4,7 +4,7 @@ const port = 3001;
 const bodyParser = require('body-parser');
 const cors = require('cors');
 require('dotenv').config();
-const { processFormData } = require('./auswertung'); // Importiere die Auswertungsfunktion
+const { processFormData } = require('./auswertung_server'); // Importiere die Auswertungsfunktion
 
 app.use(cors({
   origin: 'http://localhost:3000', // Erlaube Anfragen von http://localhost:3000

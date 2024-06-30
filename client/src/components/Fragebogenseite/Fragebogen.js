@@ -121,7 +121,7 @@ const Fragebogen = () => {
     jsonFragen.forEach((question) => {
       if (
         question.mandatory &&
-        !formData[question.id] 
+        !formData[question.id]
       ) {
         newErrors[question.id] = true;
       }
@@ -217,7 +217,7 @@ const Fragebogen = () => {
           ) : (
             <>
               <MdInsights size={30} />
-              Zur Auswertung (mit validierung, über Login)
+              Zur Auswertung_client (mit validierung, über Login)
             </>
           )}
         </Button>
@@ -226,21 +226,21 @@ const Fragebogen = () => {
           disabled={evaluationLoading}
           onClick={() => navigate("/auswertung", { state: { formData } })}
         >
-          Zur Auswertung (ohne validierung - Dev only - direkt)
+          Zur Auswertung_client (ohne validierung - Dev only - direkt)
         </Button>
         <Button
           variant="primary"
           disabled={evaluationLoading}
           onClick={() => navigate("/login", { state: { formData } })}
         >
-          Zur Auswertung (ohne validierung - Dev only - über login)
+          Zur Auswertung_client (ohne validierung - Dev only - über login)
         </Button>
       </Form>
       <CustomPopup
         show={showSuccessModal}
         onHide={() => setShowSuccessModal(false)}
-        title="Auswertung läuft ..."
-        body="Alle notwendigen Daten wurden eingegeben und erfolgreich für die Auswertung übermittelt."
+        title="Auswertung_client läuft ..."
+        body="Alle notwendigen Daten wurden eingegeben und erfolgreich für die Auswertung_client übermittelt."
       />
       <CustomPopup
         show={showFailureModal}

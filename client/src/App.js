@@ -9,7 +9,7 @@ import AboutUs from "./components/Über_Uns_Seite/AboutUs";
 import Startseite from "./components/Startseite/Startseite";
 import Fragebogen from "./components/Fragebogenseite/Fragebogen";
 import Angebotseite from "./components/Angebotsseite/Angebotseite";
-import Auswertung from "./components/Auswertungsseite/Auswertung";
+import Auswertung_client from "./components/Auswertungsseite/auswertung_client";
 import Usermanagement from "./components/Adminpage/Usermanagement";
 
 function App() {
@@ -81,7 +81,7 @@ function App() {
           <Route
             path="/auswertung"
             element={
-                <Auswertung isAdmin={isAdmin} userID={userID} />
+                <Auswertung_client isAdmin={isAdmin} userID={userID} />
             }
           />
           <Route

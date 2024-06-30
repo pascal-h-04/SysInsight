@@ -1,4 +1,4 @@
-import "./Auswertung.css";
+import "./auswertung_client.css";
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Gesamtmetrik from "./Gesamtmetrik";
@@ -9,7 +9,7 @@ import { MdOutlineLocalOffer } from "react-icons/md";
 import dreiAngeboteBeiAuswertung from "../../data/dreiAngeboteBeiAuswertung";
 import axios from "axios";
 
-const Auswertung = ({ isAdmin, userID }) => {
+const Auswertung_client = ({ isAdmin, userID }) => {
   const navigate = useNavigate();
   const [einschaetzungenData, setEinschaetzungenData] = useState(null);
   const [scoreSecurity, setScoreSecurity] = useState(0);
@@ -97,4 +97,4 @@ const Auswertung = ({ isAdmin, userID }) => {
   );
 };
 
-export default Auswertung;
+export default Auswertung_client;

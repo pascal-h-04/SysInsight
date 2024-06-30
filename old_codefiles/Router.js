@@ -7,7 +7,7 @@ import AboutUs from "./components/Über_Uns_Seite/AboutUs";
 import Startseite from "./components/Startseite/Startseite";
 import Fragebogen from "./components/Fragebogenseite/Fragebogen";
 import Angebotseite from "./components/Angebotsseite/Angebotseite";
-import Auswertung from "./components/Auswertungsseite/Auswertung";
+import Auswertung_client from "./components/Auswertungsseite/Auswertung_client";
 
 function Router() {
   return (
@@ -19,7 +19,7 @@ function Router() {
         <Route path="/about-us" element={<AboutUs />} />
         <Route path="/startseite" element={<Startseite />} />
         <Route path="/fragebogen" element={<Fragebogen />} />
-        <Route path="/auswertung" element={<Auswertung />} />
+        <Route path="/auswertung" element={<Auswertung_client />} />
         <Route path="/angebotseite" element={<Angebotseite />} />
       </Route>
     </Routes>
