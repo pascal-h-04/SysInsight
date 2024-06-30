@@ -10,8 +10,8 @@
     "maxLength": 30,
     "placeholder": "z.B. SAP SE",
     "weight": 1,
-    "mandatory": false,
-    "internalCategory": "ignore"
+    "mandatory": true,
+    "internalCategory": "Allgemeines"
   },
   {
     "id": "branche",
@@ -27,7 +27,7 @@
       "Andere": 5
     },
     "weight": 1,
-    "mandatory": true,
+    "mandatory": false,
     "internalCategory": "Allgemeines"
   },
   {
@@ -51,7 +51,7 @@
     "type": "single-select",
     "options": { "Intern": 0, "Extern": 5, "Intern und Extern": 3 },
     "weight": 1,
-    "mandatory": true,
+    "mandatory": false,
     "internalCategory": "Allgemeines"
   },
   {
@@ -65,7 +65,7 @@
     "marks": ["1", "50", "100+"],
     "valueLabelDisplay": "auto",
     "weight": 1,
-    "mandatory": true,
+    "mandatory": false,
     "internalCategory": "Allgemeines"
   },
 
@@ -101,7 +101,7 @@
     "marks": ["1", "2", "3", "4", "5"],
     "info": "1 = Sehr unzufrieden, 2 = Unzufrieden, 3 = Neutral, 4 = Zufrieden, 5 = Sehr zufrieden",
     "weight": 1,
-    "mandatory": false,
+    "mandatory": true,
     "internalCategory": "Kollaboration"
   },
   {
@@ -151,7 +151,7 @@
     "info": "1 = Irrelevant (wird nicht genutzt), 2 = Geringe Relevanz (wird selten genutzt), 3 = Mittlere Relevanz (wird mehrmals die Woche genutzt), 4 = Hohe Relevanz (wird täglich genutzt), 5 = Sehr hohe Relevanz (wird mehrfach täglich genutzt)",
     "valueLabelDisplay": "off",
     "weight": 1,
-    "mandatory": false,
+    "mandatory": true,
     "internalCategory": "Kollaboration"
   },
   {
@@ -187,7 +187,7 @@
     "marks": ["1", "2", "3", "4", "5"],
     "info": "1 = Sehr ineffektiv, 2 = Ineffektiv, 3 = Neutral, 4 = Effektiv, 5 = Sehr effektiv",
     "weight": 1,
-    "mandatory": false,
+    "mandatory": true,
     "internalCategory": "Kommunikation"
   },
   {
@@ -201,7 +201,7 @@
     "marks": ["1", "2", "3", "4", "5"],
     "info": "1 = Sehr schlecht informiert, 2 = Schlecht informiert, 3 = Neutral, 4 = Gut informiert, 5 = Sehr gut informiert",
     "weight": 1,
-    "mandatory": false,
+    "mandatory": true,
     "internalCategory": "Kommunikation"
   },
   {
@@ -218,7 +218,7 @@
       "Andere": 2
     },
     "weight": 1,
-    "mandatory": false,
+    "mandatory": true,
     "internalCategory": "Kommunikation"
   },
   {
@@ -238,7 +238,7 @@
       "Unbekannt": 0
     },
     "weight": 1,
-    "mandatory": false,
+    "mandatory": true,
     "internalCategory": "Security"
   },
   {
@@ -250,7 +250,8 @@
       "True": 5,
       "False": 0
     },
-    "internalCategory": "Security"
+    "internalCategory": "Security",
+    "mandatory": true
   },
   {
     "id": "schulungen",
@@ -264,7 +265,7 @@
       "Regelmäßig": 5
     },
     "weight": 1,
-    "mandatory": false,
+    "mandatory": true,
     "internalCategory": "Security"
   },
   {
@@ -278,7 +279,7 @@
       "Automatische Backups und regelmäßige Tests": 5
     },
     "weight": 1,
-    "mandatory": false,
+    "mandatory": true,
     "internalCategory": "Security"
   },
   {
@@ -293,7 +294,7 @@
       "Nie": 5
     },
     "weight": 1,
-    "mandatory": false,
+    "mandatory": true,
     "internalCategory": "Security"
   },
   {
@@ -301,7 +302,7 @@
     "question": "Können Sie Sicherheitsvorfälle online melden?",
     "type": "toggle",
     "weight": 1,
-    "mandatory": false,
+    "mandatory": true,
     "options": {
       "True": 5,
       "False": 0
@@ -318,7 +319,7 @@
     "type": "email",
     "placeholder": "z.B. name@example.com",
     "mandatory": true,
-    "internalCategory": "ignore"
+    "internalCategory": "Allgemeines"
   },
   {
     "id": "telefonnummer",
@@ -327,21 +328,21 @@
     "maxLength": 15,
     "placeholder": "z.B. +49 123 456789",
     "mandatory": false,
-    "internalCategory": "ignore"
+    "internalCategory": "Allgemeines"
   },
   {
     "id": "newsletter",
     "question": "Newsletter:",
     "type": "checkbox",
     "mandatory": false,
-    "internalCategory": "ignore"
+    "internalCategory": "Allgemeines"
   },
   {
     "id": "agbs",
     "question": "AGBs und Datenschutzverordnung gelesen:",
     "type": "checkbox",
     "mandatory": true,
-    "internalCategory": "ignore"  
+    "internalCategory": "Allgemeines"  
   },
   {
     "id": "terminplanung",
@@ -349,6 +350,6 @@
     "type": "date",
     "label": "Datum",
     "mandatory": false,
-    "internalCategory": "ignore"
+    "internalCategory": "Allgemeines"
   }
 ]
