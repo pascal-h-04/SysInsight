@@ -36,8 +36,16 @@ function LoginScreen({ loginSuccess }) {
         setShowSuccessModal(true);
         setTimeout(() => {
           setShowSuccessModal(false);
+          if (response.data.isAdmin == false){
+
+            loginSuccess(false, userID);
+
+          }
+          else {
+            loginSuccess(response.data.isAdmin, userID); // Übergebe isAdmin an den loginSuccess-Handler
+          }
           
-          loginSuccess(response.data.isAdmin, userID); // Übergebe isAdmin an den loginSuccess-Handler
+          
           
         }, 2000);
       } else {

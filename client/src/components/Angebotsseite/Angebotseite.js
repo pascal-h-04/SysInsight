@@ -15,8 +15,6 @@ const Angebotseite = ({ isAdmin, userID }) => {
   const [scoreSecurity, setScoreSecurity] = useState(0);
   const [scoreKollaboration, setScoreKollaboration] = useState(0);
   const [scoreKommunikation, setScoreKommunikation] = useState(0);
-
-  //const apiUrlAngebote = "http://localhost:3002/api/angebote"; 
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [deleteId, setDeleteId] = useState(null);
   const [angebote, setAngebote] = useState([]);
@@ -86,47 +84,67 @@ const Angebotseite = ({ isAdmin, userID }) => {
     setDeleteId(ID);
   };
 
-  const confirmDelete = () => {
-    setAngebote((prevAngebote) =>
-      prevAngebote.filter((angebot) => angebot.ID !== deleteId)
-    );
-    setShowConfirmModal(false);
-    setDeleteId(null);
+  const confirmDelete = async () => {
+    try {
+      await axios.delete(`http://localhost:3002/api/angebote/${deleteId}`);
+      setAngebote((prevAngebote) =>
+        prevAngebote.filter((angebot) => angebot.ID !== deleteId)
+      );
+      setShowConfirmModal(false);
+      setDeleteId(null);
+    } catch (error) {
+      console.error('Fehler beim Löschen des Angebots:', error);
+    }
   };
+  
 
   const handleAdd = async () => {
     const newAngebot = {
-      Name: "",
-      category: "",
-      Score: "",
-      Bild: "",
-      Beschreibung: "",
-      NutzerID: 1, // Annahme: NutzerID muss gesetzt sein, z.B. aus dem State oder einer Authentifizierung
+    ID: null, 
+    Name: "Neues Angebot", 
+    category: "Kommunikation", 
+    Score: 5, 
+    Bild: "bild.jpg", 
+    Beschreibung: "Beschreibung des neuen Angebots",
+    NutzerID: userID
+    
     };
   
     try {
       // POST-Anfrage an die API senden
       const response = await axios.post('http://localhost:3002/api/angebote', newAngebot);
-  
+      const savedAngebot = response.data;
       // Erfolgreiche Antwort behandeln
       console.log(response.data); // Zum Testen oder für Feedback
   
       // Das folgende Setzen von State kann abhängig von deiner App-Logik variieren
-      setAngebote((prevAngebote) => [newAngebot, ...prevAngebote]);
+      setAngebote((prevAngebote) => [savedAngebot, ...prevAngebote]);
       setCustomizingMode(true); // Optional: Setzen des Customizing-Modus
+     
+      
+
     } catch (error) {
       console.error('Fehler beim Hinzufügen des Angebots:', error);
       // Hier kannst du eine Fehlerbehandlung einfügen, z.B. Benutzer benachrichtigen
     }
+    const response = await axios.get("http://localhost:3002/api/alleangebote");
+            console.log('Angebote:', response.data);
+            setAngebote(response.data);
   };
 
-  const handleSave = (newAngebot) => {
-    setAngebote((prevAngebote) =>
-      prevAngebote.map((angebot) =>
-        angebot.ID === newAngebot.ID ? newAngebot : angebot
-      )
-    );
+  const handleSave = async (updatedAngebot) => {
+    try {
+      await axios.put(`http://localhost:3002/api/angebote/${updatedAngebot.ID}`, updatedAngebot);
+      setAngebote((prevAngebote) =>
+        prevAngebote.map((angebot) =>
+          angebot.ID === updatedAngebot.ID ? updatedAngebot : angebot
+        )
+      );
+    } catch (error) {
+      console.error('Fehler beim Speichern des Angebots:', error);
+    }
   };
+  
 
   return (
     <div ID="angebotseite">
@@ -156,7 +174,7 @@ const Angebotseite = ({ isAdmin, userID }) => {
       )}
       <h1 className="h1-with-spacing">Ihre personalisierten Angebote:</h1>
       <Grid container spacing={2}>
-        {angebote.map((angebot) => (
+        {angebote.slice().reverse().map((angebot) => (
           <Grid item key={angebot.ID} xs={6}>
             <Angebot
               data={angebot}
