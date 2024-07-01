@@ -106,7 +106,7 @@ const Angebotseite = ({ isAdmin, userID }) => {
   
     try {
       // POST-Anfrage an die API senden
-      const response = await axios.post('/api/angebote', newAngebot);
+      const response = await axios.post('http://localhost:3002/api/angebote', newAngebot);
   
       // Erfolgreiche Antwort behandeln
       console.log(response.data); // Zum Testen oder für Feedback
