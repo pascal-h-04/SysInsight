@@ -73,7 +73,6 @@ const Angebot = ({ data, isAdmin, onEdit, onDelete, onSave }) => {
       ) : (
         <>
           <Card.Img variant="top" src={data.Bild} className="angebot-img" />
-          <FiPackage size={50} className="angebot-icon" />
           <Card.Body>
             <Card.Title>{data.Name}</Card.Title>
             <Card.Text>Kategorie: {data.category}</Card.Text>

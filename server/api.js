@@ -21,7 +21,7 @@ const connection = mysql.createPool({
   port: 3306
 });
 
-// Angebot anzeigen
+// Angebot für Nutzer scores anzeigen
 app.get("/api/angebote", (req, res) => {
   const { scores } = req.query;
   
@@ -71,10 +71,10 @@ app.get("/api/alleangebote", (req, res) => {
 
 // Neues Angebot hinzufügen
 app.post("/api/angebote", (req, res) => {
-  const { Name, Score, category, Beschreibung, Bild, NutzerID } = req.body;
+  const { ID, Name, Score, category, Beschreibung, Bild } = req.body;
   connection.query(
-    "INSERT INTO Angebote (Name, Score, category, Beschreibung, Bild) VALUES (?, ?, ?, ?, ?)",
-    [Name, Score, category, Beschreibung, Bild, NutzerID],
+    "INSERT INTO Angebote (ID, Name, Score, category, Beschreibung, Bild) VALUES (?, ?, ?, ?, ?, ?)",
+    [ID, Name, Score, category, Beschreibung, Bild],
     (err, results) => {
       if (err) {
         console.error("Fehler beim Hinzufügen des Eintrags:", err);
@@ -82,6 +82,51 @@ app.post("/api/angebote", (req, res) => {
         return;
       }
       res.send("Angebot hinzugefügt");
+    }
+  );
+});
+
+// Angebot aktualisieren
+app.put("/api/angebote/:id", (req, res) => {
+  const { id } = req.params;
+  const { Name, Score, category, Beschreibung, Bild } = req.body;
+
+  connection.query(
+    "UPDATE Angebote SET Name = ?, Score = ?, category = ?, Beschreibung = ?, Bild = ? WHERE ID = ?",
+    [Name, Score, category, Beschreibung, Bild, id],
+    (err, results) => {
+      if (err) {
+        console.error("Fehler beim Aktualisieren des Eintrags:", err);
+        res.status(500).send("Serverfehler");
+        return;
+      }
+      if (results.affectedRows === 0) {
+        res.status(404).send("Angebot nicht gefunden");
+        return;
+      }
+      res.send("Angebot aktualisiert");
+    }
+  );
+});
+
+//Angebot löschen
+app.delete("/api/angebote/:id", (req, res) => {
+  const { id } = req.params;
+
+  connection.query(
+    "DELETE FROM Angebote WHERE ID = ?",
+    [id],
+    (err, results) => {
+      if (err) {
+        console.error("Fehler beim Löschen des Eintrags:", err);
+        res.status(500).send("Serverfehler");
+        return;
+      }
+      if (results.affectedRows === 0) {
+        res.status(404).send("Angebot nicht gefunden");
+        return;
+      }
+      res.send("Angebot gelöscht");
     }
   );
 });
