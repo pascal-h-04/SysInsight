@@ -3,7 +3,7 @@ const nodemailer = require('nodemailer');
 const expressBaseUrl = 'http://localhost:3002';
 
 function processFormData(formData) {
-  console.log('Aus Auswertung_client.js: Processing form data:', formData);
+  console.log('Aus AnalyseClient.js: Processing form data:', formData);
 
   let scoreGeneral = 0;
   let scoreSecurity = 0;

@@ -1,4 +1,4 @@
-import "./Fragebogen.css";
+import "./questionnairePageStyle.css";
 import { OverlayTrigger, Popover, Button } from "react-bootstrap";
 import { BsInfoCircle } from "react-icons/bs";
 

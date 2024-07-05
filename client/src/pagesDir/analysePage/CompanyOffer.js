@@ -1,12 +1,12 @@
-import "./Unternehmensangebot.css";
+import "./CompanyOfferStyle.css";
 import React from "react";
 import { Card } from "react-bootstrap";
 
-const Unternehmensangebot = ({ angebot }) => {
+const CompanyOffer = ({ angebot }) => {
   return (
     <Card className="unternehmensangebote mb-4">
       <div className="image-container">
-        <img src={angebot.image} alt="Angebot Bild" className="angebot-image" />
+        <img src={angebot.image} alt="Offer Bild" className="angebot-image" />
       </div>
       <Card.Body>
         <Card.Title>{angebot.title}</Card.Title>
@@ -16,4 +16,4 @@ const Unternehmensangebot = ({ angebot }) => {
   );
 };
 
-export default Unternehmensangebot;
+export default CompanyOffer;

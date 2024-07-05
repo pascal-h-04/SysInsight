@@ -1,7 +1,7 @@
-import "../Fragebogen.css";
+import "../questionnairePageStyle.css";
 import { TextField } from "@mui/material";
 
-const Textfeld = ({ question, formData, handleInputChange, errors }) => {
+const TextBoxSelector = ({ question, formData, handleInputChange, errors }) => {
   return (
     <TextField
       fullWidth
@@ -14,4 +14,4 @@ const Textfeld = ({ question, formData, handleInputChange, errors }) => {
     />
   );
 };
-export default Textfeld;
+export default TextBoxSelector;

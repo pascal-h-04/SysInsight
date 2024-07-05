@@ -1,15 +1,15 @@
-import "./Angebotseite.css";
+import "./OfferPageStyle.css";
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import Angebot from "./Angebot.js";
+import Offer from "./Offer.js";
 import { Button } from "react-bootstrap";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { Grid } from "@mui/material";
 import { MdAdd } from "react-icons/md";
-import LöschenBestätigenPopup from "./LöschenBestätigenPopup.js"; // Import the new component
+import DeletePopup from "./DeletePopup.js"; // Import the new component
 import axios from "axios";
 
-const Angebotseite = ({ isAdmin, userID }) => {
+const OfferPage = ({ isAdmin, userID }) => {
   const navigate = useNavigate();
   const [einschaetzungenData, setEinschaetzungenData] = useState(null);
   const [scoreSecurity, setScoreSecurity] = useState(0);
@@ -101,7 +101,7 @@ const Angebotseite = ({ isAdmin, userID }) => {
   const handleAdd = async () => {
     const newAngebot = {
     ID: null, 
-    Name: "Neues Angebot", 
+    Name: "Neues Offer",
     category: "Kommunikation", 
     Score: 5, 
     Bild: "bild.jpg", 
@@ -176,7 +176,7 @@ const Angebotseite = ({ isAdmin, userID }) => {
       <Grid container spacing={2}>
         {angebote.slice().reverse().map((angebot) => (
           <Grid item key={angebot.ID} xs={6}>
-            <Angebot
+            <Offer
               data={angebot}
               onEdit={handleEdit}
               onDelete={handleDelete}
@@ -186,7 +186,7 @@ const Angebotseite = ({ isAdmin, userID }) => {
           </Grid>
         ))}
       </Grid>
-      <LöschenBestätigenPopup
+      <DeletePopup
         show={showConfirmModal}
         onHide={() => setShowConfirmModal(false)}
         onConfirm={confirmDelete}
@@ -194,4 +194,4 @@ const Angebotseite = ({ isAdmin, userID }) => {
     </div>
   );
 };
-export default Angebotseite;
+export default OfferPage;

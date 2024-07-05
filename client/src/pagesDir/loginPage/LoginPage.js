@@ -1,4 +1,4 @@
-import "./LoginScreen.css";
+import "./LoginPageStyle.css";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
@@ -7,7 +7,7 @@ import Modal from "react-bootstrap/Modal";
 import ComicWelcome from "../../imgs/comic_welcome.png";
 import axios from 'axios';
 
-function LoginScreen({ loginSuccess }) {
+function LoginPage({ loginSuccess }) {
   const navigate = useNavigate();
 
   const [loginLoading, setLoginLoading] = useState(false);
@@ -176,4 +176,4 @@ function LoginScreen({ loginSuccess }) {
   );
 }
 
-export default LoginScreen;
+export default LoginPage;

@@ -1,7 +1,7 @@
-import "../Fragebogen.css";
+import "../questionnairePageStyle.css";
 import { Radio, RadioGroup, Grid, FormControlLabel } from "@mui/material";
 
-const Knopfgruppe = ({ question, formData, handleInputChange, errors }) => {
+const ButtonGroup = ({ question, formData, handleInputChange, errors }) => {
   return (
     <div className="category-btns">
       <RadioGroup
@@ -29,4 +29,4 @@ const Knopfgruppe = ({ question, formData, handleInputChange, errors }) => {
     </div>
   );
 };
-export default Knopfgruppe;
+export default ButtonGroup;

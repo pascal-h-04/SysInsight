@@ -1,4 +1,4 @@
-import "../Fragebogen.css";
+import "../questionnairePageStyle.css";
 // npm install @mui/x-date-pickers @mui/material @emotion/react @emotion/styled dayjs
 import { LocalizationProvider, DatePicker } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
@@ -6,7 +6,7 @@ import dayjs from "dayjs";
 import "dayjs/locale/de";
 import { TextField } from "@mui/material";
 
-const Datumsauswahl = ({ question, formData, handleInputChange }) => {
+const DateSelector = ({ question, formData, handleInputChange }) => {
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DatePicker
@@ -20,4 +20,4 @@ const Datumsauswahl = ({ question, formData, handleInputChange }) => {
     </LocalizationProvider>
   );
 };
-export default Datumsauswahl;
+export default DateSelector;

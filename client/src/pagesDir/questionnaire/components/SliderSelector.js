@@ -1,7 +1,7 @@
-import "../Fragebogen.css";
+import "../questionnairePageStyle.css";
 import { Tooltip, Slider } from "@mui/material";
 
-const Schieberegler = ({ question, formData, handleInputChange }) => {
+const SliderSelector = ({ question, formData, handleInputChange }) => {
   const tooltipContent = question.info && (
     <div style={{ fontSize: "16px" }}>
       {question.info.split(",").map((line, index) => (
@@ -27,4 +27,4 @@ const Schieberegler = ({ question, formData, handleInputChange }) => {
     </Tooltip>
   );
 };
-export default Schieberegler;
+export default SliderSelector;

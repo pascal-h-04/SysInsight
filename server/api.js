@@ -21,7 +21,7 @@ const connection = mysql.createPool({
   port: 3306
 });
 
-// Angebot für Nutzer scores anzeigen
+// Offer für Nutzer scores anzeigen
 app.get("/api/angebote", (req, res) => {
   const { scores } = req.query;
   
@@ -69,7 +69,7 @@ app.get("/api/alleangebote", (req, res) => {
 });
 
 
-// Neues Angebot hinzufügen
+// Neues Offer hinzufügen
 app.post("/api/angebote", (req, res) => {
   const { ID, Name, Score, category, Beschreibung, Bild } = req.body;
   connection.query(
@@ -81,12 +81,12 @@ app.post("/api/angebote", (req, res) => {
         res.status(500).send("Serverfehler");
         return;
       }
-      res.send("Angebot hinzugefügt");
+      res.send("Offer hinzugefügt");
     }
   );
 });
 
-// Angebot aktualisieren
+// Offer aktualisieren
 app.put("/api/angebote/:id", (req, res) => {
   const { id } = req.params;
   const { Name, Score, category, Beschreibung, Bild } = req.body;
@@ -101,15 +101,15 @@ app.put("/api/angebote/:id", (req, res) => {
         return;
       }
       if (results.affectedRows === 0) {
-        res.status(404).send("Angebot nicht gefunden");
+        res.status(404).send("Offer nicht gefunden");
         return;
       }
-      res.send("Angebot aktualisiert");
+      res.send("Offer aktualisiert");
     }
   );
 });
 
-//Angebot löschen
+//Offer löschen
 app.delete("/api/angebote/:id", (req, res) => {
   const { id } = req.params;
 
@@ -123,10 +123,10 @@ app.delete("/api/angebote/:id", (req, res) => {
         return;
       }
       if (results.affectedRows === 0) {
-        res.status(404).send("Angebot nicht gefunden");
+        res.status(404).send("Offer nicht gefunden");
         return;
       }
-      res.send("Angebot gelöscht");
+      res.send("Offer gelöscht");
     }
   );
 });
@@ -311,10 +311,10 @@ app.put("/api/angebote/:id", (req, res) => {
         return;
       }
       if (results.affectedRows === 0) {
-        res.status(404).send("Angebot nicht gefunden");
+        res.status(404).send("Offer nicht gefunden");
         return;
       }
-      res.send("Angebot aktualisiert");
+      res.send("Offer aktualisiert");
     }
   );
 });

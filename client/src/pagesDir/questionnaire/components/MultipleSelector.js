@@ -1,7 +1,7 @@
-import "../Fragebogen.css";
+import "../questionnairePageStyle.css";
 import { FormControl, Select, MenuItem, Checkbox } from "@mui/material";
 
-const Mehrfachauswahl = ({ question, formData, handleInputChange, errors }) => {
+const MultipleSelector = ({ question, formData, handleInputChange, errors }) => {
   return (
     <FormControl fullWidth error={errors[question.id]}>
       <Select
@@ -31,4 +31,4 @@ const Mehrfachauswahl = ({ question, formData, handleInputChange, errors }) => {
     </FormControl>
   );
 };
-export default Mehrfachauswahl;
+export default MultipleSelector;

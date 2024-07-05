@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-const Usermanagement = () => {
+const UserManagement = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [role, setRole] = useState("");
   const [message, setMessage] = useState("");
@@ -127,4 +127,4 @@ const Usermanagement = () => {
   );
 };
 
-export default Usermanagement;
+export default UserManagement;

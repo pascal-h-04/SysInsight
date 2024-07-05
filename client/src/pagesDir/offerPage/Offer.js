@@ -1,11 +1,11 @@
-import "./Angebot.css";
+import "./OfferStyle.css";
 import { useState } from "react";
 import { Card, Button, Form } from "react-bootstrap";
 import { CiMail } from "react-icons/ci";
 import { MdEdit, MdDelete, MdSave } from "react-icons/md";
 import { FiPackage } from "react-icons/fi";
 
-const Angebot = ({ data, isAdmin, onEdit, onDelete, onSave }) => {
+const Offer = ({ data, isAdmin, onEdit, onDelete, onSave }) => {
   const [editMode, setEditMode] = useState(isAdmin && data.Name === "");
   const [editData, setEditData] = useState(data);
 
@@ -101,4 +101,4 @@ const Angebot = ({ data, isAdmin, onEdit, onDelete, onSave }) => {
   );
 };
 
-export default Angebot;
+export default Offer;

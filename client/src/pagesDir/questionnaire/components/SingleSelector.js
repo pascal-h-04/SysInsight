@@ -1,7 +1,7 @@
-import "../Fragebogen.css";
+import "../questionnairePageStyle.css";
 import { FormControl, Select, MenuItem } from "@mui/material";
 
-const Einzelauswahl = ({ question, formData, handleInputChange, errors }) => {
+const SingleSelector = ({ question, formData, handleInputChange, errors }) => {
   return (
     <FormControl fullWidth error={errors[question.id]}>
       <Select
@@ -21,4 +21,4 @@ const Einzelauswahl = ({ question, formData, handleInputChange, errors }) => {
     </FormControl>
   );
 };
-export default Einzelauswahl;
+export default SingleSelector;

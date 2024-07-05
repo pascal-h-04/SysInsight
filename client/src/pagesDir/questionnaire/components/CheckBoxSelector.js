@@ -1,7 +1,7 @@
-import "../Fragebogen.css";
+import "../questionnairePageStyle.css";
 import { Checkbox, FormControlLabel, FormControl } from "@mui/material";
 
-const Ankreuzbox = ({ question, formData, handleInputChange, errors }) => {
+const CheckBoxSelector = ({ question, formData, handleInputChange, errors }) => {
   return (
     <FormControl fullWidth error={errors[question.id]}>
       <FormControlLabel
@@ -19,4 +19,4 @@ const Ankreuzbox = ({ question, formData, handleInputChange, errors }) => {
     </FormControl>
   );
 };
-export default Ankreuzbox;
+export default CheckBoxSelector;

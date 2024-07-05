@@ -2,15 +2,15 @@ import "./App.css";
 import { useState, useEffect } from "react";
 import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 // geplant: import Router from "./Router"; und dann <Router /> in return
-import LoginScreen from "./components/Loginseite/LoginScreen";
-import Navigation from "./components/Navigation";
-import Profile from "./components/Profilseite/Profile";
-import AboutUs from "./components/Über_Uns_Seite/AboutUs";
-import Startseite from "./components/Startseite/Startseite";
-import Fragebogen from "./components/Fragebogenseite/Fragebogen";
-import Angebotseite from "./components/Angebotsseite/Angebotseite";
-import Auswertung_client from "./components/Auswertungsseite/auswertung_client";
-import Usermanagement from "./components/Adminpage/Usermanagement";
+import LoginPage from "./pagesDir/loginPage/LoginPage";
+import Navigation from "./pagesDir/Navigation";
+import ProfilPage from "./pagesDir/profilPage/ProfilPage";
+import AboutUs from "./pagesDir/aboutUsPage/AboutUs";
+import HomePage from "./pagesDir/homePage/HomePage";
+import QuestionnairePage from "./pagesDir/questionnaire/questionnairePage";
+import OfferPage from "./pagesDir/offerPage/OfferPage";
+import AnalyseClient from "./pagesDir/analysePage/AnalyseClient";
+import UserManagement from "./pagesDir/adminPage/UserManagement";
 
 function App() {
   const navigate = useNavigate();
@@ -60,45 +60,45 @@ function App() {
         <Route
             path="/"
             element={
-                <Startseite isAdmin={isAdmin} userID={userID}/> 
+                <HomePage isAdmin={isAdmin} userID={userID}/>
             }
           />
           <Route
             path="/fragebogen"
             element={
   
-                <Fragebogen isAdmin={isAdmin} userID={userID} />
+                <QuestionnairePage isAdmin={isAdmin} userID={userID} />
 
             }
           />
           <Route
             path="/login"
             element={
-                <LoginScreen loginSuccess={successfullLogin} />
+                <LoginPage loginSuccess={successfullLogin} />
             }
           />
           
           <Route
             path="/auswertung"
             element={
-                <Auswertung_client isAdmin={isAdmin} userID={userID} />
+                <AnalyseClient isAdmin={isAdmin} userID={userID} />
             }
           />
           <Route
             path="/angebotseite"
             element={
-                <Angebotseite isAdmin={isAdmin} userID={userID}/>
+                <OfferPage isAdmin={isAdmin} userID={userID}/>
             }
           />
           <Route
             path="/usermanagement"
             element={
-                <Usermanagement isAdmin={isAdmin} userID={userID}/>
+                <UserManagement isAdmin={isAdmin} userID={userID}/>
             }
           />
           <Route
             path="/profile"
-            element={<Profile />}
+            element={<ProfilPage />}
           />
           <Route path="/about-us" element={<AboutUs />} />
         

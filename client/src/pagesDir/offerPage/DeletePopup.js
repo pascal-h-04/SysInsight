@@ -1,6 +1,6 @@
 import { Modal, Button } from "react-bootstrap";
 
-const LöschenBestätigenPopup = ({ show, onHide, onConfirm }) => {
+const DeletePopup = ({ show, onHide, onConfirm }) => {
   return (
     <Modal show={show} onHide={onHide}>
       <Modal.Header closeButton>
@@ -21,4 +21,4 @@ const LöschenBestätigenPopup = ({ show, onHide, onConfirm }) => {
   );
 };
 
-export default LöschenBestätigenPopup;
+export default DeletePopup;

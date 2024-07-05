@@ -1,8 +1,8 @@
 import React from 'react';
 import { ProgressBar, Card } from 'react-bootstrap';
-import './Einzelmetrik.css'; 
+import './SingleMetricStyle.css';
 
-const Einzelmetrik = ({ title, value }) => {
+const SingleMetric = ({ title, value }) => {
   let metricColorClass = '';
   if (value >= 4) {
     metricColorClass = 'high';
@@ -23,4 +23,4 @@ const Einzelmetrik = ({ title, value }) => {
   );
 };
 
-export default Einzelmetrik;
+export default SingleMetric;

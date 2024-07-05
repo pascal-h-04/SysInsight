@@ -1,21 +1,21 @@
-import "./Fragebogen.css";
+import "./questionnairePageStyle.css";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import jsonFragen from "../../data/fragebogen.json";
-import Knopfgruppe from "./Eingabeformate/Knopfgruppe.js";
-import Textfeld from "./Eingabeformate/Textfeld.js";
-import Einzelauswahl from "./Eingabeformate/Einzelauswahl.js";
-import Mehrfachauswahl from "./Eingabeformate/Mehrfachauswahl.js";
-import Schieberegler from "./Eingabeformate/Schieberegler.js";
-import Ankreuzbox from "./Eingabeformate/Ankreuzbox.js";
-import Schalter from "./Eingabeformate/Schalter.js";
-import Datumsauswahl from "./Eingabeformate/Datumsauswahl.js";
+import ButtonGroup from "./components/ButtonGroup.js";
+import TextBoxSelector from "./components/TextBoxSelector.js";
+import SingleSelector from "./components/SingleSelector.js";
+import MultipleSelector from "./components/MultipleSelector.js";
+import SliderSelector from "./components/SliderSelector.js";
+import CheckBoxSelector from "./components/CheckBoxSelector.js";
+import SwitchSelector from "./components/SwitchSelector.js";
+import DateSelector from "./components/DateSelector.js";
 import { Form, Col, Row, Button, Spinner } from "react-bootstrap";
 import { MdInsights } from "react-icons/md";
 import CustomPopup from "./CustomPopup.js";
 import InfoPopover from "./InfoPopover.js";
 
-const Fragebogen = () => {
+const QuestionnairePage = () => {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({});
@@ -90,16 +90,16 @@ const Fragebogen = () => {
   };
 
   const inputComponentsMap = {
-    "category-btns": Knopfgruppe,
-    text: Textfeld,
-    "single-select": Einzelauswahl,
-    "multi-select": Mehrfachauswahl,
-    slider: Schieberegler,
-    toggle: Schalter,
-    checkbox: Ankreuzbox,
-    email: Textfeld,
-    tel: Textfeld,
-    date: Datumsauswahl,
+    "category-btns": ButtonGroup,
+    text: TextBoxSelector,
+    "single-select": SingleSelector,
+    "multi-select": MultipleSelector,
+    slider: SliderSelector,
+    toggle: SwitchSelector,
+    checkbox: CheckBoxSelector,
+    email: TextBoxSelector,
+    tel: TextBoxSelector,
+    date: DateSelector,
   };
 
   const renderQuestion = (question) => {
@@ -233,7 +233,7 @@ const Fragebogen = () => {
           ) : (
             <>
               <MdInsights size={30} />
-              Zur Auswertung_client (mit validierung, über Login)
+              Zur AnalyseClient (mit validierung, über Login)
             </>
           )}
         </Button>
@@ -242,21 +242,21 @@ const Fragebogen = () => {
           disabled={evaluationLoading}
           onClick={() => navigate("/auswertung", { state: { formData } })}
         >
-          Zur Auswertung_client (ohne validierung - Dev only - direkt)
+          Zur AnalyseClient (ohne validierung - Dev only - direkt)
         </Button>
         <Button
           variant="primary"
           disabled={evaluationLoading}
           onClick={() => navigate("/login", { state: { formData } })}
         >
-          Zur Auswertung_client (ohne validierung - Dev only - über login)
+          Zur AnalyseClient (ohne validierung - Dev only - über login)
         </Button>
       </Form>
       <CustomPopup
         show={showSuccessModal}
         onHide={() => setShowSuccessModal(false)}
-        title="Auswertung_client läuft ..."
-        body="Alle notwendigen Daten wurden eingegeben und erfolgreich für die Auswertung_client übermittelt."
+        title="AnalyseClient läuft ..."
+        body="Alle notwendigen Daten wurden eingegeben und erfolgreich für die AnalyseClient übermittelt."
       />
       <CustomPopup
         show={showFailureModal}
@@ -268,4 +268,4 @@ const Fragebogen = () => {
   );
 };
 
-export default Fragebogen;
+export default QuestionnairePage;

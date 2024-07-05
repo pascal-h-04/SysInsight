@@ -1,8 +1,8 @@
 import React from "react";
 import { ProgressBar, Card } from "react-bootstrap";
-import "./Gesamtmetrik.css";
+import "./OverallMetricStyle.css";
 
-const Gesamtmetrik = ({ value }) => {
+const OverallMetric = ({ value }) => {
   let metricColorClass = "";
   if (value >= 70) {
     metricColorClass = "high";
@@ -24,4 +24,4 @@ const Gesamtmetrik = ({ value }) => {
   );
 };
 
-export default Gesamtmetrik;
+export default OverallMetric;

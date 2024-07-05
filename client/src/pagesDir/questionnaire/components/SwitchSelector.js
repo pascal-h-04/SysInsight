@@ -1,7 +1,7 @@
-import "../Fragebogen.css";
+import "../questionnairePageStyle.css";
 import { ToggleButton, ToggleButtonGroup } from "@mui/material";
 
-const Schalter = ({ question, formData, handleInputChange }) => {
+const SwitchSelector = ({ question, formData, handleInputChange }) => {
   return (
     <ToggleButtonGroup
       value={formData[question.id] || ""}
@@ -18,4 +18,4 @@ const Schalter = ({ question, formData, handleInputChange }) => {
     </ToggleButtonGroup>
   );
 };
-export default Schalter;
+export default SwitchSelector;

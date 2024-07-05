@@ -1,15 +1,15 @@
-import "./auswertung_client.css";
+import "./AnalyseClientStyle.css";
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import Gesamtmetrik from "./Gesamtmetrik";
-import Einzelmetrik from "./Einzelmetrik";
-import Unternehmensangebot from "./Unternehmensangebot";
+import OverallMetric from "./OverallMetric";
+import SingleMetric from "./SingleMetric";
+import CompanyOffer from "./CompanyOffer";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { MdOutlineLocalOffer } from "react-icons/md";
 import dreiAngeboteBeiAuswertung from "../../data/dreiAngeboteBeiAuswertung";
 import axios from "axios";
 
-const Auswertung_client = ({ isAdmin, userID }) => {
+const AnalyseClient = ({ isAdmin, userID }) => {
   const navigate = useNavigate();
   const [einschaetzungenData, setEinschaetzungenData] = useState(null);
   const [scoreSecurity, setScoreSecurity] = useState(0);
@@ -55,7 +55,7 @@ const Auswertung_client = ({ isAdmin, userID }) => {
       <h1 className="mb-4">Ihre personalisierte Auswertung</h1>
       <Row>
         <Col md={12}>
-          <Gesamtmetrik value={gesamtmetrik} />
+          <OverallMetric value={gesamtmetrik} />
         </Col>
       </Row>
       <Row className="mt-4">
@@ -69,10 +69,10 @@ const Auswertung_client = ({ isAdmin, userID }) => {
         {einzelmetriken.map((metrik, index) => (
           <React.Fragment key={index}>
             <Col md={5}>
-              <Einzelmetrik title={metrik.title} value={metrik.value} />
+              <SingleMetric title={metrik.title} value={metrik.value} />
             </Col>
             <Col md={7} className="mt-4 mt-md-0">
-              <Unternehmensangebot
+              <CompanyOffer
                 key={dreiAngeboteBeiAuswertung[index].id}
                 angebot={dreiAngeboteBeiAuswertung[index]}
               />
@@ -97,4 +97,4 @@ const Auswertung_client = ({ isAdmin, userID }) => {
   );
 };
 
-export default Auswertung_client;
+export default AnalyseClient;
