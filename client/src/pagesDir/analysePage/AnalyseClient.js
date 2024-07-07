@@ -6,7 +6,7 @@ import SingleMetric from "./SingleMetric";
 import CompanyOffer from "./CompanyOffer";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { MdOutlineLocalOffer } from "react-icons/md";
-import dreiAngeboteBeiAuswertung from "../../data/dreiAngeboteBeiAuswertung";
+import offersAtAnalyse from "../../data/OffersAtAnalyse";
 import axios from "axios";
 
 const AnalyseClient = ({ isAdmin, userID }) => {
@@ -73,8 +73,8 @@ const AnalyseClient = ({ isAdmin, userID }) => {
             </Col>
             <Col md={7} className="mt-4 mt-md-0">
               <CompanyOffer
-                key={dreiAngeboteBeiAuswertung[index].id}
-                angebot={dreiAngeboteBeiAuswertung[index]}
+                key={offersAtAnalyse[index].id}
+                angebot={offersAtAnalyse[index]}
               />
             </Col>
           </React.Fragment>

@@ -1,7 +1,7 @@
 import "./questionnairePageStyle.css";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import jsonFragen from "../../data/fragebogen.json";
+import jsonFragen from "../../data/Questionnaire.json";
 import ButtonGroup from "./components/ButtonGroup.js";
 import TextBoxSelector from "./components/TextBoxSelector.js";
 import SingleSelector from "./components/SingleSelector.js";

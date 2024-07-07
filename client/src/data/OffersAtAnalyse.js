@@ -1,7 +1,7 @@
-import SecurityIcon from "../imgs/Security.png";
-import OfficeToolsIcon from "../imgs/OfficeTools.png";
-import KommunikationsToolsIcon from "../imgs/KommunikationsTools.png";
-const dreiAngeboteBeiAuswertung = [
+import SecurityIcon from "../imgs/security.png";
+import OfficeToolsIcon from "../imgs/office_tools.png";
+import KommunikationsToolsIcon from "../imgs/communication_tools.png";
+const offersAtAnalyse = [
   {
     id: 1,
     title: "Mit uns sind ihre Daten sicher",
@@ -25,4 +25,4 @@ const dreiAngeboteBeiAuswertung = [
     image: KommunikationsToolsIcon,
   },
 ];
-export default dreiAngeboteBeiAuswertung;
+export default offersAtAnalyse;
