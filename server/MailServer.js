@@ -13,7 +13,7 @@ const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
         user: 'semantec.sysinsight@gmail.com',
-        pass: 'gbnuepaayjznleml' // Verwende hier das App-spezifische Passwort
+        pass: 'gfgusmybfhzgffxq' // Verwende hier das App-spezifische Passwort
     },
     logger: true, // Protokollierung aktivieren
     debug: true  // Debugging aktivieren

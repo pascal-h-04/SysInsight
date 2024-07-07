@@ -9,9 +9,9 @@ import { MdOutlineLocalOffer } from "react-icons/md";
 import offersAtAnalyse from "../../data/OffersAtAnalyse";
 import axios from "axios";
 
-const AnalyseClient = ({ isAdmin, userID }) => {
+const AnalyseClient = ({ userID }) => {
   const navigate = useNavigate();
-  const [einschaetzungenData, setEinschaetzungenData] = useState(null);
+  const [setEinschaetzungenData] = useState(null);
   const [scoreSecurity, setScoreSecurity] = useState(0);
   const [scoreKollaboration, setScoreKollaboration] = useState(0);
   const [scoreKommunikation, setScoreKommunikation] = useState(0);
