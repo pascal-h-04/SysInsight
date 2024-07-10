@@ -1,4 +1,4 @@
-import "../questionnairePageStyle.css";
+import "../QuestionnairePageStyle.css";
 import { Tooltip, Slider } from "@mui/material";
 
 const SliderSelector = ({ question, formData, handleInputChange }) => {

@@ -1,4 +1,4 @@
-import "../questionnairePageStyle.css";
+import "../QuestionnairePageStyle.css";
 import { FormControl, Select, MenuItem } from "@mui/material";
 
 const SingleSelector = ({ question, formData, handleInputChange, errors }) => {

@@ -1,4 +1,4 @@
-import "../questionnairePageStyle.css";
+import "../QuestionnairePageStyle.css";
 import { TextField } from "@mui/material";
 
 const TextBoxSelector = ({ question, formData, handleInputChange, errors }) => {

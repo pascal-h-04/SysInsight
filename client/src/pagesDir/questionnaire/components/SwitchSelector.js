@@ -1,4 +1,4 @@
-import "../questionnairePageStyle.css";
+import "../QuestionnairePageStyle.css";
 import { ToggleButton, ToggleButtonGroup } from "@mui/material";
 
 const SwitchSelector = ({ question, formData, handleInputChange }) => {

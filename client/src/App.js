@@ -7,7 +7,7 @@ import Navigation from "./pagesDir/Navigation";
 import ProfilPage from "./pagesDir/profilPage/ProfilPage";
 import AboutUs from "./pagesDir/aboutUsPage/AboutUs";
 import HomePage from "./pagesDir/homePage/HomePage";
-import QuestionnairePage from "./pagesDir/questionnaire/questionnairePage";
+import QuestionnairePage from "./pagesDir/questionnaire/QuestionnairePage";
 import OfferPage from "./pagesDir/offerPage/OfferPage";
 import AnalyseClient from "./pagesDir/analysePage/AnalyseClient";
 import UserManagement from "./pagesDir/adminPage/UserManagement";

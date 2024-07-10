@@ -13,7 +13,7 @@ const SingleMetric = ({ title, value }) => {
   }
 
   return (
-    <Card className={`einzelmetrik ${metricColorClass} mb-4`}>
+    <Card className={`single-metric ${metricColorClass} mb-4`}>
       <Card.Body>
         <Card.Title>{title}</Card.Title>
         <Card.Text>{`Bewertung: ${value}/5`}</Card.Text>

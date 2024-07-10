@@ -4,9 +4,9 @@ import { Card } from "react-bootstrap";
 
 const CompanyOffer = ({ angebot }) => {
   return (
-    <Card className="unternehmensangebote mb-4">
+    <Card className="company-offer mb-4">
       <div className="image-container">
-        <img src={angebot.image} alt="Offer Bild" className="angebot-image" />
+        <img src={angebot.image} alt="Offer Bild" className="offer-image" />
       </div>
       <Card.Body>
         <Card.Title>{angebot.title}</Card.Title>

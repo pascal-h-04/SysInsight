@@ -13,7 +13,7 @@ const OverallMetric = ({ value }) => {
   }
 
   return (
-    <Card className={`gesamtmetrik ${metricColorClass}`}>
+    <Card className={`overall-metric ${metricColorClass}`}>
       <Card.Body>
         <Card.Title>
           Ihr Digital Workplace Score ist insgesamt: 

@@ -1,19 +1,19 @@
-.einzelmetrik {
+.single-metric {
   margin-bottom: 1rem;
 }
 
-.einzelmetrik .progress-bar {
+.single-metric .progress-bar {
   background-color: #007bff; /* Standardfarbe für Metriken */
 }
 
-.einzelmetrik.high .progress-bar {
+.single-metric.high .progress-bar {
   background-color: #28a745; /* Grüne Farbe für hohe Werte */
 }
 
-.einzelmetrik.medium .progress-bar {
+.single-metric.medium .progress-bar {
   background-color: #ffc107; /* Gelbe Farbe für mittlere Werte */
 }
 
-.einzelmetrik.low .progress-bar {
+.single-metric.low .progress-bar {
   background-color: #dc3545; /* Rote Farbe für niedrige Werte */
 }

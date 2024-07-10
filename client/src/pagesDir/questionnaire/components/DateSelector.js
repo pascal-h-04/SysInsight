@@ -1,4 +1,4 @@
-import "../questionnairePageStyle.css";
+import "../QuestionnairePageStyle.css";
 // npm install @mui/x-date-pickers @mui/material @emotion/react @emotion/styled dayjs
 import { LocalizationProvider, DatePicker } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";

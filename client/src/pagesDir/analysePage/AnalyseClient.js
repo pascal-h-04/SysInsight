@@ -86,7 +86,7 @@ const AnalyseClient = ({ userID }) => {
           <Button
             variant="primary"
             onClick={() => navigate("/angebotseite")}
-            className="zurAngebotseite"
+            className="to-offer-page"
           >
             <MdOutlineLocalOffer size={30} />
             Zu Ihren personalisierten Angeboten

@@ -1,11 +1,9 @@
-.unternehmensangebote {
+.company-offer {
   background-color: #E5F9F9;
-}
-.unternehmensangebote {
   position: relative;
 }
 
-.angebot-image {
+.offer-image {
   position: absolute;
   top: 5px; 
   right: 5px; 

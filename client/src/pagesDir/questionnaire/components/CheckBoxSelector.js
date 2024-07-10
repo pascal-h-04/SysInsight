@@ -1,4 +1,4 @@
-import "../questionnairePageStyle.css";
+import "../QuestionnairePageStyle.css";
 import { Checkbox, FormControlLabel, FormControl } from "@mui/material";
 
 const CheckBoxSelector = ({ question, formData, handleInputChange, errors }) => {

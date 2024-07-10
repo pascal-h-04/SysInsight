@@ -1,4 +1,4 @@
-import "../questionnairePageStyle.css";
+import "../QuestionnairePageStyle.css";
 import { Radio, RadioGroup, Grid, FormControlLabel } from "@mui/material";
 
 const ButtonGroup = ({ question, formData, handleInputChange, errors }) => {

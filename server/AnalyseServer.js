@@ -28,12 +28,12 @@ function processFormData(formData) {
     console.log("Email-Adresse ist: " + email);
 
 
-    scoreBerechnen(q.score, q.weight, q.internalCategory);
+    scoreCalcuation(q.score, q.weight, q.internalCategory);
   });
 
-  mail_verschicken(email, password);
+  mail_send(email, password);
 
-  function mail_verschicken(email, password) {
+  function mail_send(email, password) {
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
@@ -58,7 +58,7 @@ function processFormData(formData) {
     });
   }
 
-  function scoreBerechnen(score, weight, category) {
+  function scoreCalcuation(score, weight, category) {
       const weightedScore = score * weight;
       
     

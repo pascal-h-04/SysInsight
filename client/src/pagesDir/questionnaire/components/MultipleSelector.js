@@ -1,4 +1,4 @@
-import "../questionnairePageStyle.css";
+import "../QuestionnairePageStyle.css";
 import { FormControl, Select, MenuItem, Checkbox } from "@mui/material";
 
 const MultipleSelector = ({ question, formData, handleInputChange, errors }) => {

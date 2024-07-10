@@ -1,4 +1,4 @@
-import "./questionnairePageStyle.css";
+import "./QuestionnairePageStyle.css";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import jsonFragen from "../../data/Questionnaire.json";
