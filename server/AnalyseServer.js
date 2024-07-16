@@ -9,6 +9,10 @@ function processFormData(formData) {
   let scoreSecurity = 0;
   let scoreKollaboration = 0;
   let scoreKommunikation = 0;
+  let countSecurity = 0;
+  let countKollaboration = 0;
+  let countKommunikation = 0;
+      
   const email = formData.email.answer;
   const password = generateRandomPassword(12);
 
@@ -60,17 +64,19 @@ function processFormData(formData) {
 
   function scoreBerechnen(score, weight, category) {
       const weightedScore = score * weight;
-      
     
     switch (category) {
       case "Security":
         scoreSecurity += weightedScore;
+        countSecurity += weight;
         break;
       case "Kollaboration":
         scoreKollaboration += weightedScore;
+        countKollaboration += weight;
         break;
       case "Kommunikation":
         scoreKommunikation += weightedScore;
+        countKommunikation += weight;
         break;
       case "Allgemeines":
         scoreGeneral += weightedScore;
@@ -80,9 +86,9 @@ function processFormData(formData) {
     }
   }
 //Scores werden durch die Anzahl der Fragen geteilt, um den Durchschnitt zu berechnen (Gewichtung wird berücksichtigt)
-  scoreSecurity = scoreSecurity / 11; 
-  scoreKollaboration = scoreKollaboration / 6;
-  scoreKommunikation = scoreKommunikation / 5;
+  scoreSecurity = scoreSecurity / countSecurity; 
+  scoreKollaboration = scoreKollaboration / countKollaboration;
+  scoreKommunikation = scoreKommunikation / countKommunikation;
   saveUser(email, password);
 
   async function saveUser(email, password) {

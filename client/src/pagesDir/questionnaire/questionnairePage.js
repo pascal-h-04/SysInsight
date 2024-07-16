@@ -118,27 +118,29 @@ const QuestionnairePage = () => {
     e.preventDefault();
     const newErrors = {};
     const enrichedFormData = {}; //Fragen mit internalCategory
+    let totalScore = 0;
+    let count = 0;
+  
     jsonFragen.forEach((question) => {
-      if (
-        question.mandatory &&
-        !formData[question.id]
-      ) {
+      if (question.mandatory && !formData[question.id]) {
         newErrors[question.id] = true;
       }
-    
+  
       if (formData[question.id]) {
         const answer = formData[question.id];
-        let score;
-    
+        let score = 0; // Initialize score for this question
+  
         if (Array.isArray(answer)) {
           // Wenn die Antwort ein Array ist (Multi-Select)
-          score = answer.reduce((total, option) => {
+          answer.forEach((option) => {
             if (question.options && question.options[option] !== undefined) {
-              return Math.round((total + question.options[option])/answer.length);
+              totalScore += question.options[option];
+              count += 1;
             }
-            // Falls keine passende Option gefunden wird, 0 hinzufügen
-            return total;
-          }, 0);
+          });
+          if (count > 0) {
+            score = Math.round(totalScore / count);
+          }
         } else {
           // Single-Select oder andere Typen
           if (question.options && question.options[answer] !== undefined) {
@@ -151,16 +153,20 @@ const QuestionnairePage = () => {
             score = answer;
           }
         }
-    
+  
         enrichedFormData[question.id] = {
           answer: answer,
           internalCategory: question.internalCategory || "Uncategorized", // Standardwert, falls keine Kategorie vorhanden
           weight: question.weight || 0,
           score: score,
         };
+  
+        // Reset totalScore and count for the next question
+        totalScore = 0;
+        count = 0;
       }
     });
-    
+
     setErrors(newErrors);
     if (Object.keys(newErrors).length === 0) {
       setEvaluationLoading(true);

@@ -16,7 +16,6 @@ CREATE TABLE Einschaetzung
     ScoreKollaboration INT,
     ScoreKommunikation INT,
     ScoreSecurity INT,
-    ScoreGeneral INT,
     NutzerID      INT,
     FOREIGN KEY (NutzerID) REFERENCES Nutzer(ID)
 );
@@ -38,10 +37,10 @@ INSERT INTO Nutzer (Name, pw, isAdmin) VALUES ('user@domain.de', 'password', FAL
 
 
 -- Beispielzeile für die Tabelle Einschaetzung
-INSERT INTO Einschaetzung (ScoreKollaboration, ScoreKommunikation, ScoreSecurity, ScoreGeneral, NutzerID) 
-VALUES (3, 4, 5, 40, 1),
-(5, 5, 5, 100, 2),
-(5, 5, 5, 100, 3)
+INSERT INTO Einschaetzung (ScoreKollaboration, ScoreKommunikation, ScoreSecurity, NutzerID) 
+VALUES (3, 4, 5, 1),
+(5, 5, 5, 2),
+(5, 5, 5, 3)
 ;  -- Angenommen, NutzerID 1 gehört zu 'user@domain.de'
 
 -- Beispielzeile für die Tabelle Angebote

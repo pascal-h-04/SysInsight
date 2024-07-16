@@ -19,7 +19,7 @@
     "type": "single-select",
     "options": {
       "Technologie": 3,
-      "Finanzwesen": 0,
+      "Finanzwesen": 1,
       "Gesundheitswesen": 0,
       "Bildung": 4,
       "Handel": 4,
@@ -38,7 +38,7 @@
       "1 - 50": 5,
       "50 - 1.000": 4,
       "1001 - 5.000": 2,
-      "5.001+": 0
+      "5.001+": 1
     },
     "weight": 1,
     "mandatory": true,
@@ -49,7 +49,7 @@
     "id": "it_infrastruktur",
     "question": "Verwaltung der IT-Infrastruktur:",
     "type": "single-select",
-    "options": { "Intern": 0, "Extern": 5, "Intern und Extern": 3 },
+    "options": { "Intern": 1, "Extern": 5, "Intern und Extern": 3 },
     "weight": 1,
     "mandatory": false,
     "internalCategory": "Allgemeines"
@@ -61,7 +61,7 @@
     "min": 1,
     "max": 100,
     "step": 5,
-    "defaultValue": 0,
+    "defaultValue": 1,
     "marks": ["1", "50", "100+"],
     "valueLabelDisplay": "auto",
     "weight": 1,
@@ -84,7 +84,7 @@
       "2 - 3 Tage": 3,
       "3 - 4 Tage": 2,
       "4 - 5 Tage": 1,
-      "5 Tage": 0
+      "5 Tage": 1
     },
     "weight": 1,
     "mandatory": true,
@@ -109,7 +109,7 @@
     "question": "Genutze kollaborative Tools:",
     "type": "multi-select",
     "options": {
-      "Keine in Verwendung": 0,
+      "Keine in Verwendung": 1,
       "Microsoft Teams": 5,
       "Slack": 4,
       "Jira": 5,
@@ -118,7 +118,7 @@
       "Asana": 3,
       "Google Workspace": 3,
       "Dropbox Business": 3,
-      "Andere": 0
+      "Andere": 1
     },
     "weight": 1,
     "mandatory": true,
@@ -164,13 +164,13 @@
     "question": "Genutze Meeting-Plattformen:",
     "type": "multi-select",
     "options": {
-      "Keine in Verwendung": 0,
+      "Keine in Verwendung": 1,
       "Microsoft Teams": 5,
       "Zoom": 4,
       "Cisco Webex": 3,
       "Google Meet": 3,
       "Skype": 1,
-      "Andere": 0
+      "Andere": 1
     },
     "weight": 1,
     "mandatory": true,
@@ -230,12 +230,12 @@
     "question": "Welche Authentifizierungsmethode nutzen Sie?",
     "type": "multi-select",
     "options": {
-      "Keine": 0,
+      "Keine": 1,
       "Passwort": 1,
       "Biometrische Authentifizierung": 5,
       "Zwei-Faktor-Authentifizierung": 5,
       "Single Sign-On": 5,
-      "Unbekannt": 0
+      "Unbekannt": 1
     },
     "weight": 1,
     "mandatory": true,
@@ -248,7 +248,7 @@
     "type": "toggle",
     "options": {
       "True": 5,
-      "False": 0
+      "False": 1
     },
     "internalCategory": "Security",
     "mandatory": true
@@ -258,7 +258,7 @@
     "question": "Wie häufig werden Mitarbeiter in IT-Sicherheit geschult?",
     "type": "single-select",
     "options": {
-      "Keine Schulungen": 0,
+      "Keine Schulungen": 1,
       "Einmal jährlich": 1,
       "Einmal halbjährlich": 2,
       "Einmal monatlich": 4,
@@ -273,7 +273,7 @@
     "question": "Inwiefern werden Backups gemacht?",
     "type": "single-select",
     "options": {
-      "Keine Backups": 0,
+      "Keine Backups": 1,
       "Manuelle Backups": 2,
       "Automatische Backups": 3,
       "Automatische Backups und regelmäßige Tests": 5
@@ -287,7 +287,7 @@
     "question": "Wie häufig treten Sicherheitsvorfälle auf?",
     "type": "single-select",
     "options": {
-      "Täglich": 0,
+      "Täglich": 1,
       "Wöchentlich": 1,
       "Monatlich": 2,
       "Jährlich": 4,
@@ -305,7 +305,7 @@
     "mandatory": true,
     "options": {
       "True": 5,
-      "False": 0
+      "False": 1
     },
     "internalCategory": "Security"
   },
