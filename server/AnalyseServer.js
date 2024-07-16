@@ -81,7 +81,7 @@ function processFormData(formData) {
   }
 //Scores werden durch die Anzahl der Fragen geteilt, um den Durchschnitt zu berechnen (Gewichtung wird berücksichtigt)
   scoreSecurity = scoreSecurity / 11; 
-  scoreKollaboration = scoreKollaboration / 2;
+  scoreKollaboration = scoreKollaboration / 6;
   scoreKommunikation = scoreKommunikation / 5;
   saveUser(email, password);
 
