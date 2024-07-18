@@ -1,65 +1,53 @@
 import "./LoginPageStyle.css";
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Spinner from "react-bootstrap/Spinner";
 import Modal from "react-bootstrap/Modal";
 import ComicWelcome from "../../imgs/comic_welcome.png";
-import axios from 'axios';
+import axios from "axios";
 
 function LoginPage({ loginSuccess }) {
-  const navigate = useNavigate();
-
   const [loginLoading, setLoginLoading] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [showFailureModal, setShowFailureModal] = useState(false);
-  const [showInfoModal, setShowInfoModal] = useState(true);  // Modal beim ersten Laden anzeigen
+  const [showInfoModal, setShowInfoModal] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
-  const [isAdmin, setIsAdmin] = useState(false);
   const [error, setError] = useState(null);
-
 
   const handleLogin = async (e) => {
     e.preventDefault();
     setLoginLoading(true);
-    const Name = document.getElementById('username').value;
-    const pw = document.getElementById('password').value;
+    const Name = document.getElementById("email").value;
+    const pw = document.getElementById("password").value;
 
     try {
-      const response = await axios.post('http://localhost:3002/api/login', {
+      const response = await axios.post("http://localhost:3002/api/login", {
         Name,
         pw,
       });
 
       if (response.data.auth) {
-        const userID = response.data.userID; // Nutzer-ID aus der Antwort extrahieren
+        const userID = response.data.userID;
         setShowSuccessModal(true);
         setTimeout(() => {
           setShowSuccessModal(false);
-          if (response.data.isAdmin == false){
-
+          if (response.data.isAdmin === false) {
             loginSuccess(false, userID);
-
+          } else {
+            loginSuccess(response.data.isAdmin, userID);
           }
-          else {
-            loginSuccess(response.data.isAdmin, userID); // Übergebe isAdmin an den loginSuccess-Handler
-          }
-          
-          
-          
         }, 2000);
       } else {
         setShowFailureModal(true);
       }
     } catch (error) {
-      console.error('Login error:', error);
-      setError('Login failed. Please try again.');
+      console.error("Login error:", error);
+      setError("Login failed. Please try again.");
       setShowFailureModal(true);
     } finally {
       setLoginLoading(false);
     }
   };
-
 
   return (
     <>
@@ -70,19 +58,19 @@ function LoginPage({ loginSuccess }) {
         <div id="login-form">
           <form onSubmit={handleLogin}>
             <div className="mb-3">
-              <label htmlFor="username" className="form-label">
-                Username
+              <label htmlFor="email" className="form-label">
+                Email
               </label>
               <input
-                type="text"
+                type="email"
                 className="form-control"
-                id="username"
-                autoComplete="off"
+                id="email"
+                autoComplete="on"
               />
             </div>
             <div className="mb-3">
               <label htmlFor="password" className="form-label">
-                Password
+                Passwort
               </label>
               <input
                 type={showPassword ? "text" : "password"}
@@ -98,35 +86,21 @@ function LoginPage({ loginSuccess }) {
                 onChange={() => setShowPassword(!showPassword)}
               />
               <label className="form-check-label" htmlFor="show-password">
-                Show password
+                Passwort anzeigen
               </label>
             </div>
-            <div className="mb-3 form-check">
-              <input
-                type="checkbox"
-                className="form-check-input"
-                id="admin-login"
-                onChange={() => setIsAdmin(!isAdmin)}
-              />
-              <label className="form-check-label" htmlFor="admin-login">
-                Admin login
-              </label>
-            </div>
-            <Button variant="success" type="submit" disabled={loginLoading}>
+
+            <Button
+              variant="success"
+              type="submit"
+              disabled={loginLoading}
+              id="submit-btn"
+            >
               {loginLoading ? (
                 <Spinner animation="border" variant="light" size="sm" />
               ) : (
-                "Submit"
+                "Login"
               )}
-            </Button>
-            <br />
-            <Button
-              id="quick-access"
-              variant="warning"
-              onClick={() => loginSuccess(isAdmin)}
-              disabled={loginLoading}
-            >
-              Quick access (Dev Only)
             </Button>
           </form>
         </div>
@@ -154,24 +128,22 @@ function LoginPage({ loginSuccess }) {
           </Button>
         </Modal.Footer>
       </Modal>
-        
+
       <Modal show={showInfoModal} onHide={() => setShowInfoModal(false)}>
         <Modal.Header closeButton>
           <Modal.Title>Information</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          Du möchtest deine Einschätzung und personalisierten Angebote sehen? Dann logge dich hier mit deinen Zugangsdaten, die du per E-Mail erhalten hast, ein!
+          Du möchtest deine Einschätzung und personalisierten Angebote sehen?
+          Dann logge dich hier mit deinen Zugangsdaten, die du per E-Mail
+          erhalten hast, ein!
         </Modal.Body>
         <Modal.Footer>
-          <Button
-            variant="secondary"
-            onClick={() => setShowInfoModal(false)}
-          >
+          <Button variant="secondary" onClick={() => setShowInfoModal(false)}>
             Close
           </Button>
         </Modal.Footer>
       </Modal>
-
     </>
   );
 }

@@ -18,7 +18,20 @@ import InfoPopover from "./InfoPopover.js";
 const QuestionnairePage = () => {
   const navigate = useNavigate();
 
-  const [formData, setFormData] = useState({});
+  const initializeFormData = () => {
+    const initialData = {};
+    jsonFragen.forEach((question) => {
+      initialData[question.id] =
+        question.defaultValue !== undefined
+          ? question.defaultValue
+          : question.type === "slider"
+          ? 3
+          : "";
+    });
+    return initialData;
+  };
+
+  const [formData, setFormData] = useState(initializeFormData());
   const [errors, setErrors] = useState({});
 
   const [evaluationLoading, setEvaluationLoading] = useState(false);
@@ -120,16 +133,16 @@ const QuestionnairePage = () => {
     const enrichedFormData = {}; //Fragen mit internalCategory
     let totalScore = 0;
     let count = 0;
-  
+
     jsonFragen.forEach((question) => {
       if (question.mandatory && !formData[question.id]) {
         newErrors[question.id] = true;
       }
-  
+
       if (formData[question.id]) {
         const answer = formData[question.id];
         let score = 0; // Initialize score for this question
-  
+
         if (Array.isArray(answer)) {
           // Wenn die Antwort ein Array ist (Multi-Select)
           answer.forEach((option) => {
@@ -153,14 +166,14 @@ const QuestionnairePage = () => {
             score = answer;
           }
         }
-  
+
         enrichedFormData[question.id] = {
           answer: answer,
           internalCategory: question.internalCategory || "Uncategorized", // Standardwert, falls keine Kategorie vorhanden
           weight: question.weight || 0,
           score: score,
         };
-  
+
         // Reset totalScore and count for the next question
         totalScore = 0;
         count = 0;

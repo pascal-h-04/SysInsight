@@ -1,16 +1,36 @@
 .page-content {
-  margin: 5% 20%;
+  position: fixed;
+  padding: 3% 20% 0 20%;
+  height: 100%;
+  background: linear-gradient(
+    to top right,
+    #10f3c3 0%,
+    #b8fff0 30%,
+    white 100%
+  );
+  box-sizing: border-box;
 }
 #sysInsight-heading {
   font-size: 50px;
   font-weight: bold;
-  margin-bottom: 70px;
+  margin-bottom: 40px;
   text-align: center;
+}
+#sysInsight-subheading {
+  font-size: 19px;
+  margin-bottom: 50px;
 }
 #sysInsight-startknopf {
   font-size: 24px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 30%;
+  margin: 0 25%;
+  background-color: #10f3c3;
+  color: black;
+  font-weight: bold;
+  border: 2px solid black;
+}
+#sysInsight-startknopf-icon {
+  margin-right: 15px;
 }
