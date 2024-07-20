@@ -121,7 +121,7 @@
       "Andere": 1
     },
     "weight": 1,
-    "mandatory": true,
+    "mandatory": false,
     "internalCategory": "Kollaboration"
   },
   {
@@ -151,7 +151,7 @@
     "info": "1 = Irrelevant (wird nicht genutzt), 2 = Geringe Relevanz (wird selten genutzt), 3 = Mittlere Relevanz (wird mehrmals die Woche genutzt), 4 = Hohe Relevanz (wird täglich genutzt), 5 = Sehr hohe Relevanz (wird mehrfach täglich genutzt)",
     "valueLabelDisplay": "off",
     "weight": 1,
-    "mandatory": true,
+    "mandatory": false,
     "internalCategory": "Kollaboration"
   },
   {
@@ -187,7 +187,7 @@
     "marks": ["1", "2", "3", "4", "5"],
     "info": "1 = Sehr ineffektiv, 2 = Ineffektiv, 3 = Neutral, 4 = Effektiv, 5 = Sehr effektiv",
     "weight": 2,
-    "mandatory": true,
+    "mandatory": false,
     "internalCategory": "Kommunikation"
   },
   {
@@ -218,7 +218,7 @@
       "Andere": 2
     },
     "weight": 1,
-    "mandatory": true,
+    "mandatory": false,
     "internalCategory": "Kommunikation"
   },
   {
@@ -251,7 +251,7 @@
       "False": 1
     },
     "internalCategory": "Security",
-    "mandatory": true
+    "mandatory": false
   },
   {
     "id": "schulungen",
@@ -279,7 +279,7 @@
       "Automatische Backups und regelmäßige Tests": 5
     },
     "weight": 2,
-    "mandatory": true,
+    "mandatory": false,
     "internalCategory": "Security"
   },
   {
@@ -302,7 +302,7 @@
     "question": "Können Sie Sicherheitsvorfälle online melden?",
     "type": "toggle",
     "weight": 1,
-    "mandatory": true,
+    "mandatory": false,
     "options": {
       "True": 5,
       "False": 1
