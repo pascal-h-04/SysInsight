@@ -1,7 +1,6 @@
 import "./App.css";
 import { useState, useEffect } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
-// geplant: import Router from "./Router"; und dann <Router /> in return
 import LoginPage from "./pagesDir/loginPage/LoginPage";
 import Navigation from "./pagesDir/Navigation";
 import AboutUs from "./pagesDir/aboutUsPage/AboutUs";
@@ -56,22 +55,15 @@ function App() {
       </header>
       <main>
         <Routes>
-          <Route
-            path="/"
-            element={<HomePage isAdmin={isAdmin} userID={userID} />}
-          />
-          <Route
-            path="/fragebogen"
-            element={<QuestionnairePage isAdmin={isAdmin} userID={userID} />}
-          />
+          <Route path="/" element={<HomePage />} />
+          <Route path="/fragebogen" element={<QuestionnairePage />} />
           <Route
             path="/login"
             element={<LoginPage loginSuccess={successfullLogin} />}
           />
-
           <Route
             path="/auswertung"
-            element={<AnalyseClient isAdmin={isAdmin} userID={userID} />}
+            element={<AnalyseClient userID={userID} />}
           />
           <Route
             path="/angebotseite"

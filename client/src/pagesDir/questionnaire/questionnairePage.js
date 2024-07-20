@@ -2,7 +2,7 @@ import "./questionnairePageStyle.css";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import jsonFragen from "../../data/Questionnaire.json";
-import ButtonGroup from "./components/ButtonGroup.js";
+import RadioSelector from "./components/RadioSelector.js";
 import TextBoxSelector from "./components/TextBoxSelector.js";
 import SingleSelector from "./components/SingleSelector.js";
 import MultipleSelector from "./components/MultipleSelector.js";
@@ -91,6 +91,7 @@ const QuestionnairePage = () => {
         return isValid ? cleanedValue : "";
       },
     };
+
     if (inputValidationRules[type]) {
       const cleanedValue = inputValidationRules[type](value);
       if (type === "string") {
@@ -103,7 +104,7 @@ const QuestionnairePage = () => {
   };
 
   const inputComponentsMap = {
-    "category-btns": ButtonGroup,
+    radiogroup: RadioSelector,
     text: TextBoxSelector,
     "single-select": SingleSelector,
     "multi-select": MultipleSelector,
@@ -138,11 +139,9 @@ const QuestionnairePage = () => {
       if (question.mandatory && !formData[question.id]) {
         newErrors[question.id] = true;
       }
-
       if (formData[question.id]) {
         const answer = formData[question.id];
-        let score = 0; // Initialize score for this question
-
+        let score = 0;
         if (Array.isArray(answer)) {
           // Wenn die Antwort ein Array ist (Multi-Select)
           answer.forEach((option) => {
@@ -169,12 +168,11 @@ const QuestionnairePage = () => {
 
         enrichedFormData[question.id] = {
           answer: answer,
-          internalCategory: question.internalCategory || "Uncategorized", // Standardwert, falls keine Kategorie vorhanden
+          internalCategory: question.internalCategory || "Uncategorized",
           weight: question.weight || 0,
           score: score,
         };
 
-        // Reset totalScore and count for the next question
         totalScore = 0;
         count = 0;
       }
@@ -202,14 +200,6 @@ const QuestionnairePage = () => {
           body: JSON.stringify(enrichedFormData),
         });
         console.log("Response status:", response.status);
-        /*if (response.ok) {
-          const data = await response.json();
-          console.log('Response data:', data); // Debugging: Zeige die Antwortdaten an
-          navigate('/auswertung', { state: { results: data } });
-        } else {
-          console.error('Response not OK:', response.status, response.statusText);
-          alert('Error submitting the form');
-        }*/
       } catch (error) {
         console.log("Fragebogen_2 Form Data: ", enrichedFormData);
         console.error("Error:", error);
@@ -252,7 +242,7 @@ const QuestionnairePage = () => {
           ) : (
             <>
               <MdInsights size={30} />
-              Zur AnalyseClient (mit validierung, über Login)
+              Zur Auswertung (mit validierung, über Login)
             </>
           )}
         </Button>
@@ -261,14 +251,14 @@ const QuestionnairePage = () => {
           disabled={evaluationLoading}
           onClick={() => navigate("/auswertung", { state: { formData } })}
         >
-          Zur AnalyseClient (ohne validierung - Dev only - direkt)
+          Zur Auswertung (ohne validierung - Dev only - direkt)
         </Button>
         <Button
           variant="primary"
           disabled={evaluationLoading}
           onClick={() => navigate("/login", { state: { formData } })}
         >
-          Zur AnalyseClient (ohne validierung - Dev only - über login)
+          Zur Auswertung (ohne validierung - Dev only - über login)
         </Button>
       </Form>
       <CustomPopup

@@ -1,15 +1,15 @@
-import React from 'react';
-import { ProgressBar, Card } from 'react-bootstrap';
-import './SingleMetricStyle.css';
+import React from "react";
+import { ProgressBar, Card } from "react-bootstrap";
+import "./AnalyseClientStyle.css";
 
 const SingleMetric = ({ title, value }) => {
-  let metricColorClass = '';
+  let metricColorClass = "";
   if (value >= 4) {
-    metricColorClass = 'high';
+    metricColorClass = "high";
   } else if (value >= 2) {
-    metricColorClass = 'medium';
+    metricColorClass = "medium";
   } else {
-    metricColorClass = 'low';
+    metricColorClass = "low";
   }
 
   return (
