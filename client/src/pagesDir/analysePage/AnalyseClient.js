@@ -41,7 +41,7 @@ const AnalyseClient = ({ isAdmin, userID }) => {
   
 
   // Gesamtmeterik 
-  const gesamtmetrik = ((scoreSecurity + scoreKollaboration + scoreKommunikation)/15)*100;
+  const gesamtmetrik = Math.round(((scoreSecurity + scoreKollaboration + scoreKommunikation)/15)*100);
 
   // Einzelmetriken 
   const einzelmetriken = [

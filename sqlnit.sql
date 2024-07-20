@@ -33,7 +33,7 @@ CREATE  TABLE Angebote
 -- Beispielzeile für die Tabelle Nutzer
 INSERT INTO Nutzer (Name, pw, isAdmin) VALUES ('user@domain.de', 'password', FALSE),
 ('admin@domain.de', 'password', TRUE),
-('Annika', 'TaylorSwift', TRUE);
+('Annika@Semantec.de', 'TaylorSwift', TRUE);
 
 
 -- Beispielzeile für die Tabelle Einschaetzung
