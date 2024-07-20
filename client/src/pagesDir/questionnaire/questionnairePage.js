@@ -274,8 +274,8 @@ const QuestionnairePage = () => {
       <CustomPopup
         show={showSuccessModal}
         onHide={() => setShowSuccessModal(false)}
-        title="AnalyseClient läuft ..."
-        body="Alle notwendigen Daten wurden eingegeben und erfolgreich für die AnalyseClient übermittelt."
+        title="Analyse läuft ..."
+        body="Alle notwendigen Daten wurden eingegeben und erfolgreich für die Analyse übermittelt."
       />
       <CustomPopup
         show={showFailureModal}
