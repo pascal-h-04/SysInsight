@@ -6,7 +6,7 @@ const SingleMetric = ({ title, value }) => {
   let metricColorClass = "";
   if (value >= 4) {
     metricColorClass = "high";
-  } else if (value >= 2) {
+  } else if (value >= 3) {
     metricColorClass = "medium";
   } else {
     metricColorClass = "low";
