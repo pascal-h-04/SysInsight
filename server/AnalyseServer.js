@@ -3,7 +3,6 @@ const nodemailer = require('nodemailer');
 const expressBaseUrl = 'http://localhost:3002';
 
 function processFormData(formData) {
-  console.log('Aus AnalyseClient.js: Processing form data:', formData);
 
   let scoreGeneral = 0;
   let scoreSecurity = 0;
@@ -22,14 +21,6 @@ function processFormData(formData) {
       console.log('Error: Question is undefined');
       return;
     }
-
-    console.log(`Question ID: ${questionId}`);
-    console.log(`Answer: ${q.answer}`);
-    console.log(`Category: ${q.internalCategory}`);
-    console.log(`Weight: ${q.weight}`);
-    console.log(`Score: ${q.score}`);
-
-    console.log("Email-Adresse ist: " + email);
 
 
     scoreBerechnen(q.score, q.weight, q.internalCategory);

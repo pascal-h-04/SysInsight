@@ -70,18 +70,14 @@ const OfferPage = ({ isAdmin, userID }) => {
 
   const [customizingMode, setCustomizingMode] = useState(false);
 
-  //ganzes Customizing auslagern
   const handleEdit = (updatedAngebot) => {
-    //muss noch mit der API verbunden werden
     setAngebote((prevAngebote) =>
       prevAngebote.map((angebot) =>
         angebot.ID === updatedAngebot.ID ? updatedAngebot : angebot
       )
-    );
+    )
   };
-
   const handleDelete = (ID) => {
-    //muss noch mit der API verbunden werden
     setShowConfirmModal(true);
     setDeleteId(ID);
   };
@@ -98,6 +94,27 @@ const OfferPage = ({ isAdmin, userID }) => {
       console.error("Fehler beim Löschen des Angebots:", error);
     }
   };
+
+  const validate = (angebot) => {
+    if (!angebot.Name) {
+      alert("Bitte geben Sie einen Namen ein.");
+      return false;
+    }
+    if (!(angebot.category=="Kommunikation"||angebot.category=="Kollaboration"||angebot.category=="Security")) {
+      alert("Bitte wählen Sie eine der Kateogrien: Kommunikation, Kollaboration oder Security.");
+      return false;
+    }
+    if (!angebot.Beschreibung) {
+      alert("Bitte geben Sie eine Beschreibung ein.");
+      return false;
+    }
+    if((angebot.Score < 1 || angebot.Score > 5)&& angebot.Score !== null){ 
+      alert("Bitte geben Sie eine Bewertung zwischen 1 und 5 ein.");
+      return false;
+    }
+    return true;
+  };
+
 
   const handleAdd = async () => {
     const newAngebot = {
@@ -125,7 +142,6 @@ const OfferPage = ({ isAdmin, userID }) => {
       setCustomizingMode(true); // Optional: Setzen des Customizing-Modus
     } catch (error) {
       console.error("Fehler beim Hinzufügen des Angebots:", error);
-      // Hier kannst du eine Fehlerbehandlung einfügen, z.B. Benutzer benachrichtigen
     }
     const response = await axios.get("http://localhost:3002/api/alleangebote");
     console.log("Angebote:", response.data);
@@ -133,18 +149,23 @@ const OfferPage = ({ isAdmin, userID }) => {
   };
 
   const handleSave = async (updatedAngebot) => {
-    try {
-      await axios.put(
-        `http://localhost:3002/api/angebote/${updatedAngebot.ID}`,
-        updatedAngebot
-      );
-      setAngebote((prevAngebote) =>
-        prevAngebote.map((angebot) =>
-          angebot.ID === updatedAngebot.ID ? updatedAngebot : angebot
-        )
-      );
-    } catch (error) {
-      console.error("Fehler beim Speichern des Angebots:", error);
+    if (!validate(updatedAngebot)) {
+      return;
+    }
+    else{
+      try {
+        await axios.put(
+          `http://localhost:3002/api/angebote/${updatedAngebot.ID}`,
+          updatedAngebot
+        );
+        setAngebote((prevAngebote) =>
+          prevAngebote.map((angebot) =>
+            angebot.ID === updatedAngebot.ID ? updatedAngebot : angebot
+          )
+        );
+      } catch (error) {
+        console.error("Fehler beim Speichern des Angebots:", error);
+      }
     }
   };
 
