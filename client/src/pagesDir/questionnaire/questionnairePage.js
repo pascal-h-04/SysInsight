@@ -242,24 +242,11 @@ const QuestionnairePage = () => {
           ) : (
             <>
               <MdInsights size={30} />
-              Zur Auswertung (mit validierung, über Login)
+              Zur Auswertung
             </>
           )}
         </Button>
-        <Button
-          variant="primary"
-          disabled={evaluationLoading}
-          onClick={() => navigate("/auswertung", { state: { formData } })}
-        >
-          Zur Auswertung (ohne validierung - Dev only - direkt)
-        </Button>
-        <Button
-          variant="primary"
-          disabled={evaluationLoading}
-          onClick={() => navigate("/login", { state: { formData } })}
-        >
-          Zur Auswertung (ohne validierung - Dev only - über login)
-        </Button>
+        
       </Form>
       <CustomPopup
         show={showSuccessModal}
