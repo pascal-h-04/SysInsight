@@ -4,6 +4,10 @@
   padding-top: 20px;
   font-size: 18px;
 }
+.loading {
+  pointer-events: none;
+  opacity: 0.5;
+}
 
 .info-icon {
   position: absolute;
@@ -16,6 +20,10 @@
   max-width: none;
   white-space: pre-line;
 }
+#star-info {
+  display: inline-block;
+  color: red;
+}
 .category-header {
   font-size: 20px;
   background-color: aquamarine;
@@ -26,15 +34,18 @@
   margin-top: 50px;
 }
 .question-row {
-  padding: 0 100px;
+  padding-left: 11%;
 }
-.category-btn {
-  border: 2px solid darkgray;
-  padding: 10px 15px;
+.question {
+  margin-right: 30px;
 }
-.category-btn:hover {
-  background-color: lightgray;
-  color: black;
+.radio-group {
+  padding-bottom: 10px;
+}
+.mandatory-star {
+  color: red;
+  margin-left: 5px;
+  font-size: 20px;
 }
 .error-text {
   color: red;
@@ -42,29 +53,12 @@
   margin-top: 5px;
 }
 
-.checkbox .form-check-input {
-  width: 20px;
-  height: 20px;
-}
-.checkbox .form-check-input:checked {
-  background-color: aquamarine;
-  border-color: aquamarine;
-}
 .yes-no-togglebtn {
   width: 70px;
 }
 
-.mandatory-star {
-  color: red;
-  margin-left: 5px;
-  font-size: 20px;
-}
 .zur-auswertung-btn {
   float: right;
-  margin-top: 10px;
-  margin-bottom: 30px;
-}
-.loading {
-  pointer-events: none;
-  opacity: 0.5;
+  margin-top: 15px;
+  margin-bottom: 40px;
 }

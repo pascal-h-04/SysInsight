@@ -1,9 +1,9 @@
 import "../questionnairePageStyle.css";
 import { Radio, RadioGroup, Grid, FormControlLabel } from "@mui/material";
 
-const ButtonGroup = ({ question, formData, handleInputChange, errors }) => {
+const RadioSelector = ({ question, formData, handleInputChange, errors }) => {
   return (
-    <div className="category-btns">
+    <div className="radio-group">
       <RadioGroup
         row
         aria-label={question.id}
@@ -24,9 +24,9 @@ const ButtonGroup = ({ question, formData, handleInputChange, errors }) => {
         </Grid>
       </RadioGroup>
       {errors[question.id] && (
-        <div className="error-text">Bitte wählen Sie eine Option.</div>
+        <div className="error-text">Bitte auswählen.</div>
       )}
     </div>
   );
 };
-export default ButtonGroup;
+export default RadioSelector;

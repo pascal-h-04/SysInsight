@@ -1,6 +1,6 @@
 import React from "react";
 import { ProgressBar, Card } from "react-bootstrap";
-import "./OverallMetricStyle.css";
+import "./AnalyseClientStyle.css";
 
 const OverallMetric = ({ value }) => {
   let metricColorClass = "";
@@ -15,9 +15,7 @@ const OverallMetric = ({ value }) => {
   return (
     <Card className={`gesamtmetrik ${metricColorClass}`}>
       <Card.Body>
-        <Card.Title>
-          Ihr Digital Workplace Score ist insgesamt: 
-        </Card.Title>
+        <Card.Title>Ihr Digital Workplace Score ist insgesamt:</Card.Title>
         <ProgressBar now={value} label={`${value}%`} />
       </Card.Body>
     </Card>

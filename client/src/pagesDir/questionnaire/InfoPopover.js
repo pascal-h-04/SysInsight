@@ -15,8 +15,8 @@ const InfoPopover = () => {
             <Popover.Header as="h3">Information und Hinweise</Popover.Header>
             <Popover.Body>
               Bitte fülle alle <strong>Pflichtfelder</strong> aus, bevor du das
-              Formular absendest. Diese erkennst du am roten Sternchen (*) neben
-              der Frage.
+              Formular absenden. Diese erkennst du am roten Sternchen (
+              <div id="star-info">*</div>) neben der Frage.
               <br />
               Bei manchen Dropdowns ist eine Mehrfachauswahl möglich. Klicke
               dazu auf die gewünschten Optionen.
