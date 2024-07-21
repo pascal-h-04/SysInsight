@@ -18,7 +18,7 @@ function App() {
 
   useEffect(() => {
     const loggedIn = localStorage.getItem("isLoggedIn") === "true";
-    const admin = localStorage.getItem("isAdmin") === "false";
+    const admin = localStorage.getItem("isAdmin") === "true";
     const storedUserID = localStorage.getItem("userID");
     setIsLoggedIn(loggedIn);
     setIsAdmin(admin);
