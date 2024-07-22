@@ -26,10 +26,14 @@
   align-items: center;
   justify-content: center;
   margin: 0 25%;
-  background-color: #10f3c3;
+  background-color: #fefefe;
   color: black;
   font-weight: bold;
   border: 2px solid black;
+  transition-duration: 0.3s;
+}
+#sysInsight-startknopf:hover {
+  background-color: #9cfae6;
 }
 #sysInsight-startknopf-icon {
   margin-right: 15px;

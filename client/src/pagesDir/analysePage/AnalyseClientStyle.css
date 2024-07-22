@@ -1,6 +1,36 @@
 .page-container {
   margin-top: 3%;
 }
+
+.unternehmensangebot {
+  background-color: #e5f9f9;
+  position: relative;
+}
+.angebot-image {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 50px;
+  height: auto;
+}
+
+.gesamtmetrik .progress-bar,
+.einzelmetrik .progress-bar {
+  background-color: #007bff;
+}
+.gesamtmetrik.high .progress-bar,
+.einzelmetrik.high .progress-bar {
+  background-color: #28a745;
+}
+.gesamtmetrik.medium .progress-bar,
+.einzelmetrik.medium .progress-bar {
+  background-color: #ffc107;
+}
+.gesamtmetrik.low .progress-bar,
+.einzelmetrik.low .progress-bar {
+  background-color: #dc3545;
+}
+
 .zurAngebotseite {
   float: right;
   margin-top: 10px;

@@ -9,7 +9,7 @@ import { MdAdd } from "react-icons/md";
 import DeletePopup from "./DeletePopup.js";
 import axios from "axios";
 
-const OfferPage = ({ isAdmin, userID }) => {
+const OfferPage = ({ isLoggedIn, isAdmin, userID}) => {
   const navigate = useNavigate();
   const [einschaetzungenData, setEinschaetzungenData] = useState(null);
   const [scoreSecurity, setScoreSecurity] = useState(0);
@@ -66,22 +66,18 @@ const OfferPage = ({ isAdmin, userID }) => {
     };
 
     fetchOffersByCategories(isAdmin);
-  }, [scoreSecurity, scoreKollaboration, scoreKommunikation]);
+  }, [scoreSecurity, scoreKollaboration, scoreKommunikation, userID, isAdmin]);
 
   const [customizingMode, setCustomizingMode] = useState(false);
 
-  //ganzes Customizing auslagern
   const handleEdit = (updatedAngebot) => {
-    //muss noch mit der API verbunden werden
     setAngebote((prevAngebote) =>
       prevAngebote.map((angebot) =>
         angebot.ID === updatedAngebot.ID ? updatedAngebot : angebot
       )
-    );
+    )
   };
-
   const handleDelete = (ID) => {
-    //muss noch mit der API verbunden werden
     setShowConfirmModal(true);
     setDeleteId(ID);
   };
@@ -98,6 +94,27 @@ const OfferPage = ({ isAdmin, userID }) => {
       console.error("Fehler beim Löschen des Angebots:", error);
     }
   };
+
+  const validate = (angebot) => {
+    if (!angebot.Name) {
+      alert("Bitte geben Sie einen Namen ein.");
+      return false;
+    }
+    if (!(angebot.category=="Kommunikation"||angebot.category=="Kollaboration"||angebot.category=="IT-Sicherheit")) {
+      alert("Bitte wählen Sie eine der Kateogrien: Kommunikation, Kollaboration oder IT-Sicherheit.");
+      return false;
+    }
+    if (!angebot.Beschreibung) {
+      alert("Bitte geben Sie eine Beschreibung ein.");
+      return false;
+    }
+    if((angebot.Score < 1 || angebot.Score > 5)&& angebot.Score !== null){ 
+      alert("Bitte geben Sie eine Bewertung zwischen 1 und 5 ein.");
+      return false;
+    }
+    return true;
+  };
+
 
   const handleAdd = async () => {
     const newAngebot = {
@@ -118,14 +135,12 @@ const OfferPage = ({ isAdmin, userID }) => {
       );
       const savedAngebot = response.data;
       // Erfolgreiche Antwort behandeln
-      console.log(response.data); // Zum Testen oder für Feedback
-
-      // Das folgende Setzen von State kann abhängig von deiner App-Logik variieren
+      console.log(response.data); 
+      
       setAngebote((prevAngebote) => [savedAngebot, ...prevAngebote]);
-      setCustomizingMode(true); // Optional: Setzen des Customizing-Modus
+      setCustomizingMode(true); 
     } catch (error) {
       console.error("Fehler beim Hinzufügen des Angebots:", error);
-      // Hier kannst du eine Fehlerbehandlung einfügen, z.B. Benutzer benachrichtigen
     }
     const response = await axios.get("http://localhost:3002/api/alleangebote");
     console.log("Angebote:", response.data);
@@ -133,18 +148,23 @@ const OfferPage = ({ isAdmin, userID }) => {
   };
 
   const handleSave = async (updatedAngebot) => {
-    try {
-      await axios.put(
-        `http://localhost:3002/api/angebote/${updatedAngebot.ID}`,
-        updatedAngebot
-      );
-      setAngebote((prevAngebote) =>
-        prevAngebote.map((angebot) =>
-          angebot.ID === updatedAngebot.ID ? updatedAngebot : angebot
-        )
-      );
-    } catch (error) {
-      console.error("Fehler beim Speichern des Angebots:", error);
+    if (!validate(updatedAngebot)) {
+      return;
+    }
+    else{
+      try {
+        await axios.put(
+          `http://localhost:3002/api/angebote/${updatedAngebot.ID}`,
+          updatedAngebot
+        );
+        setAngebote((prevAngebote) =>
+          prevAngebote.map((angebot) =>
+            angebot.ID === updatedAngebot.ID ? updatedAngebot : angebot
+          )
+        );
+      } catch (error) {
+        console.error("Fehler beim Speichern des Angebots:", error);
+      }
     }
   };
 

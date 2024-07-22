@@ -33,7 +33,7 @@
   {
     "id": "unternehmensgroesse",
     "question": "Mitarbeiterzahl:",
-    "type": "category-btns",
+    "type": "radiogroup",
     "categories": {
       "1 - 50": 5,
       "50 - 1.000": 4,
@@ -342,7 +342,7 @@
     "question": "AGBs und Datenschutzverordnung gelesen:",
     "type": "checkbox",
     "mandatory": true,
-    "internalCategory": "Allgemeines"  
+    "internalCategory": "Allgemeines"
   },
   {
     "id": "terminplanung",

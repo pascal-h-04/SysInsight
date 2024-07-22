@@ -9,7 +9,7 @@ import { MdOutlineLocalOffer } from "react-icons/md";
 import offersAtAnalyse from "../../data/OffersAtAnalyse";
 import axios from "axios";
 
-const AnalyseClient = ({ isAdmin, userID }) => {
+const AnalyseClient = ({ isLoggedIn, isAdmin, userID}) => {
   const navigate = useNavigate();
   const [einschaetzungenData, setEinschaetzungenData] = useState(null);
   const [scoreSecurity, setScoreSecurity] = useState(0);
@@ -19,33 +19,31 @@ const AnalyseClient = ({ isAdmin, userID }) => {
   useEffect(() => {
     const fetchEinschaetzungen = async (userID) => {
       try {
-        const response = await axios.get(`http://localhost:3002/api/einschaetzungen/${userID}`);
+        const response = await axios.get(
+          `http://localhost:3002/api/einschaetzungen/${userID}`
+        );
         setEinschaetzungenData(response.data);
-        console.log('Einschätzungen:', response.data);
+        console.log("Einschätzungen:", response.data);
         const einschaetzung = response.data[0];
         setScoreSecurity(einschaetzung.ScoreSecurity);
         setScoreKollaboration(einschaetzung.ScoreKollaboration);
         setScoreKommunikation(einschaetzung.ScoreKommunikation);
       } catch (error) {
-        console.error('Fehler beim Abrufen der Einschätzungen:', error);
-       
+        console.error("Fehler beim Abrufen der Einschätzungen:", error);
       }
     };
     if (userID) {
       fetchEinschaetzungen(userID);
     } else {
-      console.error('UserID not provided');
-      
+      console.error("UserID not provided");
     }
   }, [userID]);
-  
 
-  // Gesamtmeterik 
-  const gesamtmetrik = Math.round(((scoreSecurity + scoreKollaboration + scoreKommunikation)/15)*100);
+  const gesamtmetrik =
+    ((scoreSecurity + scoreKollaboration + scoreKommunikation) / 15) * 100;
 
-  // Einzelmetriken 
   const einzelmetriken = [
-    { id: 1, title: "IT-Sicherheit", value: scoreSecurity},
+    { id: 1, title: "IT-Sicherheit", value: scoreSecurity },
     { id: 2, title: "Kollaboration", value: scoreKollaboration },
     { id: 3, title: "Kommunikation", value: scoreKommunikation },
   ];
@@ -59,7 +57,7 @@ const AnalyseClient = ({ isAdmin, userID }) => {
         </Col>
       </Row>
       <Row className="mt-4">
-        <Col md={5}></Col>
+        <Col md={5} />
         <Col md={7}>
           <h1>Unsere Lösungen</h1>
         </Col>
