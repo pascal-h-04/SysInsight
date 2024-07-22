@@ -32,7 +32,7 @@ function App() {
     setIsLoggedIn(true);
     setIsAdmin(admin);
     setUserID(userID);
-    admin ? navigate("/usermanagement") : navigate("/auswertung");
+    admin ? navigate("/angebotseite") : navigate("/auswertung");
   };
 
   const logout = () => {

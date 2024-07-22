@@ -18,6 +18,7 @@ const OfferPage = ({ isAdmin, userID }) => {
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [deleteId, setDeleteId] = useState(null);
   const [angebote, setAngebote] = useState([]);
+  const [customizingMode, setCustomizingMode] = useState(false);
 
   useEffect(() => {
       const fetchEinschaetzungen = async (userID) => {
@@ -36,14 +37,16 @@ const OfferPage = ({ isAdmin, userID }) => {
       };
 
       fetchEinschaetzungen(userID);
+    }, [userID]);
 
+    useEffect(() => {
       const fetchOffersByCategories = async (isAdmin) => {
         const scores = {
           kommunikation: scoreKommunikation,
           kollaboration: scoreKollaboration,
           security: scoreSecurity,
         };
-
+  
         try {
           if (isAdmin) {
             const response = await axios.get(
@@ -61,12 +64,11 @@ const OfferPage = ({ isAdmin, userID }) => {
           console.error("Fehler beim Abrufen der Angebote:", error);
         }
       };
-
+  
       fetchOffersByCategories(isAdmin);
-    
-  }, [scoreSecurity, scoreKollaboration, scoreKommunikation]);
+    }, [scoreSecurity, scoreKollaboration, scoreKommunikation, isAdmin]);
 
-  const [customizingMode, setCustomizingMode] = useState(false);
+  
 
   const handleEdit = (updatedAngebot) => {
     setAngebote((prevAngebote) =>
@@ -125,10 +127,10 @@ const OfferPage = ({ isAdmin, userID }) => {
   const handleAdd = async () => {
     const newAngebot = {
       ID: null,
-      Name: "Neues Offer",
+      Name: "Neues Angebot",
       category: "Kommunikation",
       Score: 5,
-      Bild: "bild.jpg",
+      Bild: "https://indu-electric.de/wp-content/uploads/sites/8/2017/01/neu.png",
       Beschreibung: "Beschreibung des neuen Angebots",
       NutzerID: userID,
     };
@@ -176,18 +178,21 @@ const OfferPage = ({ isAdmin, userID }) => {
         </Button>
       )}
 
-      {isAdmin && (
+{isAdmin && (
         <>
           <Button
-            variant={showConfirmModal ? "warning" : "success"}
-            onClick={() => setShowConfirmModal(!showConfirmModal)}
+            variant={customizingMode ? "warning" : "success"}
+            onClick={() => setCustomizingMode(!customizingMode)}
           >
-            {showConfirmModal ? "Anpassung beenden" : "Angebote anpassen"}
+            {customizingMode ? "Anpassung beenden" : "Angebote anpassen"}
           </Button>
-          {showConfirmModal && (
-            <Button variant="success" onClick={handleAdd}>
-              <MdAdd size={20} /> Angebot hinzufügen
-            </Button>
+          {customizingMode && (
+            <>
+              {" "}
+              <Button variant="success" onClick={handleAdd}>
+                <MdAdd size={20} /> Angebot hinzufügen
+              </Button>
+            </>
           )}
         </>
       )}

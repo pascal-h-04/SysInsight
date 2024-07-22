@@ -83,10 +83,11 @@ const QuestionnairePage = () => {
       },
       phone: (x) => {
         const cleanedValue = x
-          .replace(/[^0-9+]/g, "")
-          .replace(/\++/g, "+")
-          .slice(0, 15);
-        const isValid = /^[+]?[0-9]{1,15}$/.test(cleanedValue);
+          .replace(/[^0-9+\s]/g, "")  
+          .replace(/(?!^)\+/g, "")  
+          .slice(0, 16); 
+  
+        const isValid = /^[+]?[0-9\s+]{1,15}$/.test(cleanedValue); 
         updateErrors(id, !isValid);
         return isValid ? cleanedValue : "";
       },
