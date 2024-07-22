@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
-const UserManagement = ({ isLoggedIn, isAdmin, userID}) => {
+const UserManagement = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [role, setRole] = useState("");
   const [message, setMessage] = useState("");
@@ -14,16 +15,15 @@ const UserManagement = ({ isLoggedIn, isAdmin, userID}) => {
         `http://localhost:3002/api/user`,
         {
           Name: searchQuery,
-        
         },
         {
           headers: {
-            'Content-Type': 'application/json'
+            "Content-Type": "application/json",
           }
         }
       );
       if (response.data.auth) {
-        setRole(response.data.isAdmin ? 'admin' : 'user');
+        setRole(response.data.isAdmin ? "admin" : "user");
         setMessage("");
       } else {
         setRole("");
@@ -40,7 +40,7 @@ const UserManagement = ({ isLoggedIn, isAdmin, userID}) => {
   const promoteToAdmin = async () => {
     try {
       await axios.post(`http://localhost:3002/api/user/promote`, {
-        Name: searchQuery
+        Name: searchQuery,
       });
       setRole("admin");
       setMessage("User promoted to admin");
@@ -52,7 +52,7 @@ const UserManagement = ({ isLoggedIn, isAdmin, userID}) => {
   const removeAdminRights = async () => {
     try {
       await axios.post(`http://localhost:3002/api/user/remove`, {
-        Name: searchQuery
+        Name: searchQuery,
       });
       setRole("user");
       setMessage("Admin rights removed");

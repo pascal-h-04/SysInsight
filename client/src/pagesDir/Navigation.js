@@ -1,5 +1,5 @@
 import "./Navigation.css";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
@@ -9,7 +9,7 @@ import Button from "react-bootstrap/Button";
 import Logo from "../imgs/logo.png";
 import { FaUser, FaInfoCircle } from "react-icons/fa";
 
-function Navigation({ isLoggedIn, isAdmin, userID, handleLogout }) {
+function Navigation({ isLoggedIn, isAdmin, handleLogout }) {
   const navigate = useNavigate();
 
   const adminNavigation = [
@@ -59,7 +59,7 @@ function Navigation({ isLoggedIn, isAdmin, userID, handleLogout }) {
           </span>
         )}
 
-        {isLoggedIn && (
+        {isLoggedIn ? (
           <Button
             variant="outline-light"
             size="sm"
@@ -72,8 +72,7 @@ function Navigation({ isLoggedIn, isAdmin, userID, handleLogout }) {
           >
             Logout
           </Button>
-        )}
-        {!isLoggedIn && (
+        ) : (
           <Button
             variant="outline-light"
             size="sm"

@@ -1,5 +1,6 @@
 import "./LoginPageStyle.css";
 import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Spinner from "react-bootstrap/Spinner";
 import Modal from "react-bootstrap/Modal";
@@ -7,6 +8,7 @@ import ComicWelcome from "../../imgs/comic_welcome.png";
 import axios from "axios";
 
 function LoginPage({ loginSuccess }) {
+  const navigate = useNavigate();
   const [loginLoading, setLoginLoading] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [showFailureModal, setShowFailureModal] = useState(false);
@@ -28,14 +30,11 @@ function LoginPage({ loginSuccess }) {
 
       if (response.data.auth) {
         const userID = response.data.userID;
+        const isAdmin = response.data.isAdmin === 1; // Konvertiert zu boolean
         setShowSuccessModal(true);
         setTimeout(() => {
           setShowSuccessModal(false);
-          if (response.data.isAdmin === false) {
-            loginSuccess(false, userID);
-          } else {
-            loginSuccess(response.data.isAdmin, userID);
-          }
+          loginSuccess(isAdmin, userID);
         }, 2000);
       } else {
         setShowFailureModal(true);

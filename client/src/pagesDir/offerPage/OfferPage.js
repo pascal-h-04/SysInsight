@@ -9,7 +9,7 @@ import { MdAdd } from "react-icons/md";
 import DeletePopup from "./DeletePopup.js";
 import axios from "axios";
 
-const OfferPage = ({ isLoggedIn, isAdmin, userID}) => {
+const OfferPage = ({ isAdmin, userID }) => {
   const navigate = useNavigate();
   const [einschaetzungenData, setEinschaetzungenData] = useState(null);
   const [scoreSecurity, setScoreSecurity] = useState(0);
@@ -20,53 +20,51 @@ const OfferPage = ({ isLoggedIn, isAdmin, userID}) => {
   const [angebote, setAngebote] = useState([]);
 
   useEffect(() => {
-    const fetchEinschaetzungen = async (userID) => {
-      try {
-        const response = await axios.get(
-          `http://localhost:3002/api/einschaetzungen/${userID}`
-        );
-        setEinschaetzungenData(response.data);
-        console.log("Einschätzungen:", response.data);
-        const einschaetzung = response.data[0];
-        setScoreSecurity(einschaetzung.ScoreSecurity);
-        setScoreKollaboration(einschaetzung.ScoreKollaboration);
-        setScoreKommunikation(einschaetzung.ScoreKommunikation);
-      } catch (error) {
-        console.error("Fehler beim Abrufen der Einschätzungen:", error);
-      }
-    };
-
-    fetchEinschaetzungen(userID);
-
-    const fetchOffersByCategories = async (isAdmin) => {
-      const scores = {
-        kommunikation: scoreKommunikation,
-        kollaboration: scoreKollaboration,
-        security: scoreSecurity,
+      const fetchEinschaetzungen = async (userID) => {
+        try {
+          const response = await axios.get(
+            `http://localhost:3002/api/einschaetzungen/${userID}`
+          );
+          setEinschaetzungenData(response.data);
+          const einschaetzung = response.data[0];
+          setScoreSecurity(einschaetzung.ScoreSecurity);
+          setScoreKollaboration(einschaetzung.ScoreKollaboration);
+          setScoreKommunikation(einschaetzung.ScoreKommunikation);
+        } catch (error) {
+          console.error("Fehler beim Abrufen der Einschätzungen:", error);
+        }
       };
 
-      try {
-        if (isAdmin) {
-          const response = await axios.get(
-            "http://localhost:3002/api/alleangebote"
-          );
-          console.log("Angebote:", response.data);
-          setAngebote(response.data);
-        } else {
-          const response = await axios.get(
-            "http://localhost:3002/api/angebote",
-            { params: { scores: JSON.stringify(scores) } }
-          );
-          console.log("Angebote:", response.data);
-          setAngebote(response.data);
-        }
-      } catch (error) {
-        console.error("Fehler beim Abrufen der Angebote:", error);
-      }
-    };
+      fetchEinschaetzungen(userID);
 
-    fetchOffersByCategories(isAdmin);
-  }, [scoreSecurity, scoreKollaboration, scoreKommunikation, isLoggedIn, isAdmin, userID]);
+      const fetchOffersByCategories = async (isAdmin) => {
+        const scores = {
+          kommunikation: scoreKommunikation,
+          kollaboration: scoreKollaboration,
+          security: scoreSecurity,
+        };
+
+        try {
+          if (isAdmin) {
+            const response = await axios.get(
+              "http://localhost:3002/api/alleangebote"
+            );
+            setAngebote(response.data);
+          } else {
+            const response = await axios.get(
+              "http://localhost:3002/api/angebote",
+              { params: { scores: JSON.stringify(scores) } }
+            );
+            setAngebote(response.data);
+          }
+        } catch (error) {
+          console.error("Fehler beim Abrufen der Angebote:", error);
+        }
+      };
+
+      fetchOffersByCategories(isAdmin);
+    
+  }, [scoreSecurity, scoreKollaboration, scoreKommunikation]);
 
   const [customizingMode, setCustomizingMode] = useState(false);
 
@@ -75,8 +73,9 @@ const OfferPage = ({ isLoggedIn, isAdmin, userID}) => {
       prevAngebote.map((angebot) =>
         angebot.ID === updatedAngebot.ID ? updatedAngebot : angebot
       )
-    )
+    );
   };
+
   const handleDelete = (ID) => {
     setShowConfirmModal(true);
     setDeleteId(ID);
@@ -100,21 +99,28 @@ const OfferPage = ({ isLoggedIn, isAdmin, userID}) => {
       alert("Bitte geben Sie einen Namen ein.");
       return false;
     }
-    if (!(angebot.category=="Kommunikation"||angebot.category=="Kollaboration"||angebot.category=="IT-Sicherheit")) {
-      alert("Bitte wählen Sie eine der Kateogrien: Kommunikation, Kollaboration oder IT-Sicherheit.");
+    if (
+      !(
+        angebot.category === "Kommunikation" ||
+        angebot.category === "Kollaboration" ||
+        angebot.category === "IT-Sicherheit"
+      )
+    ) {
+      alert(
+        "Bitte wählen Sie eine der Kateogrien: Kommunikation, Kollaboration oder IT-Sicherheit."
+      );
       return false;
     }
     if (!angebot.Beschreibung) {
       alert("Bitte geben Sie eine Beschreibung ein.");
       return false;
     }
-    if((angebot.Score < 1 || angebot.Score > 5)&& angebot.Score !== null){ 
+    if ((angebot.Score < 1 || angebot.Score > 5) && angebot.Score !== null) {
       alert("Bitte geben Sie eine Bewertung zwischen 1 und 5 ein.");
       return false;
     }
     return true;
   };
-
 
   const handleAdd = async () => {
     const newAngebot = {
@@ -128,30 +134,23 @@ const OfferPage = ({ isLoggedIn, isAdmin, userID}) => {
     };
 
     try {
-      // POST-Anfrage an die API senden
       const response = await axios.post(
         "http://localhost:3002/api/angebote",
         newAngebot
       );
       const savedAngebot = response.data;
-      // Erfolgreiche Antwort behandeln
-      console.log(response.data); 
-      
       setAngebote((prevAngebote) => [savedAngebot, ...prevAngebote]);
-      setCustomizingMode(true); 
     } catch (error) {
       console.error("Fehler beim Hinzufügen des Angebots:", error);
     }
     const response = await axios.get("http://localhost:3002/api/alleangebote");
-    console.log("Angebote:", response.data);
     setAngebote(response.data);
   };
 
   const handleSave = async (updatedAngebot) => {
     if (!validate(updatedAngebot)) {
       return;
-    }
-    else{
+    } else {
       try {
         await axios.put(
           `http://localhost:3002/api/angebote/${updatedAngebot.ID}`,
@@ -169,7 +168,7 @@ const OfferPage = ({ isLoggedIn, isAdmin, userID}) => {
   };
 
   return (
-    <div id="angebotseite">
+    <div ID="angebotseite">
       {!isAdmin && (
         <Button variant="primary" onClick={() => navigate("/auswertung")}>
           <IoMdArrowRoundBack size={25} />
@@ -180,18 +179,15 @@ const OfferPage = ({ isLoggedIn, isAdmin, userID}) => {
       {isAdmin && (
         <>
           <Button
-            variant={customizingMode ? "warning" : "success"}
-            onClick={() => setCustomizingMode(!customizingMode)}
+            variant={showConfirmModal ? "warning" : "success"}
+            onClick={() => setShowConfirmModal(!showConfirmModal)}
           >
-            {customizingMode ? "Anpassung beenden" : "Angebote anpassen"}
+            {showConfirmModal ? "Anpassung beenden" : "Angebote anpassen"}
           </Button>
-          {customizingMode && (
-            <>
-              {" "}
-              <Button variant="success" onClick={handleAdd}>
-                <MdAdd size={20} /> Angebot hinzufügen
-              </Button>
-            </>
+          {showConfirmModal && (
+            <Button variant="success" onClick={handleAdd}>
+              <MdAdd size={20} /> Angebot hinzufügen
+            </Button>
           )}
         </>
       )}
@@ -221,4 +217,5 @@ const OfferPage = ({ isLoggedIn, isAdmin, userID}) => {
     </div>
   );
 };
+
 export default OfferPage;

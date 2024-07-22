@@ -1,5 +1,5 @@
 import "./AboutUsStyle.css";
-const AboutUs = ({ isLoggedIn, isAdmin, userID}) => {
+const AboutUs = () => {
   return (
     <div id="about-us">
       <div id="about-us-heading">Unser Team</div>

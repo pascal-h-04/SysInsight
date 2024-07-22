@@ -9,7 +9,7 @@ import { MdOutlineLocalOffer } from "react-icons/md";
 import offersAtAnalyse from "../../data/OffersAtAnalyse";
 import axios from "axios";
 
-const AnalyseClient = ({ isLoggedIn, isAdmin, userID}) => {
+const AnalyseClient = ({ isAdmin, userID }) => {
   const navigate = useNavigate();
   const [einschaetzungenData, setEinschaetzungenData] = useState(null);
   const [scoreSecurity, setScoreSecurity] = useState(0);
@@ -17,30 +17,31 @@ const AnalyseClient = ({ isLoggedIn, isAdmin, userID}) => {
   const [scoreKommunikation, setScoreKommunikation] = useState(0);
 
   useEffect(() => {
-    const fetchEinschaetzungen = async (userID) => {
-      try {
-        const response = await axios.get(
-          `http://localhost:3002/api/einschaetzungen/${userID}`
-        );
-        setEinschaetzungenData(response.data);
-        console.log("Einschätzungen:", response.data);
-        const einschaetzung = response.data[0];
-        setScoreSecurity(einschaetzung.ScoreSecurity);
-        setScoreKollaboration(einschaetzung.ScoreKollaboration);
-        setScoreKommunikation(einschaetzung.ScoreKommunikation);
-      } catch (error) {
-        console.error("Fehler beim Abrufen der Einschätzungen:", error);
+      const fetchEinschaetzungen = async (userID) => {
+        try {
+          const response = await axios.get(
+            `http://localhost:3002/api/einschaetzungen/${userID}`
+          );
+          setEinschaetzungenData(response.data);
+          console.log("Einschätzungen:", response.data);
+          const einschaetzung = response.data[0];
+          setScoreSecurity(einschaetzung.ScoreSecurity);
+          setScoreKollaboration(einschaetzung.ScoreKollaboration);
+          setScoreKommunikation(einschaetzung.ScoreKommunikation);
+        } catch (error) {
+          console.error("Fehler beim Abrufen der Einschätzungen:", error);
+        }
+      };
+      if (userID) {
+        fetchEinschaetzungen(userID);
+      } else {
+        console.error('UserID not provided');
+        
       }
-    };
-    if (userID) {
-      fetchEinschaetzungen(userID);
-    } else {
-      console.error("UserID not provided");
-    }
-  }, [isLoggedIn, isAdmin, userID]);
+    }, [userID]);
 
   const gesamtmetrik =
-    ((scoreSecurity + scoreKollaboration + scoreKommunikation) / 15) * 100;
+    Math.round(((scoreSecurity + scoreKollaboration + scoreKommunikation) / 15) * 100);
 
   const einzelmetriken = [
     { id: 1, title: "IT-Sicherheit", value: scoreSecurity },
