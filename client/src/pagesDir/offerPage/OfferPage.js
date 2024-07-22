@@ -149,7 +149,7 @@ const OfferPage = ({ isAdmin, userID }) => {
   };
 
   return (
-    <div ID="angebotseite">
+    <div id="angebotseite">
       {!isAdmin && (
         <Button variant="primary" onClick={() => navigate("/auswertung")}>
           <IoMdArrowRoundBack size={25} />
@@ -188,6 +188,7 @@ const OfferPage = ({ isAdmin, userID }) => {
                 onDelete={handleDelete}
                 isAdmin={isAdmin}
                 onSave={handleSave}
+                customizingMode={customizingMode}
               />
             </Grid>
           ))}
