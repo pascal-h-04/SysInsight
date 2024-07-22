@@ -1,0 +1,60 @@
+diff --git a/client/src/components/Auswertungsseite/Unternehmensangebot.js b/client/src/components/analysePage/Unternehmensangebot.js
+rename from client/src/components/Auswertungsseite/Unternehmensangebot.js
+rename to client/src/components/analysePage/Unternehmensangebot.js
+diff --git a/client/src/components/Profilseite/Profile.js b/client/src/components/profilPage/Profile.js
+rename from client/src/components/Profilseite/Profile.js
+rename to client/src/components/profilPage/Profile.js
+diff --git a/client/src/components/Auswertungsseite/Unternehmensangebot.css b/client/src/components/analysePage/Unternehmensangebot.css
+rename from client/src/components/Auswertungsseite/Unternehmensangebot.css
+rename to client/src/components/analysePage/Unternehmensangebot.css
+diff --git a/client/src/components/Profilseite/Profile.css b/client/src/components/profilPage/Profile.css
+rename from client/src/components/Profilseite/Profile.css
+rename to client/src/components/profilPage/Profile.css
+diff --git a/client/src/components/Auswertungsseite/Gesamtmetrik.js b/client/src/components/analysePage/Gesamtmetrik.js
+rename from client/src/components/Auswertungsseite/Gesamtmetrik.js
+rename to client/src/components/analysePage/Gesamtmetrik.js
+diff --git a/client/src/components/Angebotsseite/LöschenBestätigenPopup.js b/client/src/components/offerPage/LöschenBestätigenPopup.js
+rename from client/src/components/Angebotsseite/LöschenBestätigenPopup.js
+rename to client/src/components/offerPage/LöschenBestätigenPopup.js
+diff --git a/client/src/components/Angebotsseite/Angebotseite.js b/client/src/components/offerPage/Angebotseite.js
+rename from client/src/components/Angebotsseite/Angebotseite.js
+rename to client/src/components/offerPage/Angebotseite.js
+diff --git a/client/src/components/Auswertungsseite/Gesamtmetrik.css b/client/src/components/analysePage/Gesamtmetrik.css
+rename from client/src/components/Auswertungsseite/Gesamtmetrik.css
+rename to client/src/components/analysePage/Gesamtmetrik.css
+diff --git a/client/src/components/Angebotsseite/Angebotseite.css b/client/src/components/offerPage/Angebotseite.css
+rename from client/src/components/Angebotsseite/Angebotseite.css
+rename to client/src/components/offerPage/Angebotseite.css
+diff --git a/client/src/components/Auswertungsseite/Einzelmetrik.js b/client/src/components/analysePage/Einzelmetrik.js
+rename from client/src/components/Auswertungsseite/Einzelmetrik.js
+rename to client/src/components/analysePage/Einzelmetrik.js
+diff --git a/client/src/components/Angebotsseite/Angebot.js b/client/src/components/offerPage/Angebot.js
+rename from client/src/components/Angebotsseite/Angebot.js
+rename to client/src/components/offerPage/Angebot.js
+diff --git a/client/src/components/Auswertungsseite/Einzelmetrik.css b/client/src/components/analysePage/Einzelmetrik.css
+rename from client/src/components/Auswertungsseite/Einzelmetrik.css
+rename to client/src/components/analysePage/Einzelmetrik.css
+diff --git a/client/src/components/Auswertungsseite/auswertung_client.js b/client/src/components/analysePage/auswertung_client.js
+rename from client/src/components/Auswertungsseite/auswertung_client.js
+rename to client/src/components/analysePage/auswertung_client.js
+diff --git a/client/src/components/Angebotsseite/Angebot.css b/client/src/components/offerPage/Angebot.css
+rename from client/src/components/Angebotsseite/Angebot.css
+rename to client/src/components/offerPage/Angebot.css
+diff --git a/client/src/components/Auswertungsseite/auswertung_client.css b/client/src/components/analysePage/auswertung_client.css
+rename from client/src/components/Auswertungsseite/auswertung_client.css
+rename to client/src/components/analysePage/auswertung_client.css
+diff --git a/client/src/components/Startseite/Startseite.js b/client/src/components/test/Startseite.js
+rename from client/src/components/Startseite/Startseite.js
+rename to client/src/components/test/Startseite.js
+diff --git a/client/src/components/Startseite/Startseite.css b/client/src/components/test/Startseite.css
+rename from client/src/components/Startseite/Startseite.css
+rename to client/src/components/test/Startseite.css
+diff --git a/client/src/components/Loginseite/LoginScreen.js b/client/src/components/loginPage/LoginScreen.js
+rename from client/src/components/Loginseite/LoginScreen.js
+rename to client/src/components/loginPage/LoginScreen.js
+diff --git a/client/src/components/Loginseite/LoginScreen.css b/client/src/components/loginPage/LoginScreen.css
+rename from client/src/components/Loginseite/LoginScreen.css
+rename to client/src/components/loginPage/LoginScreen.css
+diff --git a/anweisung.sql b/sqInit.sql
+rename from anweisung.sql
+rename to sqInit.sql

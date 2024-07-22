@@ -4,3 +4,22 @@
 .h1-with-spacing {
   margin: 30px 0;
 }
+
+.angebot-img {
+  width: 50%;
+  height: auto;
+  margin: 10px 0 0 10px;
+}
+.admin-buttons {
+  margin-top: 20px;
+}
+.image-input {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+}
+.offer-edit-header {
+  font-weight: bold;
+  display: inline-block;
+  margin-right: 5px;
+}
