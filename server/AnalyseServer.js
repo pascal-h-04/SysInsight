@@ -4,7 +4,6 @@ const expressBaseUrl = 'http://localhost:3002';
 
 function processFormData(formData) {
 
-  let scoreGeneral = 0;
   let scoreSecurity = 0;
   let scoreKollaboration = 0;
   let scoreKommunikation = 0;
@@ -69,9 +68,6 @@ function processFormData(formData) {
         scoreKommunikation += weightedScore;
         countKommunikation += weight;
         break;
-      case "Allgemeines":
-        scoreGeneral += weightedScore;
-        break;
       case "ignore":
         break;
     }
@@ -100,7 +96,7 @@ function processFormData(formData) {
 
       if (userID) {
         console.log('UserID erhalten:', userID);
-        sendEinschaetzung(scoreSecurity, scoreKollaboration, scoreKommunikation, scoreGeneral, userID);
+        sendEinschaetzung(scoreSecurity, scoreKollaboration, scoreKommunikation, userID);
       } else {
         console.log('UserID konnte nicht abgerufen werden.');
       }
@@ -123,13 +119,12 @@ function processFormData(formData) {
     }
   };
 
-  async function sendEinschaetzung(scoreSecurity, scoreKollaboration, scoreKommunikation, scoreGeneral, nutzerID) {
+  async function sendEinschaetzung(scoreSecurity, scoreKollaboration, scoreKommunikation, nutzerID) {
     try {
       const response = await axios.post(`${expressBaseUrl}/api/einschaetzung`, {
         ScoreSecurity: scoreSecurity,
         ScoreKollaboration: scoreKollaboration,
         ScoreKommunikation: scoreKommunikation,
-        ScoreGeneral: scoreGeneral,
         NutzerID: nutzerID
       }, {
         headers: {

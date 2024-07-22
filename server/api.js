@@ -321,11 +321,11 @@ app.put("/api/angebote/:id", (req, res) => {
 
 //Einschätzung hinzufügen
 app.post("/api/einschaetzung", (req, res) => {
-  const { ScoreKollaboration, ScoreKommunikation, ScoreSecurity, ScoreGeneral, NutzerID } = req.body;
+  const { ScoreKollaboration, ScoreKommunikation, ScoreSecurity, NutzerID } = req.body;
   
   connection.query(
-    "INSERT INTO Einschaetzung (ScoreKollaboration, ScoreKommunikation, ScoreSecurity, ScoreGeneral, NutzerID) VALUES (?, ?, ?, ?, ?)",
-    [ScoreKollaboration, ScoreKommunikation, ScoreSecurity, ScoreGeneral, NutzerID],
+    "INSERT INTO Einschaetzung (ScoreKollaboration, ScoreKommunikation, ScoreSecurity, NutzerID) VALUES (?, ?, ?, ?)",
+    [ScoreKollaboration, ScoreKommunikation, ScoreSecurity, NutzerID],
     (err, results) => {
       if (err) {
         console.error("Fehler beim Hinzufügen der Einschätzung:", err);
