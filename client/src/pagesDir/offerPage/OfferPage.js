@@ -100,8 +100,8 @@ const OfferPage = ({ isAdmin, userID }) => {
       alert("Bitte geben Sie einen Namen ein.");
       return false;
     }
-    if (!(angebot.category=="Kommunikation"||angebot.category=="Kollaboration"||angebot.category=="Security")) {
-      alert("Bitte wählen Sie eine der Kateogrien: Kommunikation, Kollaboration oder Security.");
+    if (!(angebot.category=="Kommunikation"||angebot.category=="Kollaboration"||angebot.category=="IT-Sicherheit")) {
+      alert("Bitte wählen Sie eine der Kateogrien: Kommunikation, Kollaboration oder IT-Sicherheit.");
       return false;
     }
     if (!angebot.Beschreibung) {
