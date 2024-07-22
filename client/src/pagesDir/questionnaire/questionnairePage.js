@@ -196,7 +196,7 @@ const QuestionnairePage = () => {
         const response = await fetch("http://localhost:3001/api/submit", {
           method: "POST",
           headers: {
-            "Contentt -Type": "application/json",
+            "Content-Type": "application/json",
           },
           body: JSON.stringify(enrichedFormData),
         });
