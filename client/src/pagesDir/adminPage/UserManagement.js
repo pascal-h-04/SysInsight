@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-const UserManagement = () => {
+const UserManagement = ({ isLoggedIn, isAdmin, userID}) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [role, setRole] = useState("");
   const [message, setMessage] = useState("");

@@ -9,7 +9,7 @@ import { MdAdd } from "react-icons/md";
 import DeletePopup from "./DeletePopup.js";
 import axios from "axios";
 
-const OfferPage = ({ isAdmin, userID }) => {
+const OfferPage = ({ isLoggedIn, isAdmin, userID}) => {
   const navigate = useNavigate();
   const [einschaetzungenData, setEinschaetzungenData] = useState(null);
   const [scoreSecurity, setScoreSecurity] = useState(0);
@@ -135,11 +135,10 @@ const OfferPage = ({ isAdmin, userID }) => {
       );
       const savedAngebot = response.data;
       // Erfolgreiche Antwort behandeln
-      console.log(response.data); // Zum Testen oder für Feedback
-
-      // Das folgende Setzen von State kann abhängig von deiner App-Logik variieren
+      console.log(response.data); 
+      
       setAngebote((prevAngebote) => [savedAngebot, ...prevAngebote]);
-      setCustomizingMode(true); // Optional: Setzen des Customizing-Modus
+      setCustomizingMode(true); 
     } catch (error) {
       console.error("Fehler beim Hinzufügen des Angebots:", error);
     }

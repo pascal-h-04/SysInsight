@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import { MdOutlinePlayCircle } from "react-icons/md";
 
-const HomePage = ({isAdmin}) => {
+const HomePage = ({ isLoggedIn, isAdmin, userID}) => {
   return (
     <div className="page-content">
       <div id="sysInsight-heading">SysInsight</div>

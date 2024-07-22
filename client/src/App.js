@@ -54,25 +54,25 @@ function App() {
       </header>
       <main>
         <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/fragebogen" element={<QuestionnairePage />} />
+          <Route path="/" element={<HomePage isLoggedIn={isLoggedIn} isAdmin={isAdmin} userID={userID} />} />
+          <Route path="/fragebogen" element={<QuestionnairePage isLoggedIn={isLoggedIn} isAdmin={isAdmin} userID={userID} />} />
           <Route
             path="/login"
-            element={<LoginPage loginSuccess={successfullLogin} />}
+            element={<LoginPage loginSuccess={successfullLogin} isLoggedIn={isLoggedIn} isAdmin={isAdmin} userID={userID} />}
           />
           <Route
             path="/auswertung"
-            element={<AnalyseClient userID={userID} />}
+            element={<AnalyseClient isLoggedIn={isLoggedIn} isAdmin={isAdmin} userID={userID}/>}
           />
           <Route
             path="/angebotseite"
-            element={<OfferPage isAdmin={isAdmin} userID={userID} />}
+            element={<OfferPage isLoggedIn={isLoggedIn} isAdmin={isAdmin} userID={userID} />}
           />
           <Route
             path="/usermanagement"
-            element={<UserManagement isAdmin={isAdmin} userID={userID} />}
+            element={<UserManagement isLoggedIn={isLoggedIn} isAdmin={isAdmin} userID={userID} />}
           />
-          <Route path="/about-us" element={<AboutUs />} />
+          <Route path="/about-us" element={<AboutUs isLoggedIn={isLoggedIn} isAdmin={isAdmin} userID={userID}/>} />
         </Routes>
       </main>
     </div>
