@@ -18,7 +18,7 @@ app.use(bodyParser.json());
 app.post('/api/submit', (req, res) => {
   const formData = req.body;
   const results = processFormData(formData);
-  res.json(results); // Sende die verarbeiteten Ergebnisse zurück
+  
 });
 
 // Start the server

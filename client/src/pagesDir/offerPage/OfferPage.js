@@ -66,7 +66,7 @@ const OfferPage = ({ isLoggedIn, isAdmin, userID}) => {
     };
 
     fetchOffersByCategories(isAdmin);
-  }, [scoreSecurity, scoreKollaboration, scoreKommunikation, userID, isAdmin]);
+  }, [scoreSecurity, scoreKollaboration, scoreKommunikation, isLoggedIn, isAdmin, userID]);
 
   const [customizingMode, setCustomizingMode] = useState(false);
 

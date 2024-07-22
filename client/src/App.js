@@ -1,6 +1,6 @@
 import "./App.css";
 import { useState, useEffect } from "react";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route, useNavigate, Navigate} from "react-router-dom";
 import LoginPage from "./pagesDir/loginPage/LoginPage";
 import Navigation from "./pagesDir/Navigation";
 import AboutUs from "./pagesDir/aboutUsPage/AboutUs";
@@ -25,7 +25,19 @@ function App() {
     setUserID(storedUserID);
   }, []);
 
+  useEffect(() => {
+    localStorage.setItem("isLoggedIn", isLoggedIn);
+    localStorage.setItem("isAdmin", isAdmin);
+    if (userID) {
+      localStorage.setItem("userID", userID);
+    } else {
+      localStorage.removeItem("userID");
+    }
+  }, [isLoggedIn, isAdmin, userID]);
+  
+
   const successfullLogin = (admin, userID) => {
+    localStorage.setItem("isLoggedIn", true);
     localStorage.setItem("isAdmin", admin);
     localStorage.setItem("userID", userID);
     setIsLoggedIn(true);
@@ -49,28 +61,29 @@ function App() {
         <Navigation
           isLoggedIn={isLoggedIn}
           isAdmin={isAdmin}
+          userID={userID}
           handleLogout={logout}
         />
       </header>
       <main>
-        <Routes>
+      <Routes>
           <Route path="/" element={<HomePage isLoggedIn={isLoggedIn} isAdmin={isAdmin} userID={userID} />} />
-          <Route path="/fragebogen" element={<QuestionnairePage isLoggedIn={isLoggedIn} isAdmin={isAdmin} userID={userID} />} />
+          <Route path="/fragebogen" element={isLoggedIn ? <QuestionnairePage isLoggedIn={isLoggedIn} isAdmin={isAdmin} userID={userID} /> : <Navigate to="/login" />} />
           <Route
             path="/login"
             element={<LoginPage loginSuccess={successfullLogin} isLoggedIn={isLoggedIn} isAdmin={isAdmin} userID={userID} />}
           />
           <Route
             path="/auswertung"
-            element={<AnalyseClient isLoggedIn={isLoggedIn} isAdmin={isAdmin} userID={userID}/>}
+            element={isLoggedIn ? <AnalyseClient isLoggedIn={isLoggedIn} isAdmin={isAdmin} userID={userID}/> : <Navigate to="/login" />}
           />
           <Route
             path="/angebotseite"
-            element={<OfferPage isLoggedIn={isLoggedIn} isAdmin={isAdmin} userID={userID} />}
+            element={isLoggedIn ? <OfferPage isLoggedIn={isLoggedIn} isAdmin={isAdmin} userID={userID} /> : <Navigate to="/login" />}
           />
           <Route
             path="/usermanagement"
-            element={<UserManagement isLoggedIn={isLoggedIn} isAdmin={isAdmin} userID={userID} />}
+            element={isLoggedIn && isAdmin ? <UserManagement isLoggedIn={isLoggedIn} isAdmin={isAdmin} userID={userID} /> : <Navigate to="/login" />}
           />
           <Route path="/about-us" element={<AboutUs isLoggedIn={isLoggedIn} isAdmin={isAdmin} userID={userID}/>} />
         </Routes>

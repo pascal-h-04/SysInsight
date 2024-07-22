@@ -37,7 +37,7 @@ const AnalyseClient = ({ isLoggedIn, isAdmin, userID}) => {
     } else {
       console.error("UserID not provided");
     }
-  }, [userID]);
+  }, [isLoggedIn, isAdmin, userID]);
 
   const gesamtmetrik =
     ((scoreSecurity + scoreKollaboration + scoreKommunikation) / 15) * 100;

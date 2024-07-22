@@ -9,7 +9,7 @@ import Button from "react-bootstrap/Button";
 import Logo from "../imgs/logo.png";
 import { FaUser, FaInfoCircle } from "react-icons/fa";
 
-function Navigation({ isLoggedIn, isAdmin, handleLogout }) {
+function Navigation({ isLoggedIn, isAdmin, userID, handleLogout }) {
   const navigate = useNavigate();
 
   const adminNavigation = [
