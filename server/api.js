@@ -8,9 +8,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }))
 const dbport = 3002;
 
-// Middleware für JSON-Requests
 app.use(bodyParser.json());
-// CORS middleware
 app.use(cors());
 
 const connection = mysql.createPool({
@@ -25,10 +23,10 @@ const connection = mysql.createPool({
 app.get("/api/angebote", (req, res) => {
   const { scores } = req.query;
   
-  // Parse the scores from the query string
+
   const parsedScores = JSON.parse(scores);
 
-  // Prepare SQL query
+  //  SQL query vorbereiten
   const query = `
     (SELECT * FROM Angebote WHERE category = 'Kommunikation' AND Score = ? LIMIT 1)
     UNION
@@ -37,7 +35,7 @@ app.get("/api/angebote", (req, res) => {
     (SELECT * FROM Angebote WHERE category = 'IT-Sicherheit' AND Score = ? LIMIT 1)
   `;
   
-  // Prepare query parameters
+  
   const queryParams = [
     parsedScores.kommunikation,
     parsedScores.kollaboration,

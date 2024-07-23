@@ -16,6 +16,7 @@ const AnalyseClient = ({ isAdmin, userID }) => {
   const [scoreKollaboration, setScoreKollaboration] = useState(0);
   const [scoreKommunikation, setScoreKommunikation] = useState(0);
 
+  //Einschätzungen aus der Datenbnak laden, um sie anzuzeigen
   useEffect(() => {
       const fetchEinschaetzungen = async (userID) => {
         try {
@@ -40,6 +41,7 @@ const AnalyseClient = ({ isAdmin, userID }) => {
       }
     }, [userID]);
 
+  //Die Gesamtmetrik, ist eine Durchschnittswert der Einzelmetriken
   const gesamtmetrik =
     Math.round(((scoreSecurity + scoreKollaboration + scoreKommunikation) / 15) * 100);
 

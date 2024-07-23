@@ -16,12 +16,14 @@ function LoginPage({ loginSuccess }) {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState(null);
 
+
   const handleLogin = async (e) => {
     e.preventDefault();
     setLoginLoading(true);
     const Name = document.getElementById("email").value;
     const pw = document.getElementById("password").value;
 
+    //Schaue ob der User in der Datenbank existiert
     try {
       const response = await axios.post("http://localhost:3002/api/login", {
         Name,

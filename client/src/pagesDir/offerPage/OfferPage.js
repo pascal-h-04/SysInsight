@@ -20,6 +20,7 @@ const OfferPage = ({ isAdmin, userID }) => {
   const [angebote, setAngebote] = useState([]);
   const [customizingMode, setCustomizingMode] = useState(false);
 
+  //die Einschätzung wird hier erneut abgerufen, da die Angebote auf der individuellen EInschätzung basieren
   useEffect(() => {
       const fetchEinschaetzungen = async (userID) => {
         try {
@@ -38,7 +39,7 @@ const OfferPage = ({ isAdmin, userID }) => {
 
       fetchEinschaetzungen(userID);
     }, [userID]);
-
+    //nur die Angebote, die einer Kategorie und den Einschätzungen entsprechen, werden aus der Datenbank abgerufen
     useEffect(() => {
       const fetchOffersByCategories = async (isAdmin) => {
         const scores = {
@@ -96,11 +97,13 @@ const OfferPage = ({ isAdmin, userID }) => {
     }
   };
 
+  
   const validate = (angebot) => {
     if (!angebot.Name) {
       alert("Bitte geben Sie einen Namen ein.");
       return false;
     }
+    //da nur 3 Kategorien berecnet werden, können nur für diese Angebote angezeigt werden
     if (
       !(
         angebot.category === "Kommunikation" ||
@@ -117,6 +120,7 @@ const OfferPage = ({ isAdmin, userID }) => {
       alert("Bitte geben Sie eine Beschreibung ein.");
       return false;
     }
+    // es werden nur die Scores 1-5 berechnet, deswegen kann es keine angebote mit höherem Score geben
     if ((angebot.Score < 1 || angebot.Score > 5) && angebot.Score !== null) {
       alert("Bitte geben Sie eine Bewertung zwischen 1 und 5 ein.");
       return false;

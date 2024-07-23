@@ -51,7 +51,8 @@ function processFormData(formData) {
       }
     });
   }
-
+  //der Score ist das Produkt aus der Antwort und dem Gewicht der Frage
+  //für jede Kategorie wird der Score und das Gewicht der Frage addiert
   function scoreBerechnen(score, weight, category) {
       const weightedScore = score * weight;
     

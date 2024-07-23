@@ -8,6 +8,8 @@ const UserManagement = () => {
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
 
+
+  //USer suchen, um zu Befördern/ degradieren
   const searchUserAndRole = async () => {
     setLoading(true);
     try {
